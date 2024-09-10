@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Property Bhandar</string>
+    <string name="get_started_text">Property Bhandar</string>
+    <string name="get_started_text2">Your Dream Property One Tap Away!</string>
+    <string name="forgot_password_msg">Don\'t worry! it happens. Please enter the email address associated with your account.</string>
+    <string name="on_submit_msg">Check out your mailbox, you will receive an email containing link where you can reset your password</string>
+
+    <string name="title_home">Home</string>
+    <string name="add_property">Add Property</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_property" tools:ignore="DuplicateDefinition">Property</string>
+    <string name="passage1"><![CDATA[Lenders have drafted a set of parameters for borrowers that are to be fulfilled while availing for a home loan. Home loan eligibility criteria include age, income, work experience, and credit history.\n\nAny salaried, self-employed or professional individual can apply for a home loan, provided he meets the eligibility criteria mentioned below]]></string>
+    <string name="passage2">Income criteria: Before granting a home loan, the lender carries out an assessment of the applicant’s incomes and expenditures. The borrower needs to have a regular source of income to enhance the chances of home loan approval as it attests the borrower\'s repayment capacity. For self-employed individuals, the home loan value approved is dependent on the profit earnings shown in the yearly accounts.</string>
+    <string name="passage3"><![CDATA[Credit History: One of the crucial eligibility criteria for getting a home loan approved is the borrower\'s credit history. A clean credit history will help you get home loan without any hassle. This includes timely payment of credit card bills and other personal loans.\n\n\n.]]></string>
+    <string name="emi_amount_format">₹%.2f</string>
+    <string name="descripction">A sleek and modern property detail page designed for Android applications, featuring a property image, price, location, buyer information, and property requirements. The layout is fully responsive, ensuring a seamless experience across various screen sizes.</string>
+    <string name="faq">Welcome to the Property Bhandar FAQ (Frequently Asked Questions) page, where buyers and owners can find answers to their questions related to login or registration, property search, property advertisement posting, account management and other related topics. Start your search by simply entering keywords in the search-bar, located at the top of the page or you can browse through questions under the categories given below. Alternatively, you can also reach out to us at 9067000315/9067000316. (Monday to Sunday, 9:30 AM to 6:30 PM) to talk to our customer support executive.</string>
+
+</resources>

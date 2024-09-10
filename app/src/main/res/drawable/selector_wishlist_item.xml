@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Default state -->
+    <item android:drawable="@drawable/favorite_border"
+        android:state_enabled="true" />
+
+    <!-- When the item is pressed -->
+    <item android:drawable="@drawable/favorite_fill"
+        android:state_pressed="true" />
+
+    <!-- When the item is selected -->
+    <item android:drawable="@drawable/favorite_fill"
+        android:state_selected="true" />
+
+    <!-- When the item is focused -->
+    <item android:drawable="@drawable/favorite_fill"
+        android:state_focused="true" />
+
+    <!-- When the item is disabled (e.g., wishlist feature is unavailable) -->
+    <item android:drawable="@drawable/favorite_border"
+        android:state_enabled="false" />
+</selector>

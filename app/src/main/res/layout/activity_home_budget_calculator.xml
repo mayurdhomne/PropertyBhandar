@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <!-- Top Bar with Back Button, Title, and Action -->
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="336dp"
+            android:layout_marginBottom="44dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:importantForAccessibility="yes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title1"
+            tools:ignore="NotSibling,SpeakableTextPresentCheck,TouchTargetSizeCheck">
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:contentDescription="Back Button"
+                android:importantForAccessibility="no"
+                android:src="@drawable/baseline_arrow_back_ios_new_24"
+                tools:ignore="HardcodedText,ObsoleteLayoutParam" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Home Budget Calculator"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            tools:ignore="HardcodedText" />
+
+    </RelativeLayout>
+
+    <!-- Check your Home buying budget Title -->
+    <TextView
+        android:id="@+id/checkBudgetTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Check your Home buying budget"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        tools:ignore="HardcodedText" />
+
+    <!-- Savings for buying home TextInputLayout -->
+    <TextView
+        android:id="@+id/savingsTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Savings for buying home"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/checkBudgetTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/savingsInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/savingsTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/savingsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter Savings Amount"
+            tools:ignore="HardcodedText,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- EMI TextInputLayout -->
+    <TextView
+        android:id="@+id/emiTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="EMI you can afford"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/savingsInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emiInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/emiTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emiInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter EMI Amount"
+            tools:ignore="HardcodedText,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Loan Tenure TextInputLayout -->
+    <TextView
+        android:id="@+id/loanTenureTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Preferred loan tenure"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/emiInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loanTenureInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/loanTenureTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loanTenureInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter Loan Tenure (in years)"
+            tools:ignore="HardcodedText,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Budget Range -->
+    <TextView
+        android:id="@+id/budgetRangeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Budget range you may consider"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/loanTenureInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/budgetRangeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₹ 0 - 5 Lacs"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/budgetRangeTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/infoIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/info"
+        android:contentDescription="Info Icon"
+        app:layout_constraintTop_toTopOf="@id/budgetRangeValue"
+        app:layout_constraintStart_toEndOf="@id/budgetRangeValue"
+        android:layout_marginStart="4dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/budgetNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculated at an average interest rate of 8.5%"
+        android:textSize="12sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/budgetRangeValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        tools:ignore="HardcodedText" />
+
+    <!-- View Properties Button -->
+    <Button
+        android:id="@+id/viewPropertiesButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/buttonBackgroundColor"
+        android:text="View properties in this budget"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/budgetNote"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

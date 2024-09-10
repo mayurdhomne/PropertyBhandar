@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+    <group android:checkableBehavior="single"
+        tools:ignore="ExtraText">
+
+        <item
+            android:id="@+id/nav_profile1"
+            android:icon="@drawable/person"
+            android:title="Profile"
+            android:iconTint="@color/black"/>
+
+
+
+        <item
+            android:id="@+id/nav_Calculator"
+            android:icon="@drawable/ic_emi_calculator"
+            android:title="EMI Calculator"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/nav_Affordability"
+            android:icon="@drawable/home"
+            android:title="Affordability Calculators"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/nav_Eligibility"
+            android:icon="@drawable/baseline_calculate"
+            android:title="Eligibility Calculators"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/nav_Property"
+            android:icon="@drawable/property"
+            android:title="Property Page"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/nav_Loan"
+            android:icon="@drawable/baseline_dynamic_form"
+            android:title="Loan Application Form"
+            android:iconTint="@color/black"/>
+
+
+        <item
+            android:id="@+id/nav_contactus"
+            android:icon="@drawable/baseline_contact_us"
+            android:title="Contact Us"
+            android:iconTint="@color/black"/>/>
+
+        <item
+            android:id="@+id/nav_Setting"
+            android:icon="@drawable/settings_24"
+            android:title="Setting"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/nav_Log"
+            android:icon="@drawable/logout_24"
+            android:title="Log Out"
+            android:iconTint="@color/black"/>
+
+    </group>
+</menu>

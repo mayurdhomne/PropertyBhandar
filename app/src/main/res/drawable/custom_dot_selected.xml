@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:width="8dp" android:height="8dp"/>
+    <solid android:color="@color/backgroundColor"/>
+    <corners android:radius="4dp"/> <!-- Updated from 50% to 4dp -->
+</shape>

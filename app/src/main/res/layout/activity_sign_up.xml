@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.SignUpActivity">
+
+    <ImageView
+        android:id="@+id/ivSinUpLogo"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        android:src="@drawable/signupic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,ImageContrastCheck"
+        android:contentDescription="Login screen title"/>
+
+    <TextView
+        android:id="@+id/tvSinUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginStart="40dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/ivSinUpLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText"
+        android:contentDescription="Sign up button"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilContacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/start_end_margin"
+        android:layout_marginEnd="@dimen/start_end_margin"
+        android:layout_marginTop="10dp"
+        app:boxStrokeWidth="2dp"
+        app:boxCornerRadiusBottomEnd="@dimen/til_radius"
+        app:boxCornerRadiusBottomStart="@dimen/til_radius"
+        app:boxCornerRadiusTopEnd="@dimen/til_radius"
+        app:boxCornerRadiusTopStart="@dimen/til_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSinUp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <EditText
+            android:id="@+id/contactEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contact"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_text_size"
+            tools:ignore="Autofill,HardcodedText,TextContrastCheck,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/start_end_margin"
+        android:layout_marginEnd="@dimen/start_end_margin"
+        android:layout_marginTop="10dp"
+        app:boxStrokeWidth="2dp"
+        app:boxCornerRadiusBottomEnd="@dimen/til_radius"
+        app:boxCornerRadiusBottomStart="@dimen/til_radius"
+        app:boxCornerRadiusTopEnd="@dimen/til_radius"
+        app:boxCornerRadiusTopStart="@dimen/til_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilContacts"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email ID"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_text_size"
+            tools:ignore="Autofill,HardcodedText,TextContrastCheck,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/start_end_margin"
+        android:layout_marginEnd="@dimen/start_end_margin"
+        android:layout_marginTop="10dp"
+        app:boxStrokeWidth="2dp"
+        app:passwordToggleEnabled="true"
+        app:boxCornerRadiusBottomEnd="@dimen/til_radius"
+        app:boxCornerRadiusBottomStart="@dimen/til_radius"
+        app:boxCornerRadiusTopEnd="@dimen/til_radius"
+        app:boxCornerRadiusTopStart="@dimen/til_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/et_text_size"
+            tools:ignore="Autofill,HardcodedText,TextContrastCheck,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Terms & Conditions Checkbox -->
+    <LinearLayout
+        android:id="@+id/termsLayout"
+        android:layout_width="345dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword"
+        tools:ignore="RtlHardcoded,TextSizeCheck">
+
+        <CheckBox
+            android:id="@+id/termsCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I agree to the terms &amp; conditions"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText"
+            android:contentDescription="Check this box to agree to the terms and conditions"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/backgroundColor"
+        android:text="Sign Up"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/termsLayout"
+        tools:ignore="HardcodedText,VisualLintButtonSize"
+        android:contentDescription="Sign Up button"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signUpButton"
+        app:layout_constraintVertical_bias="0.2">
+
+        <TextView
+            android:id="@+id/tvNewHere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Joined us before?"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText"
+            android:contentDescription="Text indicating if you have joined us before"/>
+
+        <TextView
+            android:id="@+id/signInText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Login"
+            android:textColor="@color/blue_5"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText"
+            android:contentDescription="Login option"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

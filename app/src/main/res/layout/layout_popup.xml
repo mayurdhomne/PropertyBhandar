@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/popup_background">
+
+        <ImageView
+            android:id="@+id/closeButton"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="-9dp"
+            android:contentDescription="close"
+            android:padding="8dp"
+            android:src="@drawable/ic_black_cross" />
+
+        <ImageView
+            android:id="@+id/popupImage"
+            android:layout_width="220dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:contentDescription="Lease agreement image"
+            android:src="@drawable/ic_lease_agree" />
+
+        <TextView
+            android:id="@+id/popupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Lease Agreement"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/popupDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:maxLines="10"
+            android:ellipsize="none"
+            android:text="A legal contract between a lessor and lessee Constitutes all requisites when a lessor engages with a lessee Allows the lessee to rent a property for a certain period."
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:gravity="center" />
+    </LinearLayout>
+</ScrollView>

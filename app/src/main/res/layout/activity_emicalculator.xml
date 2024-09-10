@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white"
+    tools:context=".Activity.EMICalculatorActivity">
+
+    <!-- Top Bar with Back Button and Title -->
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:contentDescription="Back Button" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="EMI Calculator"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
+
+    <!-- Estimated EMI Section -->
+    <TextView
+        android:id="@+id/emiTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Estimated EMI per month you may consider"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/emiAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="₹0.00"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/emiTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:id="@+id/infoIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/info"
+        android:contentDescription="Info Icon"
+        app:layout_constraintStart_toEndOf="@id/emiAmount"
+        app:layout_constraintTop_toTopOf="@id/emiAmount"
+        app:layout_constraintBottom_toBottomOf="@id/emiAmount"
+        android:layout_marginStart="8dp" />
+
+    <!-- Loan Amount Section -->
+    <TextView
+        android:id="@+id/loanAmountLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Loan Amount (₹)"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/emiAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loanAmountLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/loanAmountLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeColor="@color/buttonBackgroundColor">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loanAmountEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter loan amount (₹)"
+            android:maxLength="10"
+            android:textColor="@android:color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Interest Rate Section -->
+    <TextView
+        android:id="@+id/interestRateLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Interest Rate (%)"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/loanAmountLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/interestRateLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/interestRateLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeColor="@color/buttonBackgroundColor">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/interestRateEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="Enter interest rate (%)"
+            android:maxLength="5"
+            android:textColor="@android:color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Loan Tenure Section -->
+    <TextView
+        android:id="@+id/loanTenureLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Loan Tenure (years)"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/interestRateLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loanTenureLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/loanTenureLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeColor="@color/buttonBackgroundColor">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loanTenureEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter tenure (years)"
+            android:maxLength="2"
+            android:textColor="@android:color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Calculate Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calculateButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Calculate"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/buttonBackgroundColor"
+        app:layout_constraintTop_toBottomOf="@id/loanTenureLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cornerRadius="8dp"
+        app:icon="@drawable/emiicalculator"
+        app:iconGravity="textStart"
+        android:elevation="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:background="@color/white"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="40dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:contentDescription="Back Button" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy"
+            android:textSize="29.5dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="At AARTI MULTI SERVICES PRIVATE LIMITED (hereinafter referred to as “we”, “us”, “our”, etc.), a company incorporated under the provisions of Companies Act, 2015, having our registered office at Flat no.101, Prathamesh Plaza, Above Peter England Showroom, Unthkhana Road, Medical Square, Nagpur - 440009 and having corporate identity number L45101DL2006PLC148314, we value your trust and respect your right to privacy."
+            android:textColor="@color/black"
+            android:textSize="13.5dp"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="This Privacy Policy provides you with details about the manner in which your data is collected, stored and used by us. You are advised to read this Privacy Policy carefully. If you do not agree to the terms of this Privacy Policy, please do not further use or access AMSPL website/applications."
+            android:textColor="@color/black"
+            android:textSize="13.5dp"
+            tools:ignore="TextSizeCheck" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="General"
+            android:textColor="@color/black"
+            android:textSize="29.5dp"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="This privacy statement is applicable to website and applications (mobile and hybrid, hereinafter referred to “applications”) of AMSPL. This Privacy Policy applies regardless of whether you use a computer, mobile phone, tablet, or television or any other media or computer resource to access our Services. It also applies to those who register on our website/applications in connection with use of our services, or whose data AMSPL otherwise receives in connection with its services. It is important that you read the Privacy Policy carefully because whenever you use our website/applications, your Personal Data will be processed (if at all) in accordance with this policy."
+            android:textColor="@color/black"
+            android:textSize="13.5dp"
+            tools:ignore="TextSizeCheck" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal Data and its collection"
+            android:textSize="29.5dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal Data, means and includes, any data relating to identified or identifiable living person (‘data subject’ here in referred as you/your’) including but not limited to, name, address, mailing address, telephone number, email ID, bank account details including details linked to credit/debit payment instruments, information about your mobile phone, any personal details that may have been voluntarily provided by the customer, whether to Unique Identification Authority of India (UIDAI), Credit Information Bureau of India Limited (CIBIL) or any other agency including any other Credit Information Companies (CIC)."
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Information Collected when you use our Website"
+            android:textSize="29dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We collect information about you or your usage to provide better services to all of our users. We collect information in the following ways:"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Many of our services require you to register \ sign up for an account on AMSPL. When you do, we will ask for Personal Data, such as, but not limited to your name, email address, contact number, PAN, Passport number to create/ update your account."
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  When you use our website to contact us or give feedback through or give a Testimonial, we will ask for Personal Data such as Name, Email ID and Contact number."
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  We collect data about the services that you use and how you use them. This data includes log information and location information."
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  We may collect your data through campaigns and publicly available sources."
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  When you communicate with AMSPL or use the AMSPL platform to communicate with other members, we collect data about your communication and any data you choose to provide."
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  If you choose to sign in with your social media account to access AMSPL, or otherwise connect your social media account with the services of AMSPL, you consent to our collection, storage, and use, in accordance with this Privacy Policy, of the data that you make available to us through the social media interface. Please see your social media provider’s privacy policy and help centre for more information about how they share data when you choose to connect your account."
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Information Collected when you use our Applications"
+            android:textSize="29dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="When you download our mobile application or use our hybrid application (related to our various services) we collect the below information, but not limited to:"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Email ID"
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:text="•  Name"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:text="•  Address"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Country/City"
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Mobile Number"
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aarti Multi Services does not collect Personal Data about individuals except when such individuals specifically provide such data on a voluntary basis. Upon such voluntary disclosure of Personal Data, we may further verify, collate or receive data about you from publicly and commercially available sources (as permitted by law), which we may combine with other data we receive from you. We may also receive data about you from third-party social networking services if you are already connected with those services."
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lawful Basis of Processing"
+            android:textSize="29.5dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We may process your data because:"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  We have a contract with you"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  You have given us permission to do so"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  We must provide services to you after you have purchased something from us"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  To comply with the law"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  To protect your vital interests or those of another person"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  To perform a task in the public interest or in the exercise of official authority vested in us"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use of your Personal Data"
+            android:textSize="29.5dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We use Personal Data to provide you with the services you request. To the extent we use your Personal Data to market to you, we will provide you the ability to opt-out of such uses. The uses of your Personal Data may include:"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Delivering our services to you"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Improving our services"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Research and development"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Providing customer support"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Marketing and advertising"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Ensuring legal compliance"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  Other purposes as outlined in this Privacy Policy"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sharing of your Personal Data"
+            android:textSize="29dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We may share your data with third parties under the following circumstances:"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  With your consent"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  For external processing by trusted organizations that we work with"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  For legal reasons"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:text="•  To protect the rights and property of AMSPL"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="Security of your Personal Data"
+            android:textSize="29dp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="We take appropriate security measures to protect against unauthorized access to or unauthorized alteration, disclosure, or destruction of data. These include internal reviews of our data collection, storage, and processing practices and security measures, including appropriate encryption and physical security measures to guard against unauthorized access to systems where we store Personal Data."
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            tools:ignore="TextSizeCheck" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accessing and updating your Personal Data"
+            android:textSize="29dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="Whenever you use our services, we strive to provide you with access to your Personal Data. If that data is wrong, we give you ways to update it quickly or to delete it unless we have to keep that data for legitimate business or legal purposes."
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            tools:ignore="TextSizeCheck" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Changes to this Policy"
+            android:textSize="29dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page."
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            tools:ignore="TextSizeCheck" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:textColor="@color/black"
+            android:textSize="29.5dp"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:text="If you have any questions about this Privacy Policy, please contact us:"
+            android:textSize="14dp"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:text="•  By email: admin@aartimultiservices.com"
+            android:textSize="14dp"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp"
+            android:text="•  By phone number: +91 9067000315 / +91 9067000316"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:text="•  By address: Aarti Multi Services Pvt. Ltd., Flat no.101, Prathamesh Plaza, Above Peter England Showroom, Unthkhana Road, Medical Square, Nagpur - 440009"
+            android:textSize="14dp"
+            tools:ignore="TextSizeCheck" />
+    </LinearLayout>
+</ScrollView>
+
+
+

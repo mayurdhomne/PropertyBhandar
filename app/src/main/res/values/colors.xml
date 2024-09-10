@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FF808080</color>
+
+    <color name="blue_1">#BFD6F6</color>
+    <color name="blue_2">#8DBDFF</color>
+    <color name="blue_3">#64A1F4</color>
+    <color name="blue_4">#4A91F2</color>
+    <color name="blue_5">#3B7DD8</color>
+    <color name="card_graph_bg_color">#4A91F2</color>
+    <color name="graph_heading_color">#FFFFFF</color>
+
+    <color name="gradientStart">#4a00e0</color>
+    <color name="gradientEnd">#8e2de2</color>
+
+    <color name="semi_transparent_theme_color">#07434D</color>
+
+    <color name="backgroundColor">#07434D</color> <!-- Background Color -->
+    <color name="skipTextColor">#909090</color> <!-- Skip Text Color -->
+    <color name="descriptionTextColor">#333333</color> <!-- Description Text Color -->
+    <color name="subtitleTextColor">#666666</color> <!-- Subtitle Text Color -->
+    <color name="buttonBackgroundColor">#07434D</color> <!-- Button Background Color -->
+    <color name="buttonTextColor">#FFFFFF</color>
+
+
+    <color name="grey">#f2f3f4</color>
+    <color name="background_color">#e2efff</color> <!-- Adjusted to match the card background -->
+    <color name="button_blue">#1A73E8</color>
+    <color name="button_green">#114b54</color>
+    <color name="gray1">#757575</color>
+    <color name="darker_hint_color">#333333</color>
+</resources>

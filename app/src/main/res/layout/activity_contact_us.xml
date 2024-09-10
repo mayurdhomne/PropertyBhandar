@@ -1,0 +1,371 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e2efff">
+
+    <!-- ScrollView for Scrollable Content -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Inner ConstraintLayout for better performance -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Header with curved background -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header_layout"
+                android:layout_width="0dp"
+                android:layout_height="125dp"
+                android:background="@drawable/curved_background"
+                android:paddingTop="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Contact Us Text -->
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="336dp"
+                    android:layout_marginBottom="44dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:importantForAccessibility="yes"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/title1"
+                    tools:ignore="NotSibling,SpeakableTextPresentCheck">
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/reset_password_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Contact Us header"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Contact Us"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.545"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.169" />
+
+                <!-- Back Arrow Icon -->
+                <ImageView
+                    android:id="@+id/back_arrow"
+                    android:layout_width="30dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="Navigate back"
+                    android:src="@drawable/back_arrow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Form Container with CardView -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="24dp"
+                android:layout_margin="15dp"
+                app:layout_constraintTop_toBottomOf="@id/header_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Reach Out Text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reach Out"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingBottom="16dp"
+                        android:contentDescription="Reach Out text" />
+
+                    <!-- Info Text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We value your feedback and inquiries."
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingBottom="24dp"
+                        android:contentDescription="We value your feedback and inquiries text" />
+
+                    <!-- Your Name Input -->
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:hint="Enter Your Name"
+                        android:inputType="textPersonName"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black"
+                        tools:ignore="EditableContentDescCheck" />
+
+                    <!-- Your Email Input -->
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:hint="Enter Your Email"
+                        android:inputType="textEmailAddress"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black"
+                        tools:ignore="EditableContentDescCheck" />
+
+                    <!-- Phone Number Input -->
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:hint="Enter Your Phone Number"
+                        android:inputType="phone"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black"
+                        tools:ignore="EditableContentDescCheck" />
+
+                    <!-- Subject Input -->
+                    <EditText
+                        android:id="@+id/subject"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:hint="Enter Subject"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black"
+                        tools:ignore="EditableContentDescCheck" />
+
+                    <!-- Message Input -->
+                    <EditText
+                        android:id="@+id/message"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:hint="enter Message"
+                        android:inputType="textMultiLine"
+                        android:minLines="3"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black"
+                        tools:ignore="EditableContentDescCheck" />
+
+                    <!-- Submit Button -->
+                    <Button
+                        android:id="@+id/sendMessageButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Submit"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:padding="10dp"
+                        android:backgroundTint="@color/button_green"
+                        android:contentDescription="Submit the form"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Second CardView containing additional information -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/card_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp"
+                    tools:ignore="WebViewLayout">
+
+                    <!-- About Section -->
+                    <TextView
+                        android:id="@+id/about_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="About"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="23sp"
+                        android:contentDescription="About section title" />
+
+                    <TextView
+                        android:id="@+id/about_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Need help? Contact us via email, phone, or our quick contact form."
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:contentDescription="About section description" />
+
+                    <!-- Contact Section -->
+                    <TextView
+                        android:id="@+id/contact_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Contact"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="23sp"
+                        android:contentDescription="Contact section title" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="16dp"
+                        android:onClick="onPhone1Click">
+
+                        <TextView
+                            android:id="@+id/contact_phone_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Phone Number:"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:id="@+id/contact_phone_1"
+                            android:layout_width="204dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="📞 +91 9067000316"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="16dp"
+                        android:onClick="onPhone2Click">
+
+                        <TextView
+                            android:id="@+id/contact_phone_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📞 +91 9067000315"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Email Section -->
+                    <TextView
+                        android:id="@+id/email_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="23sp"
+                        android:contentDescription="Email section title"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:onClick="onEmailClick"
+                        android:contentDescription="Email ✉ info@aartimultiservices.com, Tap to call.">
+
+                        <TextView
+                            android:id="@+id/email_subtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✉️  info@aartimultiservices.com"
+                            android:textColor="@color/black"
+                            android:contentDescription="Email ✉ info@aartimultiservices.com"
+                            android:textSize="20sp"/>
+                    </LinearLayout>
+
+                    <!-- Address Section -->
+                    <TextView
+                        android:id="@+id/address_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="23sp"
+                        android:contentDescription="Address section title"/>
+
+                    <TextView
+                        android:id="@+id/address_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Flat No. 101, Prathamesh Plaza, Unthkhana Road, Above Peter England Showroom, Medical sq.,Nagpur, 440009."
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:contentDescription="Address: Flat No. 101, Prathamesh Plaza, Unthkhana Road,  Above Peter England Showroom, Medical sq., Nagpur, 440009."/>
+
+                    <!-- WebView for Map -->
+                    <WebView
+                        android:id="@+id/webview"
+                        android:layout_width="match_parent"
+                        android:layout_height="380dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:layout_marginBottom="32dp"
+                        android:contentDescription="Map location view" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

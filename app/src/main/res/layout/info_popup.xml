@@ -1,0 +1,16 @@
+<!-- res/layout/info_popup.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@color/buttonBackgroundColor">
+
+    <TextView
+        android:id="@+id/infoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is only an estimated value, actual eligibility depends on loan provider, terms of loan, etc."
+        android:textColor="@android:color/white"
+        android:textSize="14sp"/>
+</LinearLayout>

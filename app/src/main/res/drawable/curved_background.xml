@@ -1,0 +1,11 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1080dp"
+    android:height="120dp"
+    android:viewportWidth="1080"
+    android:viewportHeight="220">
+
+    <!-- Path for the curved background -->
+    <path
+        android:pathData="M0,0 H1080 V150 C1000,200 400,50 0,180 Z"
+        android:fillColor="#114b54" />
+</vector>

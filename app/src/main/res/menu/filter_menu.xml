@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@style/MenuBackground"
+    >
+    <item
+        android:id="@+id/sort_low_to_high"
+        android:title="Low to High" />
+    <item
+        android:id="@+id/sort_high_to_low"
+        android:title="High to Low" />
+    <item
+        android:id="@+id/direction"
+        android:title="Direction">
+        <menu>
+            <item
+                android:id="@+id/east_to_west"
+                android:title="North" />
+            <item
+                android:id="@+id/west_to_east"
+                android:title="South" />
+            <item
+                android:id="@+id/north_to_south"
+                android:title="East" />
+            <item
+                android:id="@+id/south_to_north"
+                android:title="West" />
+        </menu>
+         </item>
+</menu>

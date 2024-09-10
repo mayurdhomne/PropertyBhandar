@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".Activity.PropertyListActivity">
+
+    <!-- Top AppBar with Menu Icon and Title -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/top_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backic"
+            android:layout_width="48sp"
+            android:layout_height="48sp"
+            android:layout_gravity="start"
+            android:clickable="true"
+            android:contentDescription="Back Icon"
+            android:focusable="true"
+            android:padding="8dp"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Search Properties"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/filteric"
+            android:layout_width="48sp"
+            android:layout_height="48sp"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            android:contentDescription="Filter Icon"
+            android:focusable="true"
+            android:padding="8dp"
+            android:src="@drawable/baseline_filter_list"
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        tools:ignore="MissingConstraints">
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            tools:ignore="UselessParent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:ignore="VisualLintBounds">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/allpropertycard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:clickable="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/backgroundColor"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    tools:ignore="KeyboardInaccessibleWidget">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="  All  "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Housescard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/backgroundColor"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    tools:ignore="KeyboardInaccessibleWidget">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="  House  "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Apartmentcard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/backgroundColor"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    tools:ignore="KeyboardInaccessibleWidget">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="  Apartment  "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/flatscard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/backgroundColor"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    tools:ignore="KeyboardInaccessibleWidget">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text=" Flats "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/plotscard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/backgroundColor"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    tools:ignore="KeyboardInaccessibleWidget">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="  Plots  "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/comercialscard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/backgroundColor"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    tools:ignore="KeyboardInaccessibleWidget">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="  Shop  "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <!-- RecyclerView for Property Listings -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/propertyRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:contentDescription="A list of properties available for viewing"
+        tools:ignore="HardcodedText" />
+
+    <!-- Bottom Navigation View -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonBackgroundColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:paddingBottom="10dp"
+        style="@style/BottomNavigationViewTransparent"
+        app:menu="@menu/bottom_bar_items"
+        tools:ignore="VisualLintBottomNav" />
+
+    <!-- Filter Icon -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/dilougebg"
+    android:padding="20dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you finding us helpful?"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:textColor="@android:color/black"/>
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/subtitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please share your experience with us."
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:textColor="@android:color/black"/>
+
+    <!-- Buttons Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <!-- Yes Button -->
+        <LinearLayout
+            android:id="@+id/yesButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="9dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginBottom="9dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:background="@drawable/white_bg"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/happyic"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes, Loving it"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="5dp"/>
+        </LinearLayout>
+
+        <!-- No Button -->
+        <LinearLayout
+            android:id="@+id/noButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="9dp"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:background="@drawable/white_bg"
+            android:padding="10dp"
+            android:layout_marginStart="10dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/sad"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No, Not really"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Remind Me Later Button -->
+    <TextView
+        android:id="@+id/button_remind_later"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remind me later"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"/>
+</LinearLayout>

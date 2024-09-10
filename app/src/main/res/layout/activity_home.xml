@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".Activity.HomeActivity">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="70dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/home_bg"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/weltext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="24dp">
+
+                        <ImageView
+                            android:id="@+id/logo"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/logo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/title1"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/title1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Welcome To"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@id/logo"
+                            tools:ignore="HardcodedText,MissingConstraints"
+                            tools:layout_editor_absoluteY="6dp" />
+
+                        <TextView
+                            android:id="@+id/firstname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Property Bhandar"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/title1"
+                            app:layout_constraintTop_toBottomOf="@id/title1"
+                            tools:ignore="HardcodedText" />
+
+                        <FrameLayout
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="16dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:importantForAccessibility="yes"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/title1"
+                            tools:ignore="SpeakableTextPresentCheck">
+
+                            <!-- Invisible TextView for accessibility labeling -->
+                            <TextView
+                                android:id="@+id/actionmenudivider_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/actionmenudivider"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:labelFor="@id/actionmenudivider_label"
+                                app:srcCompat="@drawable/threeeline"
+                                tools:ignore="ContentDescription" />
+                        </FrameLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp">
+
+                        <EditText
+                            android:id="@+id/searchView"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/white_bg"
+                            android:drawableStart="@drawable/baseline_search_24"
+                            android:drawablePadding="8dp"
+                            android:ems="10"
+                            android:hint="Find Your Dream Destination...."
+                            android:inputType="text"
+                            android:padding="8dp"
+                            android:textColorHint="@color/backgroundColor"
+                            android:textSize="16sp"
+                            android:imeOptions="actionSearch"
+                            tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Categories"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:scrollbars="none"
+                        tools:ignore="UselessParent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/buybtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardBackgroundColor="@color/backgroundColor"
+                                app:cardCornerRadius="16dp"
+                                app:cardElevation="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="16dp"
+                                    android:text="  Buy  "
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/loanbtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardBackgroundColor="@color/backgroundColor"
+                                app:cardCornerRadius="16dp"
+                                app:cardElevation="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="16dp"
+                                    android:text=" Loan "
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/hbcalculator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardBackgroundColor="@color/backgroundColor"
+                                app:cardCornerRadius="16dp"
+                                app:cardElevation="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="16dp"
+                                    android:text="Home Budget Calculator"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/lecalculator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardBackgroundColor="@color/backgroundColor"
+                                app:cardCornerRadius="16dp"
+                                app:cardElevation="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="16dp"
+                                    android:text="Loan Eligibility Calculator"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/emiCalculator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardBackgroundColor="@color/backgroundColor"
+                                app:cardCornerRadius="16dp"
+                                app:cardElevation="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="16dp"
+                                    android:text="EMI Calculator"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/servicesbtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardBackgroundColor="@color/backgroundColor"
+                                app:cardCornerRadius="16dp"
+                                app:cardElevation="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="16dp"
+                                    android:text="Services"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Recommended Properties"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText,InefficientWeight" />
+
+                    <TextView
+                        android:id="@+id/viewAllTextView1"
+                        android:layout_width="70dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="View all items or details"
+                        android:text="View All"
+                        android:textColor="@color/blue_5"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText,TextSizeCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recommendedrecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="16dp"
+                        android:clipToPadding="false"
+                        android:paddingEnd="16dp"
+                        android:orientation="horizontal"
+                        android:scrollbars="none" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/calculatebtnText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal">
+
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        tools:ignore="UselessParent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:orientation="horizontal"
+                            tools:ignore="RtlSymmetry">
+
+                            <androidx.cardview.widget.CardView
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                card_view:cardCornerRadius="16dp"
+                                android:id="@+id/emiCalculatorcard"
+                                card_view:cardElevation="4dp"
+                                card_view:cardBackgroundColor="@color/white">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <!-- Title Text -->
+                                    <TextView
+                                        android:id="@+id/calculator_title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="EMI \nCalculator"
+                                        android:textColor="@color/backgroundColor"
+                                        android:textStyle="bold"
+                                        android:textSize="20sp"
+                                        tools:ignore="HardcodedText,TooDeepLayout" />
+
+                                    <!-- Subtitle Text -->
+                                    <TextView
+                                        android:id="@+id/calculator_subtitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Calculate  your  EMI "
+                                        android:textColor="@color/black"
+                                        android:layout_marginTop="4dp"
+                                        android:textSize="14sp"
+                                        tools:ignore="HardcodedText" />
+
+                                    <!-- Image and Arrow Icon in a horizontal layout -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:importantForAccessibility="no"
+                                        android:orientation="horizontal"
+                                        android:layout_marginTop="16dp">
+
+                                        <!-- Bottom Image -->
+                                        <ImageView
+                                            android:id="@+id/calculator_image"
+                                            android:layout_width="0dp"
+                                            android:layout_height="72dp"
+                                            android:layout_weight="1"
+                                            android:scaleType="fitCenter"
+                                            android:src="@drawable/emicalculator"
+                                            tools:ignore="ContentDescription" />
+
+                                        <!-- Arrow Icon -->
+                                        <ImageView
+                                            android:id="@+id/arrow_icon"
+                                            android:layout_width="32dp"
+                                            android:layout_height="32dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="8dp"
+                                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                                            android:tint="@color/backgroundColor"
+                                            tools:ignore="ContentDescription,UseAppTint" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+                            <androidx.cardview.widget.CardView
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                card_view:cardCornerRadius="16dp"
+                                android:id="@+id/affordabilityCalculatorcard"
+                                card_view:cardElevation="4dp"
+                                card_view:cardBackgroundColor="@android:color/white">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <!-- Title Text -->
+                                    <TextView
+                                        android:id="@+id/calculator_title2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Affordability\nCalculator"
+                                        android:textColor="@color/backgroundColor"
+                                        android:textStyle="bold"
+                                        android:textSize="20sp"
+                                        tools:ignore="HardcodedText" />
+
+                                    <!-- Subtitle Text -->
+                                    <TextView
+                                        android:id="@+id/calculator_subtitle2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Find the best budget for \nyour Home Search"
+                                        android:textColor="@color/black"
+                                        android:layout_marginTop="4dp"
+                                        android:textSize="14sp"
+                                        tools:ignore="HardcodedText" />
+
+                                    <!-- Image and Arrow Icon in a horizontal layout -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <!-- Bottom Image -->
+                                        <ImageView
+                                            android:id="@+id/calculator_image2"
+                                            android:layout_width="0dp"
+                                            android:layout_height="72dp"
+                                            android:layout_weight="1"
+                                            android:scaleType="fitCenter"
+                                            android:src="@drawable/eligibility"
+                                            tools:ignore="ContentDescription" />
+
+                                        <!-- Arrow Icon -->
+                                        <ImageView
+                                            android:id="@+id/arrow_icon2"
+                                            android:layout_width="32dp"
+                                            android:layout_height="32dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="8dp"
+                                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                                            android:tint="@color/backgroundColor"
+                                            tools:ignore="ContentDescription,UseAppTint" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                card_view:cardCornerRadius="16dp"
+                                android:id="@+id/hbcCalculatorcard"
+                                card_view:cardElevation="4dp"
+                                card_view:cardBackgroundColor="@android:color/white">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <!-- Title Text -->
+                                    <TextView
+                                        android:id="@+id/calculator_title3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Eligibility  \nCalculator"
+                                        android:textColor="@color/backgroundColor"
+                                        android:textStyle="bold"
+                                        android:textSize="20sp"
+                                        tools:ignore="HardcodedText" />
+
+                                    <!-- Subtitle Text -->
+                                    <TextView
+                                        android:id="@+id/calculator_subtitle3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Find Your Home loan limit"
+                                        android:textColor="@color/black"
+                                        android:layout_marginTop="4dp"
+                                        android:textSize="14sp"
+                                        tools:ignore="HardcodedText" />
+
+                                    <!-- Image and Arrow Icon in a horizontal layout -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:layout_marginTop="16dp">
+
+                                        <!-- Bottom Image -->
+                                        <ImageView
+                                            android:id="@+id/calculator_image3"
+                                            android:layout_width="0dp"
+                                            android:layout_height="72dp"
+                                            android:layout_weight="1"
+                                            android:scaleType="fitCenter"
+                                            android:src="@drawable/hbc"
+                                            tools:ignore="ContentDescription" />
+
+                                        <!-- Arrow Icon -->
+                                        <ImageView
+                                            android:id="@+id/arrow_icon3"
+                                            android:layout_width="32dp"
+                                            android:layout_height="32dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="8dp"
+                                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                                            android:tint="@color/backgroundColor"
+                                            tools:ignore="ContentDescription,UseAppTint" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Latest Properties"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/viewAllTextView2"
+                        android:layout_width="70dp"
+                        android:layout_height="48dp"
+                        android:text="View All"
+                        android:textColor="@color/blue_5"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/latestrecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:clipToPadding="false"
+                        android:paddingEnd="16dp"
+                        android:orientation="horizontal"
+                        android:scrollbars="none" />
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="16dp">
+
+                    <!-- Title Text -->
+                    <TextView
+                        android:id="@+id/titleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selling/ Renting your property"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <!-- Subtitle Text -->
+                    <TextView
+                        android:id="@+id/subtitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Close the deal faster with Property Bhandar"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                        tools:ignore="HardcodedText" />
+
+                    <!-- Image -->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/propertyImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/addd"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/subtitleTextView"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CircleImageView" />
+
+                    <!-- Post Property Button -->
+                    <TextView
+                        android:id="@+id/postPropertyTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Post property for FREE"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/propertyImageView"
+                        tools:ignore="HardcodedText" />
+
+                    <!-- Arrow Icon -->
+                    <ImageView
+                        android:id="@+id/arrowImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/baseline_arrow_right_alt_24"
+                        app:layout_constraintBottom_toBottomOf="@id/postPropertyTextView"
+                        app:layout_constraintStart_toEndOf="@id/postPropertyTextView"
+                        app:layout_constraintTop_toTopOf="@id/postPropertyTextView"
+                        tools:ignore="ContentDescription" />
+
+                    <!-- Subtext -->
+                    <TextView
+                        android:id="@+id/subtextTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Option to get assistance &amp; \nfree verification"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/postPropertyTextView"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/AddPropertyButton"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/backgroundColor"
+                        android:text="Add Property"
+                        app:layout_constraintBottom_toBottomOf="@+id/arrowImageView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/propertyImageView"
+                        tools:ignore="HardcodedText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp">
+
+                    <!-- Title Text -->
+                    <TextView
+                        android:id="@+id/titleTextViewOffer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Check out our other offerings"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <!-- Explore Text -->
+                    <TextView
+                        android:id="@+id/exploreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Explore Options"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titleTextViewOffer"
+                        tools:ignore="HardcodedText" />
+
+                    <!-- LinearLayout for Offerings -->
+                    <LinearLayout
+                        android:id="@+id/offeringsLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@id/exploreTextView">
+
+                        <!-- Buy a home item -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/buyflatbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <!-- Image for the offering -->
+                            <ImageView
+                                android:id="@+id/buyHomeImageView"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/flat1"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
+
+                            <!-- Title of the offering -->
+                            <TextView
+                                android:id="@+id/buyHomeTitleTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Buy a Flat"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@id/buyHomeArrowImageView"
+                                app:layout_constraintStart_toEndOf="@id/buyHomeImageView"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="HardcodedText" />
+
+                            <!-- Description of the offering -->
+                            <TextView
+                                android:id="@+id/buyHomeDescriptionTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Apartments, land, builder floors, villas and more"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:layout_constraintEnd_toStartOf="@id/buyHomeArrowImageView"
+                                app:layout_constraintStart_toStartOf="@id/buyHomeTitleTextView"
+                                app:layout_constraintTop_toBottomOf="@id/buyHomeTitleTextView"
+                                tools:ignore="HardcodedText,TooManyViews" />
+
+                            <!-- Arrow icon -->
+                            <ImageView
+                                android:id="@+id/buyHomeArrowImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/baseline_arrow_forward_ios_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!-- Rent a home item -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/buyplotbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <!-- Image for the offering -->
+                            <ImageView
+                                android:id="@+id/rentHomeImageView"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/flat2"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
+
+                            <!-- Title of the offering -->
+                            <TextView
+                                android:id="@+id/rentHomeTitleTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Buy a Plot"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@id/rentHomeArrowImageView"
+                                app:layout_constraintStart_toEndOf="@id/rentHomeImageView"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="HardcodedText" />
+
+                            <!-- Description of the offering -->
+                            <TextView
+                                android:id="@+id/rentHomeDescriptionTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Apartments, builder floors, villas and more"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:layout_constraintEnd_toStartOf="@id/rentHomeArrowImageView"
+                                app:layout_constraintStart_toStartOf="@id/rentHomeTitleTextView"
+                                app:layout_constraintTop_toBottomOf="@id/rentHomeTitleTextView"
+                                tools:ignore="HardcodedText" />
+
+                            <!-- Arrow icon -->
+                            <ImageView
+                                android:id="@+id/rentHomeArrowImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/baseline_arrow_forward_ios_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!-- PG and co-living item -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/buyshopbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <!-- Image for the offering -->
+                            <ImageView
+                                android:id="@+id/pgCoLivingImageView"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/landdd"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
+
+                            <!-- Title of the offering -->
+                            <TextView
+                                android:id="@+id/pgCoLivingTitleTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Buy a Shop"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@id/pgCoLivingArrowImageView"
+                                app:layout_constraintStart_toEndOf="@id/pgCoLivingImageView"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="HardcodedText" />
+
+                            <!-- Description of the offering -->
+                            <TextView
+                                android:id="@+id/pgCoLivingDescriptionTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Organized, owner and broker listed PGs"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:layout_constraintEnd_toStartOf="@id/pgCoLivingArrowImageView"
+                                app:layout_constraintStart_toStartOf="@id/pgCoLivingTitleTextView"
+                                app:layout_constraintTop_toBottomOf="@id/pgCoLivingTitleTextView"
+                                tools:ignore="HardcodedText" />
+
+                            <!-- Arrow icon -->
+                            <ImageView
+                                android:id="@+id/pgCoLivingArrowImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/baseline_arrow_forward_ios_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="80dp"
+                    android:background="@drawable/white_corner_bg"
+                    android:elevation="5dp"
+                    android:padding="16dp">
+
+                    <!-- Title Text -->
+                    <TextView
+                        android:id="@+id/titleTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Register to post your"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <!-- Highlighted Text -->
+                    <TextView
+                        android:id="@+id/highlightedTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="property for FREE"
+                        android:textColor="@color/backgroundColor"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titleTextView2"
+                        tools:ignore="HardcodedText" />
+
+                    <!-- House Image -->
+                    <ImageView
+                        android:id="@+id/houseImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="16dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/addd2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/titleTextView2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!-- Post Property Button -->
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:id="@+id/postPropertyButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/backgroundColor"
+                        android:text="Post property \nfor FREE"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/highlightedTextView"
+                        tools:ignore="HardcodedText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Horizontal ScrollView wrapping the latestpro layout -->
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/buttonBackgroundColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:labelVisibilityMode="labeled"
+            app:itemIconTint="@color/white"
+            android:paddingBottom="10dp"
+            style="@style/BottomNavigationViewTransparent"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/bottom_bar_items"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:theme="@style/Theme.Navigation"
+        android:background="@color/white"
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/drawer_header"
+        tools:ignore="VisualLintBounds" />
+</androidx.drawerlayout.widget.DrawerLayout>

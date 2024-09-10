@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context=".Activity.ServicesActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Horizontal LinearLayout for heading and images -->
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            card_view:cardElevation="4dp"
+            card_view:cardBackgroundColor="@color/button_green"
+            card_view:cardCornerRadius="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <!-- Inner LinearLayout for background and text alignment -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/button_green"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Vector asset on the top left -->
+                    <ImageView
+                        android:id="@+id/backic"
+                        android:layout_width="30dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/back_arrow"
+                        android:contentDescription="back_button"
+                        app:tint="@color/white" />
+
+                    <!-- Heading text centered as per the original alignment -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Services"
+                        android:textSize="30sp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:layout_marginStart="95dp"
+                        android:contentDescription="heading services"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- New Vertical LinearLayout for new heading and existing content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white">
+
+            <!-- New Heading TextView -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Legal Services"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="heading legal services"/>
+
+            <!-- Existing Horizontal LinearLayout for 4 cards in a single row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:gravity="center">
+
+                <!-- CardView 1 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLeaseAgreement"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Lease Agreement Card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_lease_agree"
+                            android:contentDescription="Lease Agreement Icon"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lease Agreement"
+                            android:textSize="10sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:contentDescription="Lease Agreement Text"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView 2 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSaleAgreement"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Sale Agreement Card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_sale_agree"
+                            android:contentDescription="Sale Agreement Icon"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Sale Agreement"
+                            android:textColor="@color/black"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            android:contentDescription="Sale Agreement Text"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView 3 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardDocumentReview"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Document Review Card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_documentr"
+                            android:contentDescription="Document Review Icon"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Document Review"
+                            android:textSize="10sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:contentDescription="Document Review Text"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView 4 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardDueDiligence"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Due Diligence Card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_due"
+                            android:contentDescription="Due Diligence Icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Due Diligence"
+                            android:textSize="9sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:contentDescription="Due Diligence Text" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Existing Horizontal LinearLayout for 3 cards and 1 space in a single row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:gravity="center">
+
+                <!-- CardView 1 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPropertyComplaints"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Property Complaints Card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_propertyc"
+                            android:contentDescription="Property Complaints Icon"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:contentDescription="Property Complaints Text"
+                            android:gravity="center"
+                            android:text="Property Complaints"
+                            android:textColor="@color/black"
+                            android:textSize="9sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView 2 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLitigation"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Litigation Search Card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_litigation"
+                            android:contentDescription="Litigation Search Icon"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Litigation Search"
+                            android:textSize="10sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:contentDescription="Litigation Search Text" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView 3 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardTitleSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Title Search Card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_titles"
+                            android:contentDescription="Title Search Icon"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Title Search"
+                            android:textSize="10sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:contentDescription="Title Search Text"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Space to push the text to the center -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="4dp"
+            card_view:cardBackgroundColor="@color/background_color"
+            android:contentDescription="Card containing assistance details and inquiry button">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="14dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:contentDescription="Text content for assistance and services description">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Need Assistance! Let Us Know"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:contentDescription="Title: Need Assistance! Let Us Know"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Discover the services crafted to ensure smooth transactions and absolute regulatory compliance!"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray"
+                        android:contentDescription="Description: Discover the services crafted to ensure smooth transactions and absolute regulatory compliance!" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/feedback_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="Inquire Now"
+                    android:backgroundTint="#114b54"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="4dp"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="10dp"
+                    android:textSize="12sp"
+                    android:contentDescription="Button to inquire about services"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- New Vertical LinearLayout for new heading and existing content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:contentDescription="Section displaying various services in card format"
+            tools:ignore="ExtraText">>
+
+            <!-- New Heading TextView -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Our Services"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="Heading: Our Services"/>
+
+            <!-- Existing Horizontal LinearLayout for 4 cards in a single row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_gravity="center">
+
+                <!-- CardView 1 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardBuyOur"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Card for Buy service">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:contentDescription="Buy service with image and title">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_buy_our"
+                            android:contentDescription="Icon representing Buy service"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Buy"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:contentDescription="Text: Buy"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView 2 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLoanOur"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Card for Loan service">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:contentDescription="Loan service with image and title">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_loan_our"
+                            android:contentDescription="Icon representing Loan service"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Loan"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:contentDescription="Text: Loan"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView 3 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSellOur"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Card for Sell service">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:contentDescription="Sell service with image and title">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_sell_our"
+                            android:contentDescription="Icon representing Sell service"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sell"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:contentDescription="Text: Sell"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <!-- Existing Horizontal LinearLayout for 3 cards and 1 space in a single row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_gravity="center">
+
+                <!-- CardView 1 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSaleAgreementOur"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Card for Sale Agreement service">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:contentDescription="Sale Agreement service with image and title">
+
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Sale Agreement"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:contentDescription="Text: Sale Agreement"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/sale_agreement_our"
+                            android:contentDescription="Icon representing Sale Agreement service"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- CardView 4 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardBuySellPropertyQuestionsOur"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    android:contentDescription="Card for Buy/Sell Property Questions service">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:contentDescription="Buy/Sell Property Questions service with image and title">
+
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Buy/Sell Property Questions"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:contentDescription="Text: Buy/Sell Property Questions"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/property_question_our"
+                            android:contentDescription="Icon representing Buy/Sell Property Questions service"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

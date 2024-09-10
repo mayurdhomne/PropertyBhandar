@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Loan Types -->
+    <string-array name="loan_types">
+        <item>Loan Type</item>
+        <item>Home Loan</item>
+        <item>Home Construction Loan</item>
+        <item>Land or Plot Loan</item>
+        <item>Home Improvement and Extension Loan</item>
+        <item>Top-Up Home Loan</item>
+        <item>Pre-Approved Home Loan</item>
+        <item>PMAY Loan</item>
+        <item>Balance Transfer Home Loan</item>
+        <item>NRI Home Loans</item>
+    </string-array>
+
+    <!-- Indian States -->
+    <string-array name="indian_states">
+    <item>States</item>
+    <item>Andaman and Nicobar Islands</item>
+    <item>Andhra Pradesh</item>
+    <item>Arunachal Pradesh</item>
+    <item>Assam</item>
+    <item>Bihar</item>
+    <item>Chandigarh</item>
+    <item>Chhattisgarh</item>
+    <item>Dadra and Nagar Haveli</item>
+    <item>Daman and Diu</item>
+    <item>Delhi</item>
+    <item>Goa</item>
+    <item>Gujarat</item>
+    <item>Haryana</item>
+    <item>Himachal Pradesh</item>
+    <item>Jammu and Kashmir</item>
+    <item>Jharkhand</item>
+    <item>Karnataka</item>
+    <item>Kerala</item>
+    <item>Ladakh</item>
+    <item>Lakshadweep</item>
+    <item>Madhya Pradesh</item>
+    <item>Maharashtra</item>
+    <item>Manipur</item>
+    <item>Meghalaya</item>
+    <item>Mizoram</item>
+    <item>Nagaland</item>
+    <item>Odisha</item>
+    <item>Puducherry</item>
+    <item>Punjab</item>
+    <item>Rajasthan</item>
+    <item>Sikkim</item>
+    <item>Tamil Nadu</item>
+    <item>Telangana</item>
+    <item>Tripura</item>
+    <item>Uttar Pradesh</item>
+    <item>Uttarakhand</item>
+    <item>West Bengal</item>
+    </string-array>
+
+    <!-- Array for Property Types -->
+    <string-array name="property_types">
+        <item>Property Type</item>
+        <item>Flat</item>
+        <item>Plot</item>
+        <item>Shop</item>
+        <item>House</item>
+        <item>Apartment</item>
+    </string-array>
+
+    <!-- Array for Property Facing Options -->
+    <string-array name="property_facing_options">
+        <item>Property Facing</item>
+        <item>North</item>
+        <item>South</item>
+        <item>East</item>
+        <item>West</item>
+    </string-array>
+</resources>
