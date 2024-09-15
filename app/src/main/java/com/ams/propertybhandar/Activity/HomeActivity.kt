@@ -5,6 +5,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
@@ -15,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ams.propertybhandar.Adaptar.LatestPropertyAdapter
@@ -23,7 +27,9 @@ import com.ams.propertybhandar.Domin.NetworkClient
 import com.ams.propertybhandar.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -44,6 +50,14 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var addPropertyButton: MaterialButton
     private lateinit var addPropertyButton2: MaterialButton
+    private lateinit var propertyImageView: ShapeableImageView
+    private lateinit var calculatorImageView: ImageView
+    private lateinit var calculatorImageView2: ImageView
+    private lateinit var calculatorImageView3: ImageView
+    private lateinit var buyHomeImageView: ImageView
+    private lateinit var buyPlotImageView: ImageView
+    private lateinit var buyShopImageView: ImageView
+
 
 
     private lateinit var viewAllTextView1: TextView
@@ -57,6 +71,76 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        propertyImageView = findViewById(R.id.propertyImageView)
+        calculatorImageView = findViewById(R.id.calculator_image)
+        calculatorImageView2 = findViewById(R.id.calculator_image2)
+        calculatorImageView3 = findViewById(R.id.calculator_image3)
+        buyHomeImageView = findViewById(R.id.buyHomeImageView)
+        buyPlotImageView = findViewById(R.id.rentHomeImageView)
+        buyShopImageView = findViewById(R.id.pgCoLivingImageView)
+
+
+
+
+        val imageUrl = "https://drive.google.com/uc?export=download&id=1BIoT5aBuLzqRnqaQyy6WIMUxIs8hGYO3"
+        Picasso.get()
+            .load(imageUrl)
+            .fit()
+            .centerCrop()
+            .into(propertyImageView)
+
+        // Direct download link for the first calculator image
+        val calculatorImageUrl = "https://drive.google.com/uc?export=download&id=18g4u7uLEEhuoUSZVnwqMHLLGGkHaC_6L"
+        Picasso.get()
+            .load(calculatorImageUrl)
+            .fit()
+            .centerCrop()
+            .into(calculatorImageView)
+
+        // Direct download link for the second calculator image
+        val calculatorImageUrl2 = "https://drive.google.com/uc?export=download&id=1vKBL78422AJQJBXy8Lhm1DfADG9em8JZ"
+        Picasso.get()
+            .load(calculatorImageUrl2)
+            .fit()
+            .centerCrop()
+            .into(calculatorImageView2)
+
+        // Direct download link for the third calculator image
+        val calculatorImageUrl3 = "https://drive.google.com/uc?export=download&id=1nNrBU6LEOOYA1e1ztB3qi-fNHUoNYRsW"
+        Picasso.get()
+            .load(calculatorImageUrl3)
+            .fit()
+            .centerCrop()
+            .into(calculatorImageView3)
+
+
+        // Direct download link for the first buy home image
+        val buyHomeImageUrl = "https://drive.google.com/uc?export=download&id=1XuqBeomGtC-5ZIYkxB42tVwARlapF1CH"
+        Picasso.get()
+            .load(buyHomeImageUrl)
+            .fit()
+            .centerCrop()
+            .into(buyHomeImageView)
+
+        // Direct download link for the second buy home image
+        val buyPlotImageUrl = "https://drive.google.com/uc?export=download&id=1vPbMb9MaQRlMz5eCJy2pJBM4U6YV4U1f"
+        Picasso.get()
+            .load(buyPlotImageUrl)
+            .fit()
+            .centerCrop()
+            .into(buyPlotImageView)
+
+        // Direct download link for the third buy home image
+        val buyShopImageUrl = "https://drive.google.com/uc?export=download&id=1iRvf4_9wnLrG-93eRMoxic0ulIRzPbgU"
+        Picasso.get()
+            .load(buyShopImageUrl)
+            .fit()
+            .centerCrop()
+            .into(buyShopImageView)
+
+
+
+
         // Initialize NetworkClient
         networkClient = NetworkClient(this)
 
@@ -66,7 +150,6 @@ class HomeActivity : AppCompatActivity() {
                 // Refresh user profile data
             }
         }
-
         findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.buyflatbtn).setOnClickListener {
             navigateToPropertyList("Flat")
         }
@@ -187,8 +270,82 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // Initialize RecyclerView
+        // Find your RecyclerView
         recyclerView = findViewById(R.id.recommendedrecyclerView)
+
+// Set the LayoutManager for horizontal scrolling
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+// Use DefaultItemAnimator for custom fade, scale, and move animations
+        recyclerView.itemAnimator = object : DefaultItemAnimator() {
+
+            override fun animateAdd(holder: RecyclerView.ViewHolder?): Boolean {
+                holder?.itemView?.apply {
+                    // Starting state for animation (fade, scale, translation)
+                    alpha = 0f
+                    scaleX = 0.8f
+                    scaleY = 0.8f
+                    translationY = 200f // start slightly lower
+                    rotation = 10f
+
+                    // Animate the view to final state
+                    animate()
+                        .alpha(1f) // fade in
+                        .scaleX(1f) // scale up
+                        .scaleY(1f) // scale up
+                        .translationY(0f) // move to the final position
+                        .rotation(0f) // rotate back to normal
+                        .setDuration(500) // set animation duration
+                        .setInterpolator(DecelerateInterpolator()) // smooth animation
+                        .start()
+                }
+                return super.animateAdd(holder)
+            }
+
+            override fun animateRemove(holder: RecyclerView.ViewHolder?): Boolean {
+                holder?.itemView?.apply {
+                    // Starting state for removal animation
+                    alpha = 1f
+                    scaleX = 1f
+                    scaleY = 1f
+                    translationX = 0f
+                    rotation = 0f
+
+                    // Animate the view to exit state
+                    animate()
+                        .alpha(0f) // fade out
+                        .scaleX(0.5f) // shrink the view
+                        .scaleY(0.5f) // shrink the view
+                        .translationX(-200f) // slide out to the left
+                        .rotation(20f) // slight rotation on removal
+                        .setDuration(400) // set animation duration
+                        .setInterpolator(AccelerateInterpolator()) // faster exit
+                        .start()
+                }
+                return super.animateRemove(holder)
+            }
+
+            override fun animateMove(
+                holder: RecyclerView.ViewHolder?,
+                fromX: Int,
+                fromY: Int,
+                toX: Int,
+                toY: Int
+            ): Boolean {
+                holder?.itemView?.apply {
+                    // Animation for moving an item
+                    animate()
+                        .translationX(toX.toFloat()) // horizontal translation
+                        .setDuration(300)
+                        .setInterpolator(LinearInterpolator()) // constant speed
+                        .start()
+                }
+                return super.animateMove(holder, fromX, fromY, toX, toY)
+            }
+        }
+
+
+
 
         // Initialize RecyclerView for latest properties
         latestRecyclerView = findViewById(R.id.latestrecyclerView)
@@ -263,7 +420,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         addPropertyButton2.setOnClickListener {
-            val intent = Intent(this@HomeActivity, AddPropertyFormActivity::class.java)
+            val intent = Intent(this@HomeActivity, LoanApplicationActivity::class.java)
             startActivity(intent)
         }
         searchEditText = findViewById(R.id.searchView)
@@ -285,6 +442,8 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         showExitConfirmationDialog()

@@ -54,6 +54,7 @@
 
 
             <!-- Property Type Dropdown -->
+            <!-- Property Type Dropdown -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/propertyTypeLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -65,17 +66,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/top_bar">
 
-                <Spinner
-                    android:id="@+id/propertyTypeSpinner"
+                <!-- FrameLayout to hold Spinner and dropdown arrow -->
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/property_types"
-                    android:textSize="18sp"
-                    android:padding="16dp"
-                    android:importantForAccessibility="yes"
-                    android:background="@drawable/text_input_border"
-                    android:contentDescription="Select Property"
-                     />
+                    android:layout_height="wrap_content">
+
+                    <!-- Spinner for Property Type -->
+                    <Spinner
+                        android:id="@+id/propertyTypeSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/property_types"
+                        android:textSize="18sp"
+                        android:padding="16dp"
+                        android:importantForAccessibility="yes"
+                        android:background="@drawable/text_input_border"
+                        android:contentDescription="Select Property Type"
+                        android:popupTheme="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+                    <!-- Dropdown arrow ImageView -->
+                    <ImageView
+                        android:id="@+id/dropdownArrowType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:src="@drawable/baseline_arrow_drop_down_24"
+                        android:padding="16dp"
+                        android:contentDescription="Dropdown arrow"/>
+                </FrameLayout>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Property Facing Dropdown -->
@@ -90,18 +108,35 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/propertyTypeLayout">
 
-                <Spinner
-                    android:id="@+id/propertyFacingSpinner"
+                <!-- FrameLayout to hold Spinner and dropdown arrow -->
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/property_facing_options"
-                    android:textSize="18sp"
-                    android:padding="16dp"
-                    android:importantForAccessibility="yes"
-                    android:background="@drawable/text_input_border"
-                    android:contentDescription="Select Property" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content">
 
+                    <!-- Spinner for Property Facing -->
+                    <Spinner
+                        android:id="@+id/propertyFacingSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/property_facing_options"
+                        android:textSize="18sp"
+                        android:padding="16dp"
+                        android:importantForAccessibility="yes"
+                        android:background="@drawable/text_input_border"
+                        android:contentDescription="Select Property Facing"
+                        android:popupTheme="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+                    <!-- Dropdown arrow ImageView -->
+                    <ImageView
+                        android:id="@+id/dropdownArrowFacing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:src="@drawable/baseline_arrow_drop_down_24"
+                        android:padding="16dp"
+                        android:contentDescription="Dropdown arrow"/>
+                </FrameLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Title Input -->
             <com.google.android.material.textfield.TextInputLayout
@@ -173,17 +208,37 @@
                 app:layout_constraintStart_toEndOf="@id/cityLayout"
                 app:layout_constraintTop_toBottomOf="@id/addressLayout">
 
-                <Spinner
-                    android:id="@+id/state"
-                    android:autofillHints="states"
+                <!-- FrameLayout to stack Spinner and dropdown arrow together -->
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/text_input_border"
-                    android:contentDescription="Select State type"
-                    android:entries="@array/indian_states"
-                    android:importantForAccessibility="yes"
-                    android:padding="16dp" />
+                    android:layout_height="wrap_content">
+
+                    <!-- Spinner for state selection -->
+                    <Spinner
+                        android:id="@+id/state"
+                        android:autofillHints="states"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_input_border"
+                        android:contentDescription="Select State type"
+                        android:entries="@array/indian_states"
+                        android:importantForAccessibility="yes"
+                        android:padding="16dp"
+                        android:popupTheme="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+                    <!-- ImageView for dropdown arrow -->
+                    <ImageView
+                        android:id="@+id/dropdownArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:src="@drawable/baseline_arrow_drop_down_24"
+                        android:padding="16dp"
+                        android:contentDescription="Dropdown arrow"/>
+                </FrameLayout>
+
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <!-- Zipcode Input -->
             <com.google.android.material.textfield.TextInputLayout
@@ -212,7 +267,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="Price"
+                android:hint="Price (Per Sq.Ft.)"
                 app:layout_constraintEnd_toStartOf="@id/areaLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/zipcodeLayout">
@@ -231,7 +286,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Area (sq ft)"
+                android:hint="Area (Sq.Ft.)"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/priceLayout"
                 app:layout_constraintTop_toBottomOf="@id/zipcodeLayout">

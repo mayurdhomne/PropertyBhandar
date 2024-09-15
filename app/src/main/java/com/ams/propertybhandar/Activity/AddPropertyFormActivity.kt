@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ams.propertybhandar.Domin.NetworkClient
 import com.ams.propertybhandar.R
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -139,7 +140,13 @@ class AddPropertyFormActivity : AppCompatActivity() {
             val amenities4 = amenities4EditText.text.toString().trim()
             val amenities5 = amenities5EditText.text.toString().trim()
             val amenities6 = amenities6EditText.text.toString().trim()
+            val isForSale = findViewById<SwitchMaterial>(R.id.saleSwitch).isChecked
+            val isForRent = findViewById<SwitchMaterial>(R.id.rentSwitch).isChecked
 
+            if (!isForSale && !isForRent) {
+                Toast.makeText(this, "Please select either For Sale or For Rent", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             // Validate inputs
             if (validateFields(title, address, city, selectedState, zipcode, description, price, area, amenities1, amenities2, amenities3) && photoMainUri != null) {
                 val propertyData = mapOf(
@@ -161,8 +168,8 @@ class AddPropertyFormActivity : AppCompatActivity() {
                     "amenities4" to amenities4,
                     "amenities5" to amenities5,
                     "amenities6" to amenities6,
-                    "is_for_sale" to "true",
-                    "is_for_rent" to "true",
+                    "is_for_sale" to isForSale.toString(),
+                    "is_for_rent" to isForRent.toString(),
                     "list_date" to "2024-08-23T14:15:22Z",
                     "agent" to "1"
                 )
@@ -221,6 +228,7 @@ class AddPropertyFormActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         // Navigate to HomeActivity when back button is pressed

@@ -61,25 +61,32 @@ class SignUpActivity : AppCompatActivity() {
 
         return when {
             !isValidEmail(email) -> {
-                emailEditText.error = "Invalid email"
+                emailEditText.error = null // Clear any previous error
+                Toast.makeText(this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show()
                 false
             }
             contact.isEmpty() -> {
-                contactEditText.error = "Contact cannot be empty"
+                contactEditText.error = null
+                Toast.makeText(this, "Contact number cannot be empty.", Toast.LENGTH_SHORT).show()
+                false
+            }
+            contact.length < 10 -> {
+                contactEditText.error = null
+                Toast.makeText(this, "Contact number must be at least 10 digits.", Toast.LENGTH_SHORT).show()
                 false
             }
             !isValidPassword(password) -> {
-                passwordEditText.error = "Password must be at least 6 characters"
+                passwordEditText.error = null
+                Toast.makeText(this, "Password must be at least 6 characters.", Toast.LENGTH_SHORT).show()
                 false
             }
             !termsCheckBox.isChecked -> {
-                Toast.makeText(this, "Please agree to the terms & conditions", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please agree to the terms & conditions.", Toast.LENGTH_SHORT).show()
                 false
             }
             else -> true
         }
     }
-
     private fun signUp() {
         val email = emailEditText.text.toString().trim()
         val password = passwordEditText.text.toString()
@@ -120,14 +127,29 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun handleUnsuccessfulResponse(response: Response) {
-        when (response.code) {
-            400 -> {
-                Toast.makeText(this@SignUpActivity, "Email or contact number already exists", Toast.LENGTH_SHORT).show()
+        if (response.code == 400) {
+            response.body?.let { responseBody ->
+                val responseString = responseBody.string()
+
+                when {
+                    responseString.contains("email", true) -> {
+                        Toast.makeText(this@SignUpActivity, "Invalid email or email already exists.", Toast.LENGTH_SHORT).show()
+                    }
+                    responseString.contains("contact", true) -> {
+                        Toast.makeText(this@SignUpActivity, "Invalid contact number or contact already exists.", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        Toast.makeText(this@SignUpActivity, "Bad request. Please check your input.", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
-            500 -> Toast.makeText(this@SignUpActivity, "Server error, please try again later.", Toast.LENGTH_SHORT).show()
-            else -> Toast.makeText(this@SignUpActivity, "Sign up failed: ${response.message}", Toast.LENGTH_SHORT).show()
+        } else if (response.code == 500) {
+            Toast.makeText(this@SignUpActivity, "Server error, please try again later.", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this@SignUpActivity, "Sign up failed: ${response.message}", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun saveUserData(email: String, contact: String, password: String) {
         getSharedPreferences("UserPrefs", MODE_PRIVATE).edit().apply {

@@ -45,6 +45,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <!-- Property Image Slider -->
@@ -52,7 +53,7 @@
                 android:id="@+id/photo_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
 
             <!-- Custom TabLayout for Dots Indicator -->
@@ -71,8 +72,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
@@ -96,6 +95,115 @@
                     android:textColor="@color/black"/>
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Property Type"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Area"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bedrooms :-"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/bed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bathrooms :-"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/bath"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Property Facing :-"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/property_facing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
             <!-- Buyer Info -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,6 +211,10 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="16dp"
                 android:padding="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/white_bg"
+                android:elevation="5dp"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -132,6 +244,14 @@
                         android:text="State &amp; City"
                         android:textColor="@color/backgroundColor"
                         android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/zipcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="zipcode"
+                        android:textColor="@color/backgroundColor"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -152,6 +272,7 @@
                 android:layout_height="wrap_content"
                 android:columnCount="2"
                 android:rowCount="3"
+
                 android:padding="16dp"
                 android:orientation="horizontal">
 
@@ -161,8 +282,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_margin="8dp">
-
-
 
                     <TextView
                         android:id="@+id/amenities1"
@@ -180,8 +299,6 @@
                     android:orientation="horizontal"
                     android:layout_margin="8dp">
 
-
-
                     <TextView
                         android:id="@+id/amenities4"
                         android:layout_width="wrap_content"
@@ -197,7 +314,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_margin="8dp">
-
 
                     <TextView
                         android:id="@+id/amenities2"
@@ -248,9 +364,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_margin="8dp">
-
-
-                    <TextView
+                      <TextView
                         android:id="@+id/amenities6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -260,6 +374,15 @@
                 </LinearLayout>
 
             </GridLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:text="Property Description"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="bold" />
 
             <!-- Property Description -->
             <androidx.constraintlayout.widget.ConstraintLayout

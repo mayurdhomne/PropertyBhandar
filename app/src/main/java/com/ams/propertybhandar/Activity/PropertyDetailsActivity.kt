@@ -25,7 +25,7 @@ class PropertyDetailsActivity : AppCompatActivity() {
 
         // Retrieve the property data from the Intent
         val propertyData = intent.getStringExtra("property_data")
-        val property = JSONObject(propertyData)
+        val property = JSONObject(propertyData.toString())
 
         // Bind the UI elements to variables
         val photoViewPager: ViewPager2 = findViewById(R.id.photo_view_pager)
@@ -34,6 +34,12 @@ class PropertyDetailsActivity : AppCompatActivity() {
         val price: TextView = findViewById(R.id.price)
         val address: TextView = findViewById(R.id.address)
         val state: TextView = findViewById(R.id.state)
+        val zipcode: TextView = findViewById(R.id.zipcode)
+        val property_facing: TextView = findViewById(R.id.property_facing)
+        val type: TextView = findViewById(R.id.type)
+        val area: TextView = findViewById(R.id.area)
+        val bed: TextView = findViewById(R.id.bed)
+        val bath: TextView = findViewById(R.id.bath)
         val description: TextView = findViewById(R.id.descripction)
         val amenities1: TextView = findViewById(R.id.amenities1)
         val amenities2: TextView = findViewById(R.id.amenities2)
@@ -44,17 +50,25 @@ class PropertyDetailsActivity : AppCompatActivity() {
         val buyButton: Button = findViewById(R.id.check_availability_button)
 
         // Set the values from the property object
-        title.text = property.getString("title")
-        price.text = property.getString("price")
-        address.text = property.getString("address")
-        state.text = "${property.getString("state")}, ${property.getString("city")}, ${property.getString("zipcode")}"
-        description.text = property.getString("description")
+        // Set the values from the property object
+        title.text = property.optString("title", "N/A")
+        price.text = property.optString("price", "N/A")
+        address.text = property.optString("address", "N/A")
+        area.text = "${property.optString("area", "N/A")} Sq.Ft"
+        type.text = property.optString("property_type", "N/A")
+        property_facing.text = property.optString("property_facing", "N/A")
+        bed.text = property.optString("beds", "N/A")
+        bath.text = property.optString("baths", "N/A")
+        state.text = "${property.optString("state", "N/A")}, ${property.optString("city", "N/A")}"
+        zipcode.text = property.optString("zipcode", "N/A")
+        description.text = property.optString("description", "N/A")
         amenities1.text = property.optString("amenities1", "N/A")
         amenities2.text = property.optString("amenities2", "N/A")
         amenities3.text = property.optString("amenities3", "N/A")
         amenities4.text = property.optString("amenities4", "N/A")
         amenities5.text = property.optString("amenities5", "N/A")
         amenities6.text = property.optString("amenities6", "N/A")
+
 
         // Prepare the list of photo URLs with dynamic URL handling
         val baseUrl = "https://propertybhandar.com"

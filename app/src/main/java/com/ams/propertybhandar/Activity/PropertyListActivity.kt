@@ -1,6 +1,5 @@
 package com.ams.propertybhandar.Activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +23,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
+@Suppress("DEPRECATION")
 class PropertyListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
@@ -31,7 +31,8 @@ class PropertyListActivity : AppCompatActivity() {
     private var allProperties: JSONArray = JSONArray() // Initialize with an empty JSONArray
     private var searchPerformed: Boolean = false // Track if a search was performed
     private var customLoadingDialog: CustomLoadingDialog? = null
-
+    private var minBudget: Double = 0.0
+    private var maxBudget: Double = Double.MAX_VALUE
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,12 +41,13 @@ class PropertyListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_property_list)
 
         val searchQuery = intent.getStringExtra("keywords") ?: ""
-        val minBudget = intent.getDoubleExtra("min_budget", 0.0)
-        val maxBudget = intent.getDoubleExtra("max_budget", Double.MAX_VALUE)
+        minBudget = intent.getDoubleExtra("min_budget", 0.0)
+        maxBudget = intent.getDoubleExtra("max_budget", Double.MAX_VALUE)
 
         // Initialize RecyclerView
         recyclerView = findViewById(R.id.propertyRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         // Initialize adapter with click listener and wishlist toggle listener
         propertyListAdapter = PropertyListAdapter(this, allProperties, { property ->
@@ -54,14 +56,13 @@ class PropertyListActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }, { property, isChecked ->
-            handleWishlistToggle(property, isChecked)
         })
         recyclerView.adapter = propertyListAdapter
 
         // Automatically trigger the search or fetch all properties based on intent extras
         if (searchQuery.isNotEmpty()) {
             searchPerformed = true
-            fetchProperties(searchQuery, minBudget, maxBudget)
+            fetchProperties(searchQuery) // Removed minBudget and maxBudget since they're not used here
         } else {
             searchPerformed = false
             fetchAllProperties()  // Fetch all properties when no search query is provided
@@ -117,28 +118,28 @@ class PropertyListActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
+    
     private fun setupCardFilters() {
         findViewById<CardView>(R.id.allpropertycard).setOnClickListener {
-            filterProperties("All", 0.0, Double.MAX_VALUE)
-        }
+            filterProperties("All", minBudget, maxBudget)
+                   }
         findViewById<CardView>(R.id.flatscard).setOnClickListener {
-            filterProperties("Flat", 0.0, Double.MAX_VALUE)
+            filterProperties("Flat", minBudget, maxBudget) // Apply budget filter for "Flat" properties
         }
         findViewById<CardView>(R.id.plotscard).setOnClickListener {
-            filterProperties("Plot", 0.0, Double.MAX_VALUE)
+            filterProperties("Plot", minBudget, maxBudget) // Apply budget filter for "Plot" properties
         }
         findViewById<CardView>(R.id.comercialscard).setOnClickListener {
-            filterProperties("Shop", 0.0, Double.MAX_VALUE)
+            filterProperties("Shop", minBudget, maxBudget) // Apply budget filter for "Shop" properties
         }
         findViewById<CardView>(R.id.Housescard).setOnClickListener {
-            filterProperties("House", 0.0, Double.MAX_VALUE)
+            filterProperties("House", minBudget, maxBudget) // Apply budget filter for "House" properties
         }
-        findViewById<CardView>(R.id.Apartmentcard).setOnClickListener {
-            filterProperties("Apartment", 0.0, Double.MAX_VALUE)
+        findViewById<CardView>(R.id.Apartmentcard).setOnClickListener  {
+            filterProperties("Apartment", minBudget, maxBudget) // Apply budget filter for "Apartment" properties
         }
     }
-
+    // Method to fetch all properties and filter them based on budget range
     private fun fetchAllProperties() {
         showLoadingDialog()
         val networkClient = NetworkClient(this)
@@ -147,68 +148,65 @@ class PropertyListActivity : AppCompatActivity() {
                 runOnUiThread {
                     Log.e("PropertyFetch", "Failed to fetch properties: ${e.message}")
                     Toast.makeText(this@PropertyListActivity, "Failed to fetch properties", Toast.LENGTH_SHORT).show()
+                    hideLoadingDialog()
                 }
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
-                    hideLoadingDialog()
                     val responseBody = response.body?.string()
                     Log.d("PropertyFetch", "Response: $responseBody")
                     runOnUiThread {
                         try {
                             if (!responseBody.isNullOrEmpty()) {
                                 allProperties = JSONArray(responseBody)
-                                propertyListAdapter.updateProperties(allProperties)
-
+                                // Call filterProperties with budget range
+                                filterProperties("All", minBudget, maxBudget)
                             } else {
                                 Log.d("PropertyFetch", "No properties found")
                                 Toast.makeText(this@PropertyListActivity, "No properties found", Toast.LENGTH_SHORT).show()
+                                hideLoadingDialog()
                             }
                         } catch (e: Exception) {
                             Log.e("PropertyFetch", "Error parsing properties: ${e.message}")
                             Toast.makeText(this@PropertyListActivity, "Error parsing properties", Toast.LENGTH_SHORT).show()
+                        } finally {
+                            hideLoadingDialog()
                         }
                     }
                 } else {
-                    hideLoadingDialog()
                     Log.e("PropertyFetch", "Error fetching properties: ${response.code}")
                     runOnUiThread {
                         Toast.makeText(this@PropertyListActivity, "Error fetching properties: ${response.code}", Toast.LENGTH_SHORT).show()
                     }
+                    hideLoadingDialog()
                 }
             }
         })
     }
-    @SuppressLint("MissingSuperCall")
-    override fun onBackPressed() {
-        // Navigate to HomeActivity when back button is pressed
-        val intent = Intent(this@PropertyListActivity, HomeActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish() // Close current activity
-    }
-
-    private fun fetchProperties(keywords: String, minBudget: Double, maxBudget: Double) {
+    // Method to search properties based on keywords and filter them based on budget range
+    private fun fetchProperties(keywords: String) {
+        showLoadingDialog()
         val networkClient = NetworkClient(this)
         networkClient.searchProperties(keywords, object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
                     Log.e("PropertySearch", "Failed to search properties: ${e.message}")
                     Toast.makeText(this@PropertyListActivity, "Failed to search properties", Toast.LENGTH_SHORT).show()
+                    hideLoadingDialog()
                 }
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
-                    hideLoadingDialog()
                     val responseBody = response.body?.string()
                     Log.d("PropertySearch", "Response: $responseBody")
                     runOnUiThread {
                         try {
                             if (!responseBody.isNullOrEmpty()) {
                                 allProperties = JSONArray(responseBody)
-                                filterProperties(keywords, minBudget, maxBudget)
+                                // Call filterProperties with budget range
+                                filterProperties("All", minBudget, maxBudget)
                             } else {
                                 Log.d("PropertySearch", "No properties found")
                                 Toast.makeText(this@PropertyListActivity, "No properties found", Toast.LENGTH_SHORT).show()
@@ -216,18 +214,22 @@ class PropertyListActivity : AppCompatActivity() {
                         } catch (e: Exception) {
                             Log.e("PropertySearch", "Error parsing search results: ${e.message}")
                             Toast.makeText(this@PropertyListActivity, "Error parsing search results", Toast.LENGTH_SHORT).show()
+                        } finally {
+                            hideLoadingDialog()
                         }
                     }
                 } else {
-                    hideLoadingDialog()
                     Log.e("PropertySearch", "Error fetching search results: ${response.code}")
                     runOnUiThread {
                         Toast.makeText(this@PropertyListActivity, "Error fetching search results: ${response.code}", Toast.LENGTH_SHORT).show()
                     }
+                    hideLoadingDialog()
                 }
             }
         })
     }
+
+    // Method to filter properties based on type and budget range
     private fun filterProperties(type: String, minBudget: Double, maxBudget: Double) {
         val filteredProperties = JSONArray()
         for (i in 0 until allProperties.length()) {
@@ -235,60 +237,20 @@ class PropertyListActivity : AppCompatActivity() {
             val price = property.optDouble("price", 0.0)
             val propertyType = property.optString("property_type")
 
-            if ((type == "All" || propertyType == type) &&
-                price in minBudget..maxBudget) {
+            // Filter properties based on type and budget range
+            if ((type == "All" || propertyType == type) && price in minBudget..maxBudget) {
                 filteredProperties.put(property)
             }
+            if (filteredProperties.length() == 0) {
+                Toast.makeText(this@PropertyListActivity, "No properties found", Toast.LENGTH_SHORT).show()
+            }
+
         }
+        // Update adapter with filtered properties
         propertyListAdapter.updateProperties(filteredProperties)
+
+        hideLoadingDialog()
     }
-
-    private fun handleWishlistToggle(property: JSONObject, isChecked: Boolean) {
-        val networkClient = NetworkClient(this)
-        if (isChecked) {
-            networkClient.addToWishlist(property, object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    runOnUiThread {
-                        Toast.makeText(this@PropertyListActivity, "Failed to add to wishlist", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    if (response.isSuccessful) {
-                        runOnUiThread {
-                            Toast.makeText(this@PropertyListActivity, "Added to wishlist", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        runOnUiThread {
-                            Toast.makeText(this@PropertyListActivity, "Error adding to wishlist", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            })
-        } else {
-            val propertyId = property.getInt("id") // Assuming 'id' is used for wishlist item identification
-            networkClient.removeFromWishlist(propertyId, object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    runOnUiThread {
-                        Toast.makeText(this@PropertyListActivity, "Failed to remove from wishlist", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    if (response.isSuccessful) {
-                        runOnUiThread {
-                            Toast.makeText(this@PropertyListActivity, "Removed from wishlist", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        runOnUiThread {
-                            Toast.makeText(this@PropertyListActivity, "Error removing from wishlist", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            })
-        }
-    }
-
     private fun showFilterMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
         popupMenu.menuInflater.inflate(R.menu.filter_menu, popupMenu.menu)
@@ -345,14 +307,18 @@ class PropertyListActivity : AppCompatActivity() {
         val filteredProperties = JSONArray()
         for (i in 0 until allProperties.length()) {
             val property = allProperties.getJSONObject(i)
-            val propertyDirection = property.optString("direction")
+            val propertyDirection = property.optString("property_facing", "")
 
-            if (propertyDirection == direction) {
+            Log.d("FilterDirection", "Property Direction: $propertyDirection, Filtered Direction: $direction")
+
+            if (propertyDirection.equals(direction, ignoreCase = true)) {
                 filteredProperties.put(property)
             }
         }
+        // Update adapter with filtered properties
         propertyListAdapter.updateProperties(filteredProperties)
     }
+
     private fun showLoadingDialog() {
         if (customLoadingDialog == null) {
             customLoadingDialog = CustomLoadingDialog(this)

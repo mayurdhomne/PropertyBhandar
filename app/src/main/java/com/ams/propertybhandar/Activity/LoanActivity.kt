@@ -8,7 +8,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.ams.propertybhandar.R
 
-@Suppress("NAME_SHADOWING")
 class LoanActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")

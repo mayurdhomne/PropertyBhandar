@@ -13,7 +13,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
@@ -31,9 +30,7 @@ class NetworkClient(private val context: Context) {
         private val JSON = "application/json; charset=utf-8".toMediaType()
         private val gson = Gson()
     }
-
     val client: OkHttpClient = OkHttpClient()
-
     // Login User
     fun loginUser(email: String, password: String, callback: Callback) {
         val url = "$BASE_URL/api/auth/login/"
@@ -47,13 +44,11 @@ class NetworkClient(private val context: Context) {
             .url(url)
             .post(body)
             .build()
-
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("NetworkClient", "Failed to login user", e)
                 callback.onFailure(call, e)
             }
-
             override fun onResponse(call: Call, response: Response) {
                 if (!response.isSuccessful) {
                     Log.e("NetworkClient", "Unexpected response code: ${response.code}")
@@ -77,7 +72,6 @@ class NetworkClient(private val context: Context) {
             }
         })
     }
-
     // Register User
     fun registerUser(email: String, password: String, contact: String, callback: Callback) {
         val url = "$BASE_URL/api/users/sign_up/"
@@ -95,7 +89,6 @@ class NetworkClient(private val context: Context) {
 
         client.newCall(request).enqueue(callback)
     }
-
     // Verify OTP
     fun verifyOtp(email: String, otp: String, callback: Callback) {
         val url = "$BASE_URL/api/users/verify_signup_otp/"
@@ -111,7 +104,6 @@ class NetworkClient(private val context: Context) {
 
         client.newCall(request).enqueue(callback)
     }
-
     // Forgot Password
     fun forgotPassword(email: String, callback: Callback) {
         val url = "$BASE_URL/api/users/password_reset_request/"
@@ -126,13 +118,11 @@ class NetworkClient(private val context: Context) {
 
         client.newCall(request).enqueue(callback)
     }
-
     // Fetch Properties
     fun fetchProperties(callback: Callback) {
         val url = "$BASE_URL/api/listings/"
         makeAuthenticatedRequest(url, Request.Builder().url(url).build(), callback)
     }
-
     // Verify Password Reset OTP
     fun verifyPasswordResetOtp(email: String, otp: String, callback: Callback) {
         val url = "$BASE_URL/api/users/verify_password_reset_otp/"
@@ -148,8 +138,6 @@ class NetworkClient(private val context: Context) {
 
         client.newCall(request).enqueue(callback)
     }
-
-    // Reset Password
     // Reset Password
     fun resetPassword(newPassword: String, confirmPassword: String, otp: String, callback: Callback) {
         val url = "https://www.propertybhandar.com/api/users/password_reset_confirm/"
@@ -167,15 +155,11 @@ class NetworkClient(private val context: Context) {
 
         client.newCall(request).enqueue(callback)
     }
-
-
     // Fetch User Profile
     fun fetchUserProfile(callback: Callback) {
         val url = "$BASE_URL/api/profiles/profile/"
         makeAuthenticatedRequest(url, Request.Builder().url(url).build(), callback)
     }
-
-    // Update User Profile
     // Update User Profile
     fun updateUserProfile(userId: String, updatedData: JSONObject, callback: Callback) {
         val url = "$BASE_URL/api/profiles/edit_profile/"
@@ -187,7 +171,6 @@ class NetworkClient(private val context: Context) {
 
         makeAuthenticatedRequest(url, request, callback)
     }
-
     // Submit Property Form with Photos
     fun submitPropertyWithPhotos(
         propertyData: Map<String, String>,
@@ -199,11 +182,9 @@ class NetworkClient(private val context: Context) {
         callback: Callback
     ) {
         val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
-
         propertyData.forEach { (key, value) ->
             requestBodyBuilder.addFormDataPart(key, value)
         }
-
         photoMainFile?.let {
             requestBodyBuilder.addFormDataPart("photo_main", it.name, it.asRequestBody("image/jpeg".toMediaTypeOrNull()))
         }
@@ -219,7 +200,6 @@ class NetworkClient(private val context: Context) {
         photo4File?.let {
             requestBodyBuilder.addFormDataPart("photo_4", it.name, it.asRequestBody("image/jpeg".toMediaTypeOrNull()))
         }
-
         val requestBody = requestBodyBuilder.build()
         val request = Request.Builder()
             .url("$BASE_URL/api/listings/")
@@ -229,7 +209,6 @@ class NetworkClient(private val context: Context) {
 
         client.newCall(request).enqueue(callback)
     }
-
     fun refreshToken(refreshToken: String, callback: Callback) {
         val requestBody = FormBody.Builder()
             .add("refresh_token", refreshToken)
@@ -242,8 +221,6 @@ class NetworkClient(private val context: Context) {
 
         client.newCall(request).enqueue(callback)
     }
-
-
     // Handle token-based requests
     internal fun makeAuthenticatedRequest(url: String, request: Request, callback: Callback) {
         val accessToken = getAccessToken() ?: return
@@ -273,39 +250,6 @@ class NetworkClient(private val context: Context) {
             }
         })
     }
-
-    fun addToWishlist(property: JSONObject, callback: Callback) {
-        val url = "https://www.propertybhandar.com/api/wishlist/"
-        val requestBody = RequestBody.create(
-            "application/json; charset=utf-8".toMediaTypeOrNull(),
-            property.toString()
-        )
-        val request = Request.Builder()
-            .url(url)
-            .post(requestBody)
-            .build()
-        client.newCall(request).enqueue(callback)
-    }
-
-    fun removeFromWishlist(propertyId: Int, callback: Callback) {
-        val url = "https://www.propertybhandar.com/api/wishlist/$propertyId/"
-        val request = Request.Builder()
-            .url(url)
-            .delete()
-            .build()
-        client.newCall(request).enqueue(callback)
-    }
-
-    fun fetchWishlist(callback: Callback) {
-        val url = "https://www.propertybhandar.com/api/wishlist/"
-        val request = Request.Builder()
-            .url(url)
-            .build()
-
-        client.newCall(request).enqueue(callback)
-    }
-
-
     // Search Properties
     fun searchProperties(keywords: String, callback: Callback) {
         // Construct the URL with the base URL and the "keywords" query parameter
@@ -326,10 +270,6 @@ class NetworkClient(private val context: Context) {
             Log.e("PropertySearch", "Failed to build URL")
         }
     }
-
-
-
-
     // Token management
     private fun saveTokens(accessToken: String, refreshToken: String) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -339,23 +279,19 @@ class NetworkClient(private val context: Context) {
             apply()
         }
     }
-
     internal fun getAccessToken(): String? {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         return prefs.getString(ACCESS_TOKEN_KEY, null)
     }
-
     internal fun getRefreshToken(): String? {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         return prefs.getString(REFRESH_TOKEN_KEY, null)
     }
-
     private fun handleTokenRefresh(callback: (Boolean) -> Unit) {
         val refreshToken = getRefreshToken() ?: run {
             callback(false)
             return
         }
-
         val url = "$BASE_URL/api/auth/refresh/"
         val jsonObject = JsonObject().apply {
             addProperty("refresh", refreshToken)
@@ -366,25 +302,20 @@ class NetworkClient(private val context: Context) {
             .url(url)
             .post(body)
             .build()
-
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("NetworkClient", "Token refresh failed", e)
                 callback(false)
             }
-
             override fun onResponse(call: Call, response: Response) {
                 if (!response.isSuccessful) {
                     callback(false)
                     return
                 }
-
                 val responseData = response.body?.string()
                 val jsonResponse = gson.fromJson(responseData, JsonObject::class.java)
-
                 val newAccessToken = jsonResponse.get("access")?.asString
                 val newRefreshToken = jsonResponse.get("refresh")?.asString
-
                 if (newAccessToken != null && newRefreshToken != null) {
                     saveTokens(newAccessToken, newRefreshToken) // Save the new tokens
                     callback(true)
@@ -394,6 +325,4 @@ class NetworkClient(private val context: Context) {
             }
         })
     }
-
-
 }

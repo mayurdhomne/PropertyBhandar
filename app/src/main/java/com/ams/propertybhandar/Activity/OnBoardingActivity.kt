@@ -47,19 +47,15 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    // Method to skip the current onboarding page
-    fun skipOnboarding() {
-        if (currentFragmentIndex < fragments.size - 1) {
-            currentFragmentIndex++
-            showFragment(fragments[currentFragmentIndex])
-        } else {
-            // If already at the last fragment, finish onboarding
-            finishOnboarding()
-        }
+    fun finishOnboarding() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish() // Close the onboarding activity
     }
 
-    // Method to finish the onboarding process
-    fun finishOnboarding() {
+    // Method to skip the onboarding process
+    fun skipOnboarding() {
+        // Navigate directly to LoginActivity
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish() // Close the onboarding activity

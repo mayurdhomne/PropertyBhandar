@@ -3,6 +3,62 @@
     <style name="Base.Theme.PropertyBhandar" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Customize your light theme here. -->
+        <!-- Remove or override the colorPrimary if it's not needed -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Set Background Color -->
+        <item name="android:windowBackground">@android:color/white</item> <!-- Change to desired color -->
+
+        <!-- Set Status Bar Color -->
+        <item name="android:statusBarColor">@color/backgroundColor</item>
+
+        <!-- Optional: Set Navigation Bar Color -->
+        <item name="android:navigationBarColor">@color/backgroundColor</item>
+    </style>
+    <style name="Theme.PropertyBhandar" parent="Base.Theme.PropertyBhandar" />
+
+
+
+    <style name="ShapeAppearanceOverlay.App.CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+    <style name="Theme.Navigation" parent="Base.Theme.PropertyBhandar">
+        <item name="colorControlHighlight">@android:color/transparent</item>
+    </style>
+    <style name="MenuBackground" parent="Theme.AppCompat.Light">
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
+    <style name="BottomNavigationViewTransparent" parent="Widget.Design.BottomNavigationView">
+        <item name="itemBackground">
+            <!-- Ripple Effect -->
+            ?attr/selectableItemBackgroundBorderless
+        </item>
+        <item name="itemIconTint">@color/white</item> <!-- Keep the icons white -->
+        <item name="itemTextColor">@color/white</item> <!-- Keep the text white -->
+    </style>
+
+    <style name="CustomTabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <!-- Set the background color of the TabLayout -->
+        <item name="android:background">@color/white</item>
+        <!-- Set the indicator color to transparent -->
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+        <!-- Set the tab indicator height to 0dp to hide it -->
+        <item name="tabIndicatorHeight">0dp</item>
+        <!-- Set the tab text color -->
+        <item name="tabTextColor">@color/white</item> <!-- Replace with your desired color -->
+        <!-- Set the tab selected text color -->
+        <item name="tabSelectedTextColor">@color/backgroundColor</item> <!-- Replace with your desired color -->
+        <!-- Remove ripple effect -->
+        <item name="tabRippleColor">@android:color/transparent</item>
+
+        <!-- Set the dot indicator color selector -->
+        <item name="tabIndicator">@drawable/custom_tab_indicator</item>
+        <!-- Optional: Adjust tab gravity and mode -->
+        <item name="tabGravity">center</item>
+        <item name="tabMode">fixed</item>
     </style>
 </resources>

@@ -53,13 +53,17 @@ class LoginActivity : AppCompatActivity() {
         val email = emailEditText.text.toString().trim()
         val password = passwordEditText.text.toString()
 
+        // Validate Email
         if (!isValidEmail(email)) {
-            emailEditText.error = "Invalid email"
+            emailEditText.error = "Please enter a valid email address."
+            Toast.makeText(this, "Invalid email format. Please try again.", Toast.LENGTH_SHORT).show()
             return
         }
 
+        // Validate Password
         if (password.isEmpty()) {
-            passwordEditText.error = "Password cannot be empty"
+            passwordEditText.error = "Password cannot be empty."
+            Toast.makeText(this, "Please enter your password.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -71,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
                 runOnUiThread {
                     // Hide the loading dialog
                     hideLoadingDialog()
-                    Toast.makeText(this@LoginActivity, "Sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "Login failed due to network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -86,18 +90,40 @@ class LoginActivity : AppCompatActivity() {
                             apply()
                         }
 
-                        // Show the default success Toast
+                        // Show success message
                         Toast.makeText(this@LoginActivity, "Login Successful! Welcome to PropertyBhandar!", Toast.LENGTH_SHORT).show()
 
                         // Redirect to HomeActivity
                         startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this@LoginActivity, "Sign in failed: ${response.message}", Toast.LENGTH_SHORT).show()
+                        handleLoginErrorResponse(response)
                     }
                 }
             }
         })
+    }
+
+    private fun handleLoginErrorResponse(response: Response) {
+        when (response.code) {
+            400 -> {
+                Toast.makeText(this@LoginActivity, "Login failed. Please verify your email and password, and try again.", Toast.LENGTH_LONG).show()
+            }
+            401 -> {
+                Toast.makeText(this@LoginActivity, "Unauthorized access. Please check your credentials and ensure your account is verified.", Toast.LENGTH_LONG).show()
+            }
+            500 -> {
+                Toast.makeText(this@LoginActivity, "We're experiencing technical difficulties. Please try again later.", Toast.LENGTH_LONG).show()
+            }
+            else -> {
+                Toast.makeText(this@LoginActivity, "An unexpected error occurred: ${response.message}. Please try again.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+
+    private fun isValidEmail(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun showLoadingDialog() {
@@ -109,9 +135,5 @@ class LoginActivity : AppCompatActivity() {
 
     private fun hideLoadingDialog() {
         customLoadingDialog?.dismiss()
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

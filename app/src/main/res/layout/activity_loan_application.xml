@@ -243,16 +243,35 @@
                         app:layout_constraintStart_toEndOf="@id/cityLayout"
                         app:layout_constraintTop_toTopOf="@+id/cityLayout">
 
-                        <Spinner
-                            android:id="@+id/stateSpinner"
+                        <!-- RelativeLayout to place Spinner and dropdown arrow together -->
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/text_input_border"
-                            android:contentDescription="Select loan type"
-                            android:entries="@array/indian_states"
-                            android:importantForAccessibility="yes"
-                            android:padding="16dp" />
+                            android:layout_height="wrap_content">
+
+                            <!-- Spinner for state selection -->
+                            <Spinner
+                                android:id="@+id/stateSpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/text_input_border"
+                                android:entries="@array/indian_states"
+                                android:padding="16dp"
+                                android:popupTheme="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+                            <!-- ImageView for dropdown arrow -->
+                            <ImageView
+                                android:id="@+id/dropdownArrow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/baseline_arrow_drop_down_24"
+                                android:padding="16dp"
+                                android:contentDescription="Dropdown arrow"/>
+                        </RelativeLayout>
+
                     </com.google.android.material.textfield.TextInputLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -340,7 +359,10 @@
                         android:background="@drawable/text_input_border"
                         android:entries="@array/loan_types"
                         android:importantForAccessibility="yes"
-                        android:contentDescription="Select loan type" />
+                        android:contentDescription="Select loan type"
+                        android:popupTheme="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:drawableRight="@drawable/baseline_arrow_drop_down_24"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

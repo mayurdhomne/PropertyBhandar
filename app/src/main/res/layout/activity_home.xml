@@ -302,7 +302,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="24dp"
                     android:orientation="horizontal">
 
@@ -318,7 +318,7 @@
                     <TextView
                         android:id="@+id/viewAllTextView1"
                         android:layout_width="70dp"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:contentDescription="View all items or details"
                         android:text="View All"
                         android:textColor="@color/blue_5"
@@ -418,7 +418,6 @@
                                             android:layout_height="72dp"
                                             android:layout_weight="1"
                                             android:scaleType="fitCenter"
-                                            android:src="@drawable/emicalculator"
                                             tools:ignore="ContentDescription" />
 
                                         <!-- Arrow Icon -->
@@ -486,7 +485,6 @@
                                             android:layout_height="72dp"
                                             android:layout_weight="1"
                                             android:scaleType="fitCenter"
-                                            android:src="@drawable/eligibility"
                                             tools:ignore="ContentDescription" />
 
                                         <!-- Arrow Icon -->
@@ -556,7 +554,6 @@
                                             android:layout_height="72dp"
                                             android:layout_weight="1"
                                             android:scaleType="fitCenter"
-                                            android:src="@drawable/hbc"
                                             tools:ignore="ContentDescription" />
 
                                         <!-- Arrow Icon -->
@@ -581,7 +578,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="24dp"
                     android:orientation="horizontal">
 
@@ -597,7 +594,7 @@
                     <TextView
                         android:id="@+id/viewAllTextView2"
                         android:layout_width="70dp"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:text="View All"
                         android:textColor="@color/blue_5"
                         android:textSize="16sp"
@@ -660,7 +657,6 @@
                         android:layout_height="180dp"
                         android:layout_marginTop="8dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/addd"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/subtitleTextView"
@@ -956,7 +952,7 @@
                         android:id="@+id/titleTextView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Register to post your"
+                        android:text="Get started with your"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -970,13 +966,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="property for FREE"
+                        android:text="loan application for FREE"
                         android:textColor="@color/backgroundColor"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titleTextView2"
                         tools:ignore="HardcodedText" />
+
 
                     <!-- House Image -->
                     <ImageView
@@ -994,16 +991,17 @@
 
                     <!-- Post Property Button -->
                     <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.Button"
                         android:id="@+id/postPropertyButton"
+                        style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:backgroundTint="@color/backgroundColor"
-                        android:text="Post property \nfor FREE"
+                        android:text="Apply"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/highlightedTextView"
+                        app:layout_constraintStart_toStartOf="@+id/highlightedTextView"
                         app:layout_constraintTop_toBottomOf="@id/highlightedTextView"
                         tools:ignore="HardcodedText" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
