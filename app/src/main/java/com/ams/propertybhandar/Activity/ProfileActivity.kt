@@ -37,6 +37,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var networkClient: NetworkClient
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var backbutton: ImageView
+    private var customLoadingDialog: CustomLoadingDialog? = null
     private lateinit var userImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -199,8 +200,10 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun fetchUserProfile() {
+        showLoadingDialog()
         networkClient.fetchUserProfile(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                hideLoadingDialog()
                 e.printStackTrace()
                 runOnUiThread {
                     Toast.makeText(this@ProfileActivity, "Failed to fetch profile", Toast.LENGTH_SHORT).show()
@@ -208,6 +211,7 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
+                hideLoadingDialog()
                 try {
                     if (response.isSuccessful) {
                         val responseData = response.body?.string()
@@ -297,5 +301,15 @@ class ProfileActivity : AppCompatActivity() {
         } else {
             "$greeting, $firstName!"
         }
+    }
+    private fun showLoadingDialog() {
+        if (customLoadingDialog == null) {
+            customLoadingDialog = CustomLoadingDialog(this)
+        }
+        customLoadingDialog?.show()
+    }
+
+    private fun hideLoadingDialog() {
+        customLoadingDialog?.dismiss()
     }
 }

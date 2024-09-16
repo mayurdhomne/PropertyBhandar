@@ -182,9 +182,7 @@ class PropertyListActivity : AppCompatActivity() {
             filterProperties("Apartment", minBudget, maxBudget)
             setSelectedCard(apartmentsCard, "Apartment")
         }
-
     }
-
     // Method to fetch all properties and filter them based on budget range
     private fun fetchAllProperties() {
         showLoadingDialog()
@@ -198,6 +196,9 @@ class PropertyListActivity : AppCompatActivity() {
                 }
             }
 
+            // Declare the flag at the class level
+            private var toastShown = false
+
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     val responseBody = response.body?.string()
@@ -208,9 +209,14 @@ class PropertyListActivity : AppCompatActivity() {
                                 allProperties = JSONArray(responseBody)
                                 // Call filterProperties with budget range
                                 filterProperties("All", minBudget, maxBudget)
+                                toastShown = false // Reset the flag since properties are found
                             } else {
                                 Log.d("PropertyFetch", "No properties found")
-                                Toast.makeText(this@PropertyListActivity, "No properties found", Toast.LENGTH_SHORT).show()
+                                // Show toast only if it hasn't been shown yet
+                                if (!toastShown) {
+                                    Toast.makeText(this@PropertyListActivity, "No properties found", Toast.LENGTH_SHORT).show()
+                                    toastShown = true // Set the flag to true to prevent multiple toasts
+                                }
                                 hideLoadingDialog()
                             }
                         } catch (e: Exception) {
@@ -228,6 +234,7 @@ class PropertyListActivity : AppCompatActivity() {
                     hideLoadingDialog()
                 }
             }
+
         })
     }
     // Method to search properties based on keywords and filter them based on budget range

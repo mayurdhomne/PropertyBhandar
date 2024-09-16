@@ -72,13 +72,13 @@
             android:id="@+id/subTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="for your borrowing capacity"
+            android:textColor="@color/backgroundColor"
             android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/mainTitle"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="4dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainTitle" />
 
         <!-- Input Fields -->
         <com.google.android.material.textfield.TextInputLayout
@@ -345,58 +345,58 @@
             android:id="@+id/aboutEligibilityContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/passage1"
-            android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/aboutEligibilityTitle"
+            android:text="@string/passage1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/aboutEligibilityTitle" />
 
         <TextView
             android:id="@+id/aboutEligibilityContent2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Age criteria: An applicant must be 21 years or above"
-            android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/aboutEligibilityContent"
+            android:text="Age criteria: An applicant must be 21 years or above"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/aboutEligibilityContent" />
 
         <TextView
             android:id="@+id/aboutEligibilityContent3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/passage2"
-            android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/aboutEligibilityContent2"
+            android:text="@string/passage2"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/aboutEligibilityContent2" />
 
         <TextView
             android:id="@+id/aboutEligibilityContent4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/passage3"
-            android:textSize="16sp"
-
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+
             android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/aboutEligibilityContent3"
+            android:text="@string/passage3"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/aboutEligibilityContent3" />
         <!-- FAQ Section -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>

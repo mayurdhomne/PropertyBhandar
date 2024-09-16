@@ -48,6 +48,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var editUserImageView: ImageView
     private lateinit var selectedImageUri: Uri
     private lateinit var networkClient: NetworkClient
+    private var customLoadingDialog: CustomLoadingDialog? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -152,6 +153,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun updateProfile(userId: String, updatedData: JSONObject) {
+        showLoadingDialog()
         if (::selectedImageUri.isInitialized) {
             uploadProfileWithImage(userId, updatedData)
         } else {
@@ -164,6 +166,7 @@ class EditProfileActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
+                    hideLoadingDialog()
                     handleProfileUpdateResponse(response)
                 }
             })
@@ -171,6 +174,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun uploadProfileWithImage(userId: String, updatedData: JSONObject) {
+        showLoadingDialog()
         val contentResolver = contentResolver
         val inputStream = contentResolver.openInputStream(selectedImageUri)
         val file = File.createTempFile("temp", ".jpg")
@@ -190,11 +194,13 @@ class EditProfileActivity : AppCompatActivity() {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
                 runOnUiThread {
+                    hideLoadingDialog()
                     Toast.makeText(this@EditProfileActivity, "Failed to update profile with image", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onResponse(call: Call, response: Response) {
+                hideLoadingDialog()
                 if (response.isSuccessful) {
                     runOnUiThread {
                         handleProfileUpdateResponse(response)
@@ -247,5 +253,16 @@ class EditProfileActivity : AppCompatActivity() {
             }
         }
     }
+    private fun showLoadingDialog() {
+        if (customLoadingDialog == null) {
+            customLoadingDialog = CustomLoadingDialog(this)
+        }
+        customLoadingDialog?.show()
+    }
+
+    private fun hideLoadingDialog() {
+        customLoadingDialog?.dismiss()
+    }
+
 
 }
