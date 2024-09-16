@@ -111,7 +111,7 @@
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             android:contentDescription="Land/Plot Loan Card"/>
                     </LinearLayout>
 
@@ -140,7 +140,7 @@
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:contentDescription="Home Loan Card"/>
                     </LinearLayout>
 
@@ -154,8 +154,8 @@
                         android:padding="8dp">
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:layout_gravity="center"
                             android:src="@drawable/construction"
                             android:contentDescription="Construction Loan Image"/>
@@ -169,7 +169,7 @@
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="11.5sp"
+                            android:textSize="11sp"
                             android:contentDescription="Construction Loan Card"/>
                     </LinearLayout>
 
@@ -183,8 +183,8 @@
                         android:padding="8dp">
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:layout_gravity="center"
                             android:src="@drawable/improvement"
                             android:contentDescription="Improvement Loan Image"/>
@@ -198,7 +198,7 @@
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="11.6sp"
+                            android:textSize="10.5sp"
                             android:contentDescription="Improvement Loan Card"/>
                     </LinearLayout>
 
@@ -256,7 +256,7 @@
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             android:contentDescription="Top-Up Loan Card"/>
                     </LinearLayout>
 
@@ -270,8 +270,8 @@
                         android:padding="8dp">
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:layout_gravity="center"
                             android:src="@drawable/pre_approved"
                             android:contentDescription="Pre-Approved Loan Image"/>
@@ -285,7 +285,7 @@
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="11sp"
+                            android:textSize="10.5sp"
                             android:contentDescription="Pre-Approved Loan Card"/>
                     </LinearLayout>
 
@@ -315,7 +315,7 @@
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:contentDescription="PMAY Loan Text"/>
                     </LinearLayout>
 
@@ -345,7 +345,7 @@
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="10.8sp"
+                            android:textSize="10.5sp"
                             android:contentDescription="Balance Transfer Home Loan Text"/>
                     </LinearLayout>
 

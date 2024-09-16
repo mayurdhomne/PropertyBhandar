@@ -40,6 +40,7 @@ class PropertyListActivity : AppCompatActivity() {
 
 
 
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -215,7 +216,7 @@ class PropertyListActivity : AppCompatActivity() {
                                 // Show toast only if it hasn't been shown yet
                                 if (!toastShown) {
                                     Toast.makeText(this@PropertyListActivity, "No properties found", Toast.LENGTH_SHORT).show()
-                                    toastShown = true // Set the flag to true to prevent multiple toasts
+                                    toastShown = true // Set the flag to prevent multiple toasts
                                 }
                                 hideLoadingDialog()
                             }
@@ -234,6 +235,7 @@ class PropertyListActivity : AppCompatActivity() {
                     hideLoadingDialog()
                 }
             }
+
 
         })
     }

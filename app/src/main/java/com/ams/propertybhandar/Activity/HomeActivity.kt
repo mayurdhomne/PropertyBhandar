@@ -440,20 +440,29 @@ class HomeActivity : AppCompatActivity() {
                     response.body?.let { responseBody ->
                         try {
                             val jsonArray = JSONArray(responseBody.string())
+                            val limit = 6
+
+                            // Limit the number of properties
+                            val recommendedJsonArray = JSONArray()
+                            val latestJsonArray = JSONArray()
+
+                            for (i in 0 until minOf(jsonArray.length(), limit)) {
+                                recommendedJsonArray.put(jsonArray.getJSONObject(i))
+                            }
+
+                            for (i in jsonArray.length() - 1 downTo maxOf(jsonArray.length() - limit, 0)) {
+                                latestJsonArray.put(jsonArray.getJSONObject(i))
+                            }
+
                             runOnUiThread {
-                                // Set up the adapter for recommended properties (1st to last)
-                                val recommendedAdapter = RecommandedProppertyAdapter(this@HomeActivity, jsonArray)
+                                // Set up the adapter for recommended properties (last to first)
+                                val recommendedAdapter = RecommandedProppertyAdapter(this@HomeActivity, recommendedJsonArray)
                                 recyclerView.adapter = recommendedAdapter
 
-                                // Reverse the jsonArray for the latest properties (last to 1st)
-                                val reversedJsonArray = JSONArray()
-                                for (i in jsonArray.length() - 1 downTo 0) {
-                                    reversedJsonArray.put(jsonArray.getJSONObject(i))
-                                }
-
-                                // Set up the adapter for latest properties (reversed order)
-                                val latestAdapter = LatestPropertyAdapter(this@HomeActivity, reversedJsonArray)
+                                // Set up the adapter for latest properties (first to last)
+                                val latestAdapter = LatestPropertyAdapter(this@HomeActivity, latestJsonArray)
                                 latestRecyclerView.adapter = latestAdapter
+
                             }
                         } catch (e: Exception) {
                             runOnUiThread {
@@ -473,6 +482,8 @@ class HomeActivity : AppCompatActivity() {
                     }
                 }
             }
+
+
         })
     }
 

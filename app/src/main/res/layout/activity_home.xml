@@ -629,7 +629,7 @@
                         android:id="@+id/titleTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Selling/ Renting your property"
+                        android:text="Selling/Renting your property"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -670,23 +670,13 @@
                         android:layout_marginTop="8dp"
                         android:text="Post property for FREE"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/propertyImageView"
                         tools:ignore="HardcodedText" />
 
                     <!-- Arrow Icon -->
-                    <ImageView
-                        android:id="@+id/arrowImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:src="@drawable/baseline_arrow_right_alt_24"
-                        app:layout_constraintBottom_toBottomOf="@id/postPropertyTextView"
-                        app:layout_constraintStart_toEndOf="@id/postPropertyTextView"
-                        app:layout_constraintTop_toTopOf="@id/postPropertyTextView"
-                        tools:ignore="ContentDescription" />
 
                     <!-- Subtext -->
                     <TextView
@@ -706,11 +696,10 @@
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/backgroundColor"
                         android:text="Add Property"
-                        app:layout_constraintBottom_toBottomOf="@+id/arrowImageView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/propertyImageView"
                         tools:ignore="HardcodedText" />
@@ -781,7 +770,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Buy a Flat"
+                                android:text="Buy Flat"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
@@ -840,7 +829,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Buy a Plot"
+                                android:text="Buy Plot"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
@@ -899,7 +888,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Buy a Shop"
+                                android:text="Buy Shop"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
@@ -968,7 +957,7 @@
                         android:layout_marginTop="4dp"
                         android:text="loan application for FREE"
                         android:textColor="@color/backgroundColor"
-                        android:textSize="18sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titleTextView2"

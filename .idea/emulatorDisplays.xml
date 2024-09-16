@@ -33,34 +33,34 @@
                 <PanelState>
                   <option name="splitPanel">
                     <SplitPanelState>
-                      <option name="proportion" value="0.6666666865348816" />
+                      <option name="proportion" value="0.7848820090293884" />
                       <option name="firstComponent">
                         <PanelState>
                           <option name="splitPanel">
                             <SplitPanelState>
-                              <option name="proportion" value="0.6625362634658813" />
-                              <option name="splitType" value="VERTICAL" />
+                              <option name="proportion" value="0.7259231209754944" />
                               <option name="firstComponent">
-                                <PanelState>
-                                  <option name="displayId" value="0" />
-                                </PanelState>
-                              </option>
-                              <option name="secondComponent">
                                 <PanelState>
                                   <option name="splitPanel">
                                     <SplitPanelState>
+                                      <option name="proportion" value="0.6224436163902283" />
                                       <option name="firstComponent">
                                         <PanelState>
-                                          <option name="displayId" value="1" />
+                                          <option name="displayId" value="0" />
                                         </PanelState>
                                       </option>
                                       <option name="secondComponent">
                                         <PanelState>
-                                          <option name="displayId" value="2" />
+                                          <option name="displayId" value="1" />
                                         </PanelState>
                                       </option>
                                     </SplitPanelState>
                                   </option>
+                                </PanelState>
+                              </option>
+                              <option name="secondComponent">
+                                <PanelState>
+                                  <option name="displayId" value="2" />
                                 </PanelState>
                               </option>
                             </SplitPanelState>
