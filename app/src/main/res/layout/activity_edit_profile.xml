@@ -8,10 +8,20 @@
     android:background="@color/white"
     tools:context=".Activity.EditProfileActivity">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:layout_marginBottom="30dp"
         tools:ignore="MissingConstraints">
 
         <RelativeLayout
@@ -40,163 +50,161 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
-
-
         </RelativeLayout>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="30dp"
-            app:civ_border_width="2dp"
-            android:src="@drawable/profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topBar"
-            />
-
-        <ImageView
-            android:id="@+id/editImageIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:clickable="true"
-            android:contentDescription="Edit Profile Image"
-            android:focusable="true"
-            android:src="@drawable/ic_edit"
-            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-            app:layout_constraintStart_toEndOf="@+id/circleImageView"
-            app:layout_constraintTop_toTopOf="@+id/circleImageView" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/firstNameEditText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/start_end_margin"
-            android:layout_marginEnd="@dimen/start_end_margin"
-            android:layout_marginTop="10dp"
-            app:boxCornerRadiusBottomEnd="@dimen/til_radius"
-            app:boxCornerRadiusBottomStart="@dimen/til_radius"
-            app:boxCornerRadiusTopEnd="@dimen/til_radius"
-            app:boxCornerRadiusTopStart="@dimen/til_radius"
-            app:boxStrokeWidth="2dp"
-            app:boxBackgroundColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/circleImageView">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/editUserImageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="30dp"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topBar"
+                />
 
-            <EditText
-                android:id="@+id/firstnameEditText"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/uploadPhotoButton"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/backgroundColor"
+                android:text="Upload Photos*"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="@+id/editUserImageView"
+                app:layout_constraintStart_toStartOf="@+id/editUserImageView"
+                app:layout_constraintTop_toBottomOf="@id/editUserImageView" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstNameEditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Name"
-                android:inputType="text"
-                android:textSize="@dimen/et_text_size" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/start_end_margin"
+                android:layout_marginEnd="@dimen/start_end_margin"
+                android:layout_marginTop="10dp"
+                app:boxCornerRadiusBottomEnd="@dimen/til_radius"
+                app:boxCornerRadiusBottomStart="@dimen/til_radius"
+                app:boxCornerRadiusTopEnd="@dimen/til_radius"
+                app:boxCornerRadiusTopStart="@dimen/til_radius"
+                app:boxStrokeWidth="2dp"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uploadPhotoButton">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastNameEditText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/start_end_margin"
-            android:layout_marginEnd="@dimen/start_end_margin"
-            android:layout_marginTop="10dp"
-            app:boxCornerRadiusBottomEnd="@dimen/til_radius"
-            app:boxCornerRadiusBottomStart="@dimen/til_radius"
-            app:boxCornerRadiusTopEnd="@dimen/til_radius"
-            app:boxCornerRadiusTopStart="@dimen/til_radius"
-            app:boxStrokeWidth="2dp"
-            app:boxBackgroundColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstNameEditText">
+                <EditText
+                    android:id="@+id/firstnameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    android:inputType="text"
+                    android:textSize="@dimen/et_text_size" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/lastnameEditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lastNameEditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Last Name"
-                android:inputType="text"
-                android:textSize="@dimen/et_text_size" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/start_end_margin"
+                android:layout_marginEnd="@dimen/start_end_margin"
+                android:layout_marginTop="10dp"
+                app:boxCornerRadiusBottomEnd="@dimen/til_radius"
+                app:boxCornerRadiusBottomStart="@dimen/til_radius"
+                app:boxCornerRadiusTopEnd="@dimen/til_radius"
+                app:boxCornerRadiusTopStart="@dimen/til_radius"
+                app:boxStrokeWidth="2dp"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/firstNameEditText">
+
+                <EditText
+                    android:id="@+id/lastnameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Last Name"
+                    android:inputType="text"
+                    android:textSize="@dimen/et_text_size" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailEditText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/start_end_margin"
-            android:layout_marginEnd="@dimen/start_end_margin"
-            android:layout_marginTop="10dp"
-            app:boxCornerRadiusBottomEnd="@dimen/til_radius"
-            app:boxCornerRadiusBottomStart="@dimen/til_radius"
-            app:boxCornerRadiusTopEnd="@dimen/til_radius"
-            app:boxCornerRadiusTopStart="@dimen/til_radius"
-            app:boxStrokeWidth="2dp"
-            android:enabled="false"
-            app:boxBackgroundColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lastNameEditText">
-
-            <EditText
-                android:id="@+id/etEditEmail"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailEditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email Id"
-                android:inputType="text"
-                android:textSize="@dimen/et_text_size" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/start_end_margin"
+                android:layout_marginEnd="@dimen/start_end_margin"
+                android:layout_marginTop="10dp"
+                app:boxCornerRadiusBottomEnd="@dimen/til_radius"
+                app:boxCornerRadiusBottomStart="@dimen/til_radius"
+                app:boxCornerRadiusTopEnd="@dimen/til_radius"
+                app:boxCornerRadiusTopStart="@dimen/til_radius"
+                app:boxStrokeWidth="2dp"
+                android:enabled="false"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lastNameEditText">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contactEditText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/start_end_margin"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="@dimen/start_end_margin"
-            app:boxBackgroundColor="@color/white"
-            app:boxCornerRadiusBottomEnd="@dimen/til_radius"
-            app:boxCornerRadiusBottomStart="@dimen/til_radius"
-            app:boxCornerRadiusTopEnd="@dimen/til_radius"
-            app:boxCornerRadiusTopStart="@dimen/til_radius"
-            app:boxStrokeWidth="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditText">
+                <EditText
+                    android:id="@+id/etEditEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email Id"
+                    android:inputType="text"
+                    android:textSize="@dimen/et_text_size"
+                    tools:ignore="TextFields" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/etEditContact"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contactEditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contact Number"
-                android:inputType="text"
-                android:textSize="@dimen/et_text_size" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/start_end_margin"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="@dimen/start_end_margin"
+                app:boxBackgroundColor="@color/white"
+                app:boxCornerRadiusBottomEnd="@dimen/til_radius"
+                app:boxCornerRadiusBottomStart="@dimen/til_radius"
+                app:boxCornerRadiusTopEnd="@dimen/til_radius"
+                app:boxCornerRadiusTopStart="@dimen/til_radius"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailEditText">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/saveButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/backgroundColor"
-            android:text="Save"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contactEditText" />
+                <EditText
+                    android:id="@+id/etEditContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contact Number"
+                    android:inputType="text"
+                    android:textSize="@dimen/et_text_size" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/backgroundColor"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contactEditText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

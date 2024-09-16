@@ -57,20 +57,14 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var buyHomeImageView: ImageView
     private lateinit var buyPlotImageView: ImageView
     private lateinit var buyShopImageView: ImageView
-
-
-
     private lateinit var viewAllTextView1: TextView
     private lateinit var viewAllTextView2: TextView
-
     private var customLoadingDialog: CustomLoadingDialog? = null
-
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         propertyImageView = findViewById(R.id.propertyImageView)
         calculatorImageView = findViewById(R.id.calculator_image)
         calculatorImageView2 = findViewById(R.id.calculator_image2)
@@ -78,17 +72,12 @@ class HomeActivity : AppCompatActivity() {
         buyHomeImageView = findViewById(R.id.buyHomeImageView)
         buyPlotImageView = findViewById(R.id.rentHomeImageView)
         buyShopImageView = findViewById(R.id.pgCoLivingImageView)
-
-
-
-
         val imageUrl = "https://drive.google.com/uc?export=download&id=1BIoT5aBuLzqRnqaQyy6WIMUxIs8hGYO3"
         Picasso.get()
             .load(imageUrl)
             .fit()
             .centerCrop()
             .into(propertyImageView)
-
         // Direct download link for the first calculator image
         val calculatorImageUrl = "https://drive.google.com/uc?export=download&id=18g4u7uLEEhuoUSZVnwqMHLLGGkHaC_6L"
         Picasso.get()
@@ -96,7 +85,6 @@ class HomeActivity : AppCompatActivity() {
             .fit()
             .centerCrop()
             .into(calculatorImageView)
-
         // Direct download link for the second calculator image
         val calculatorImageUrl2 = "https://drive.google.com/uc?export=download&id=1vKBL78422AJQJBXy8Lhm1DfADG9em8JZ"
         Picasso.get()
@@ -104,7 +92,6 @@ class HomeActivity : AppCompatActivity() {
             .fit()
             .centerCrop()
             .into(calculatorImageView2)
-
         // Direct download link for the third calculator image
         val calculatorImageUrl3 = "https://drive.google.com/uc?export=download&id=1nNrBU6LEOOYA1e1ztB3qi-fNHUoNYRsW"
         Picasso.get()
@@ -112,8 +99,6 @@ class HomeActivity : AppCompatActivity() {
             .fit()
             .centerCrop()
             .into(calculatorImageView3)
-
-
         // Direct download link for the first buy home image
         val buyHomeImageUrl = "https://drive.google.com/uc?export=download&id=1XuqBeomGtC-5ZIYkxB42tVwARlapF1CH"
         Picasso.get()
@@ -121,7 +106,6 @@ class HomeActivity : AppCompatActivity() {
             .fit()
             .centerCrop()
             .into(buyHomeImageView)
-
         // Direct download link for the second buy home image
         val buyPlotImageUrl = "https://drive.google.com/uc?export=download&id=1vPbMb9MaQRlMz5eCJy2pJBM4U6YV4U1f"
         Picasso.get()
@@ -129,7 +113,6 @@ class HomeActivity : AppCompatActivity() {
             .fit()
             .centerCrop()
             .into(buyPlotImageView)
-
         // Direct download link for the third buy home image
         val buyShopImageUrl = "https://drive.google.com/uc?export=download&id=1iRvf4_9wnLrG-93eRMoxic0ulIRzPbgU"
         Picasso.get()
@@ -137,13 +120,8 @@ class HomeActivity : AppCompatActivity() {
             .fit()
             .centerCrop()
             .into(buyShopImageView)
-
-
-
-
         // Initialize NetworkClient
         networkClient = NetworkClient(this)
-
         // Initialize ActivityResultLauncher
         editProfileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
@@ -159,32 +137,25 @@ class HomeActivity : AppCompatActivity() {
         findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.buyshopbtn).setOnClickListener {
             navigateToPropertyList("Shop")
         }
-
         // Initialize DrawerLayout and actionMenuDivider
         drawerLayout = findViewById(R.id.drawer_layout)
         actionMenuDivider = findViewById(R.id.actionmenudivider)
-
         // Initialize NavigationView and locate views inside it
         navigationView = findViewById(R.id.nav_view2)
         val headerView = navigationView.getHeaderView(0)
         nameTextView = headerView.findViewById(R.id.nameTextView)
         emailTextView = headerView.findViewById(R.id.emailTextView)
-
-        // Initialize "View All" TextViews
+        // Initalize "View All" TextViews
         viewAllTextView1 = findViewById(R.id.viewAllTextView1)
         viewAllTextView2 = findViewById(R.id.viewAllTextView2)
-
         // Initialize the AddPropertyButton
         addPropertyButton = findViewById(R.id.AddPropertyButton)
         addPropertyButton2 = findViewById(R.id.postPropertyButton)
-
         // Set up actionMenuDivider to open the drawer
         actionMenuDivider.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.END)  // Open the drawer from the end (right side)
         }
-
-        // Fetch and display user's profile information
-
+        // Fetch an display user's profile information
         // Set up the BottomNavigationView
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener { item ->
@@ -211,9 +182,6 @@ class HomeActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-
-
         // Set the correct item as selected in BottomNavigationView
         val homeItem = navView.menu.findItem(R.id.navigation_home)
         homeItem.isChecked = true
@@ -227,7 +195,6 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this@HomeActivity, ServicesActivity::class.java)
             startActivity(intent)
         }
-
         findViewById<androidx.cardview.widget.CardView>(R.id.buybtn).setOnClickListener {
             val intent = Intent(this@HomeActivity, BuyActivity::class.java)
             startActivity(intent)
@@ -236,39 +203,32 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this@HomeActivity, LoanActivity::class.java)
             startActivity(intent)
         }
-
         // Set up the CardView click listeners
         findViewById<androidx.cardview.widget.CardView>(R.id.hbcalculator).setOnClickListener {
             val intent = Intent(this@HomeActivity, HomeBudgetCalculatorActivity::class.java)
             startActivity(intent)
         }
-
         findViewById<androidx.cardview.widget.CardView>(R.id.lecalculator).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoanEligibilityActivity::class.java)
             startActivity(intent)
         }
-
         findViewById<androidx.cardview.widget.CardView>(R.id.emiCalculator).setOnClickListener {
             val intent = Intent(this@HomeActivity, EMICalculatorActivity::class.java)
             startActivity(intent)
         }
-
         // Newly added intents for additional calculators
         findViewById<androidx.cardview.widget.CardView>(R.id.emiCalculatorcard).setOnClickListener {
             val intent = Intent(this@HomeActivity, EMICalculatorActivity::class.java)
             startActivity(intent)
         }
-
         findViewById<androidx.cardview.widget.CardView>(R.id.affordabilityCalculatorcard).setOnClickListener {
             val intent = Intent(this@HomeActivity, HomeBudgetCalculatorActivity::class.java)
             startActivity(intent)
         }
-
         findViewById<androidx.cardview.widget.CardView>(R.id.hbcCalculatorcard).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoanEligibilityActivity::class.java)
             startActivity(intent)
         }
-
         // Initialize RecyclerView
         // Find your RecyclerView
         recyclerView = findViewById(R.id.recommendedrecyclerView)
@@ -343,20 +303,12 @@ class HomeActivity : AppCompatActivity() {
                 return super.animateMove(holder, fromX, fromY, toX, toY)
             }
         }
-
-
-
-
         // Initialize RecyclerView for latest properties
         latestRecyclerView = findViewById(R.id.latestrecyclerView)
         latestRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         // Fetch and display properties
         fetchProperties()
-
-
-
-
    // Handle NavigationView item clicks
         navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -400,14 +352,12 @@ class HomeActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
         // Set up "View All" TextView click listeners
         viewAllTextView1.setOnClickListener {
             val intent = Intent(this@HomeActivity, PropertyListActivity::class.java)
             intent.putExtra("property_type", "recommended") // Pass type to filter properties
             startActivity(intent)
         }
-
         viewAllTextView2.setOnClickListener {
             val intent = Intent(this@HomeActivity, PropertyListActivity::class.java)
             intent.putExtra("property_type", "latest") // Pass type to filter properties
@@ -441,51 +391,39 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
-
-
     @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         showExitConfirmationDialog()
     }
-
     private fun showExitConfirmationDialog() {
         val builder = androidx.appcompat.app.AlertDialog.Builder(this)
-
         // Inflate the custom dialog layout
         val inflater = layoutInflater
         val dialogLayout = inflater.inflate(R.layout.dialog_exit_confirmation, null)
-
         // Set up the dialog with custom layout
         builder.setView(dialogLayout)
-
         // Find buttons in the custom layout
         val stayButton = dialogLayout.findViewById<MaterialButton>(R.id.stayButton)
         val exitButton = dialogLayout.findViewById<MaterialButton>(R.id.exitButton)
-
         // Create the dialog and show it
         val dialog = builder.create()
         dialog.show()
-
         // Handle "Stay" button click
         stayButton.setOnClickListener {
             dialog.dismiss() // Close the dialog and stay in the app
         }
-
         // Handle "Exit" button click
         exitButton.setOnClickListener {
             finishAffinity() // Close the app
             dialog.dismiss()
         }
     }
-
-
     private fun handleSearch(query: String) {
         val intent = Intent(this, PropertyListActivity::class.java)
         intent.putExtra("keywords", query)
         startActivity(intent)
     }
-
     private fun fetchProperties() {
         showLoadingDialog()
         networkClient.fetchProperties(object : Callback {
@@ -503,12 +441,18 @@ class HomeActivity : AppCompatActivity() {
                         try {
                             val jsonArray = JSONArray(responseBody.string())
                             runOnUiThread {
-                                // Set up the adapter for recommended properties
+                                // Set up the adapter for recommended properties (1st to last)
                                 val recommendedAdapter = RecommandedProppertyAdapter(this@HomeActivity, jsonArray)
                                 recyclerView.adapter = recommendedAdapter
 
-                                // Set up the adapter for latest properties
-                                val latestAdapter = LatestPropertyAdapter(this@HomeActivity, jsonArray)
+                                // Reverse the jsonArray for the latest properties (last to 1st)
+                                val reversedJsonArray = JSONArray()
+                                for (i in jsonArray.length() - 1 downTo 0) {
+                                    reversedJsonArray.put(jsonArray.getJSONObject(i))
+                                }
+
+                                // Set up the adapter for latest properties (reversed order)
+                                val latestAdapter = LatestPropertyAdapter(this@HomeActivity, reversedJsonArray)
                                 latestRecyclerView.adapter = latestAdapter
                             }
                         } catch (e: Exception) {
@@ -520,7 +464,6 @@ class HomeActivity : AppCompatActivity() {
                 } else {
                     runOnUiThread {
                         if (response.code == 401) {
-                            // Session expired, clear session data and redirect to login
                             Toast.makeText(this@HomeActivity, "Session expired. Please log in again.", Toast.LENGTH_LONG).show()
                             logoutAndRedirectToLogin()
                         } else {
@@ -544,8 +487,6 @@ class HomeActivity : AppCompatActivity() {
         startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
         finish() // Close current activity to prevent back stack accumulation
     }
-
-
     private fun logout() {
         // Clear user session data
         val sharedPreferences: SharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
@@ -569,7 +510,6 @@ class HomeActivity : AppCompatActivity() {
         }
         customLoadingDialog?.show()
     }
-
     private fun hideLoadingDialog() {
         customLoadingDialog?.dismiss()
     }

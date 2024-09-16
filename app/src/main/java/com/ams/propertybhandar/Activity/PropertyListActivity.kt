@@ -1,12 +1,15 @@
 package com.ams.propertybhandar.Activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
@@ -33,8 +36,11 @@ class PropertyListActivity : AppCompatActivity() {
     private var customLoadingDialog: CustomLoadingDialog? = null
     private var minBudget: Double = 0.0
     private var maxBudget: Double = Double.MAX_VALUE
+    private var selectedPropertyType: String = "All"
 
 
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -84,8 +90,6 @@ class PropertyListActivity : AppCompatActivity() {
         // Set up card click listeners for filtering
         setupCardFilters()
     }
-
-
     private fun setupBottomNavigation() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener { item ->
@@ -118,27 +122,69 @@ class PropertyListActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-    
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    @SuppressLint("NewApi")
     private fun setupCardFilters() {
-        findViewById<CardView>(R.id.allpropertycard).setOnClickListener {
+        // Define the colors for default and selected states
+        val defaultColor = resources.getColor(R.color.backgroundColor, null)
+        val selectedColor = resources.getColor(R.color.backgroundColor2, null)
+
+        // Find CardViews for filtering
+        val allPropertyCard = findViewById<CardView>(R.id.allpropertycard)
+        val flatsCard = findViewById<CardView>(R.id.flatscard)
+        val plotsCard = findViewById<CardView>(R.id.plotscard)
+        val commercialsCard = findViewById<CardView>(R.id.comercialscard)
+        val housesCard = findViewById<CardView>(R.id.Housescard)
+        val apartmentsCard = findViewById<CardView>(R.id.Apartmentcard)
+
+        // Function to reset all card backgrounds to default and highlight the selected card
+        fun setSelectedCard(selectedCard: CardView, type: String) {
+            allPropertyCard.setCardBackgroundColor(defaultColor)
+            flatsCard.setCardBackgroundColor(defaultColor)
+            plotsCard.setCardBackgroundColor(defaultColor)
+            commercialsCard.setCardBackgroundColor(defaultColor)
+            housesCard.setCardBackgroundColor(defaultColor)
+            apartmentsCard.setCardBackgroundColor(defaultColor)
+            selectedCard.setCardBackgroundColor(selectedColor)
+
+            // Set the selected property type
+            selectedPropertyType = type
+        }
+
+// Update card click listeners
+        allPropertyCard.setOnClickListener {
             filterProperties("All", minBudget, maxBudget)
-                   }
-        findViewById<CardView>(R.id.flatscard).setOnClickListener {
-            filterProperties("Flat", minBudget, maxBudget) // Apply budget filter for "Flat" properties
+            setSelectedCard(allPropertyCard, "All")
         }
-        findViewById<CardView>(R.id.plotscard).setOnClickListener {
-            filterProperties("Plot", minBudget, maxBudget) // Apply budget filter for "Plot" properties
+
+        flatsCard.setOnClickListener {
+            filterProperties("Flat", minBudget, maxBudget)
+            setSelectedCard(flatsCard, "Flat")
         }
-        findViewById<CardView>(R.id.comercialscard).setOnClickListener {
-            filterProperties("Shop", minBudget, maxBudget) // Apply budget filter for "Shop" properties
+
+        plotsCard.setOnClickListener {
+            filterProperties("Plot", minBudget, maxBudget)
+            setSelectedCard(plotsCard, "Plot")
         }
-        findViewById<CardView>(R.id.Housescard).setOnClickListener {
-            filterProperties("House", minBudget, maxBudget) // Apply budget filter for "House" properties
+
+        commercialsCard.setOnClickListener {
+            filterProperties("Shop", minBudget, maxBudget)
+            setSelectedCard(commercialsCard, "Shop")
         }
-        findViewById<CardView>(R.id.Apartmentcard).setOnClickListener  {
-            filterProperties("Apartment", minBudget, maxBudget) // Apply budget filter for "Apartment" properties
+
+        housesCard.setOnClickListener {
+            filterProperties("House", minBudget, maxBudget)
+            setSelectedCard(housesCard, "House")
         }
+
+        apartmentsCard.setOnClickListener {
+            filterProperties("Apartment", minBudget, maxBudget)
+            setSelectedCard(apartmentsCard, "Apartment")
+        }
+
     }
+
     // Method to fetch all properties and filter them based on budget range
     private fun fetchAllProperties() {
         showLoadingDialog()
@@ -257,27 +303,27 @@ class PropertyListActivity : AppCompatActivity() {
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.sort_low_to_high -> {
-                    sortPropertiesByPrice(ascending = true)
+                    sortPropertiesByPrice(ascending = true, selectedPropertyType)
                     true
                 }
                 R.id.sort_high_to_low -> {
-                    sortPropertiesByPrice(ascending = false)
+                    sortPropertiesByPrice(ascending = false, selectedPropertyType)
                     true
                 }
                 R.id.east_to_west -> {
-                    filterPropertiesByDirection("East")
+                    filterPropertiesByDirection("East", selectedPropertyType)
                     true
                 }
                 R.id.west_to_east -> {
-                    filterPropertiesByDirection("West")
+                    filterPropertiesByDirection("West", selectedPropertyType)
                     true
                 }
                 R.id.north_to_south -> {
-                    filterPropertiesByDirection("North")
+                    filterPropertiesByDirection("North", selectedPropertyType)
                     true
                 }
                 R.id.south_to_north -> {
-                    filterPropertiesByDirection("South")
+                    filterPropertiesByDirection("South", selectedPropertyType)
                     true
                 }
                 else -> false
@@ -286,10 +332,22 @@ class PropertyListActivity : AppCompatActivity() {
         popupMenu.show()
     }
 
-    private fun sortPropertiesByPrice(ascending: Boolean) {
-        val propertyList = mutableListOf<JSONObject>()
+
+    private fun sortPropertiesByPrice(ascending: Boolean, type: String) {
+        val filteredProperties = JSONArray()
         for (i in 0 until allProperties.length()) {
-            propertyList.add(allProperties.getJSONObject(i))
+            val property = allProperties.getJSONObject(i)
+            val propertyType = property.optString("property_type")
+
+            // Filter by selected type
+            if (type == "All" || propertyType == type) {
+                filteredProperties.put(property)
+            }
+        }
+
+        val propertyList = mutableListOf<JSONObject>()
+        for (i in 0 until filteredProperties.length()) {
+            propertyList.add(filteredProperties.getJSONObject(i))
         }
 
         // Sort by price
@@ -303,21 +361,24 @@ class PropertyListActivity : AppCompatActivity() {
         propertyListAdapter.updateProperties(sortedProperties)
     }
 
-    private fun filterPropertiesByDirection(direction: String) {
+
+    private fun filterPropertiesByDirection(direction: String, type: String) {
         val filteredProperties = JSONArray()
         for (i in 0 until allProperties.length()) {
             val property = allProperties.getJSONObject(i)
             val propertyDirection = property.optString("property_facing", "")
+            val propertyType = property.optString("property_type")
 
-            Log.d("FilterDirection", "Property Direction: $propertyDirection, Filtered Direction: $direction")
-
-            if (propertyDirection.equals(direction, ignoreCase = true)) {
+            // Filter by type and direction
+            if (propertyDirection.equals(direction, ignoreCase = true) &&
+                (type == "All" || propertyType == type)) {
                 filteredProperties.put(property)
             }
         }
-        // Update adapter with filtered properties
+
         propertyListAdapter.updateProperties(filteredProperties)
     }
+
 
     private fun showLoadingDialog() {
         if (customLoadingDialog == null) {

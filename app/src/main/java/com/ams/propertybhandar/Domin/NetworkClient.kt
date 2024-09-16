@@ -13,6 +13,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
@@ -162,15 +163,29 @@ class NetworkClient(private val context: Context) {
     }
     // Update User Profile
     fun updateUserProfile(userId: String, updatedData: JSONObject, callback: Callback) {
-        val url = "$BASE_URL/api/profiles/edit_profile/"
-        val requestBody = updatedData.toString().toRequestBody(JSON)
+        val url = "$BASE_URL/api/profiles/edit_profile/" // Ensure this is correct
+        val requestBody = updatedData.toString().toRequestBody("application/json".toMediaTypeOrNull())
         val request = Request.Builder()
             .url(url)
             .put(requestBody)
+            .addHeader("Authorization", "Bearer ${getAccessToken()}")
             .build()
 
-        makeAuthenticatedRequest(url, request, callback)
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(callback)
     }
+    fun uploadUserProfileWithImage(userId: String, requestBody: RequestBody, callback: Callback) {
+        val url = "$BASE_URL/api/profiles/edit_profile/"
+
+        val request = Request.Builder()
+            .url(url)
+            .put(requestBody)
+            .addHeader("Authorization", "Bearer ${getAccessToken()}") // Replace with your method to get the token
+            .build()
+
+        client.newCall(request).enqueue(callback)
+    }
+
     // Submit Property Form with Photos
     fun submitPropertyWithPhotos(
         propertyData: Map<String, String>,

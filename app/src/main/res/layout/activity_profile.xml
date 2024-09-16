@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/top_bar">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/userImageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -189,7 +189,8 @@
         app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        android:paddingBottom="10dp"
+
+        android:paddingBottom="15dp"
         style="@style/BottomNavigationViewTransparent"
         app:menu="@menu/bottom_bar_items"
         />

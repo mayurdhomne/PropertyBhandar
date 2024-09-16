@@ -49,25 +49,24 @@ class PropertyDetailsActivity : AppCompatActivity() {
         val amenities6: TextView = findViewById(R.id.amenities6)
         val buyButton: Button = findViewById(R.id.check_availability_button)
 
-        // Set the values from the property object
-        // Set the values from the property object
-        title.text = property.optString("title", "N/A")
-        price.text = property.optString("price", "N/A")
-        address.text = property.optString("address", "N/A")
-        area.text = "${property.optString("area", "N/A")} Sq.Ft"
-        type.text = property.optString("property_type", "N/A")
-        property_facing.text = property.optString("property_facing", "N/A")
-        bed.text = property.optString("beds", "N/A")
-        bath.text = property.optString("baths", "N/A")
-        state.text = "${property.optString("state", "N/A")}, ${property.optString("city", "N/A")}"
-        zipcode.text = property.optString("zipcode", "N/A")
-        description.text = property.optString("description", "N/A")
-        amenities1.text = property.optString("amenities1", "N/A")
-        amenities2.text = property.optString("amenities2", "N/A")
-        amenities3.text = property.optString("amenities3", "N/A")
-        amenities4.text = property.optString("amenities4", "N/A")
-        amenities5.text = property.optString("amenities5", "N/A")
-        amenities6.text = property.optString("amenities6", "N/A")
+        // Set the values from the property object with visibility checks
+        setTextViewVisibility(title, property.optString("title", ""))
+        setTextViewVisibility(price, property.optString("price", ""))
+        setTextViewVisibility(address, property.optString("address", ""))
+        setTextViewVisibility(area, "${property.optString("area", "N/A")} Sq.Ft")
+        setTextViewVisibility(type, property.optString("property_type", ""))
+        setTextViewVisibility(property_facing, property.optString("property_facing", ""))
+        setTextViewVisibility(bed, property.optString("beds", ""))
+        setTextViewVisibility(bath, property.optString("baths", ""))
+        setTextViewVisibility(state, "${property.optString("state", "")}, ${property.optString("city", "")}")
+        setTextViewVisibility(zipcode, property.optString("zipcode", ""))
+        setTextViewVisibility(description, property.optString("description", ""))
+        setTextViewVisibility(amenities1, property.optString("amenities1", ""))
+        setTextViewVisibility(amenities2, property.optString("amenities2", ""))
+        setTextViewVisibility(amenities3, property.optString("amenities3", ""))
+        setTextViewVisibility(amenities4, property.optString("amenities4", ""))
+        setTextViewVisibility(amenities5, property.optString("amenities5", ""))
+        setTextViewVisibility(amenities6, property.optString("amenities6", ""))
 
 
         // Prepare the list of photo URLs with dynamic URL handling
@@ -123,6 +122,15 @@ class PropertyDetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    private fun setTextViewVisibility(textView: TextView, text: String?) {
+        if (text.isNullOrEmpty()) {
+            textView.visibility = View.GONE
+        } else {
+            textView.text = text
+            textView.visibility = View.VISIBLE
+        }
+    }
+
 
     // Helper function to handle dynamic image URL construction
     private fun getFullImageUrl(imageUrl: String?, baseUrl: String): String? {

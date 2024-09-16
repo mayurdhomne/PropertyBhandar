@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.ams.propertybhandar.Domin.NetworkClient
 import com.ams.propertybhandar.R
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import okhttp3.Call
@@ -36,6 +37,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var networkClient: NetworkClient
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var backbutton: ImageView
+    private lateinit var userImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,7 @@ class ProfileActivity : AppCompatActivity() {
         helpfulText = findViewById(R.id.helpful_text)
         logoutText = findViewById(R.id.logout_text)
         settingIcon = findViewById(R.id.settingic)
+        userImageView = findViewById(R.id.userImageView)
 
         // Initialize SharedPreferences and NetworkClient
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
@@ -214,6 +217,7 @@ class ProfileActivity : AppCompatActivity() {
                         val contact = profileJson.optString("contact", "")
                         val firstName = userJson?.optString("first_name", "") ?: ""
                         val lastName = userJson?.optString("last_name", "") ?: ""
+                        val userImage = profileJson.optString("user_image", "")
                         val greetingMessage = getGreetingMessage(firstName)
 
                         with(sharedPreferences.edit()) {
@@ -221,11 +225,12 @@ class ProfileActivity : AppCompatActivity() {
                             putString("lastName", lastName)
                             putString("email", email)
                             putString("contact", contact)
+                            putString("user_image", userImage) // Save user image URL
                             apply()
                         }
 
                         runOnUiThread {
-                            updateProfileData(email, contact, greetingMessage)
+                            updateProfileData(email, contact, greetingMessage, userImage)
                         }
                     } else if (response.code == 401) {
                         runOnUiThread {
@@ -254,11 +259,19 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun updateProfileData(email: String, contact: String, greetingMessage: String) {
+    private fun updateProfileData(email: String, contact: String, greetingMessage: String, userImage: String) {
         emailText.text = email
         phoneText.text = contact
         greetingText.text = greetingMessage
+
+        // Load user image into ImageView
+        if (userImage.isNotEmpty()) {
+            Glide.with(this)
+                .load(userImage)
+                .placeholder(R.drawable.person) // Replace with your placeholder image
+                .error(R.drawable.person1) // Replace with your error image
+                .into(userImageView)
+        }
     }
 
     @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")

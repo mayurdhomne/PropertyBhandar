@@ -52,8 +52,6 @@
 
             </RelativeLayout>
 
-
-            <!-- Property Type Dropdown -->
             <!-- Property Type Dropdown -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/propertyTypeLayout"
@@ -145,7 +143,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Title"
+                android:hint="Title*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/propertyFacingLayout">
@@ -164,7 +162,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Address"
+                android:hint="Address*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/titleLayout">
@@ -184,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="City"
+                android:hint="City*"
                 app:layout_constraintEnd_toStartOf="@id/stateLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/addressLayout">
@@ -203,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="State"
+                android:hint="State*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cityLayout"
                 app:layout_constraintTop_toBottomOf="@id/addressLayout">
@@ -247,7 +245,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Zipcode"
+                android:hint="Zipcode*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cityLayout">
@@ -267,7 +265,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="Price (Per Sq.Ft.)"
+                android:hint="Price*"
                 app:layout_constraintEnd_toStartOf="@id/areaLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/zipcodeLayout">
@@ -286,7 +284,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Area (Sq.Ft.)"
+                android:hint="Area(Per Sq.Ft.)*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/priceLayout"
                 app:layout_constraintTop_toBottomOf="@id/zipcodeLayout">
@@ -344,7 +342,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Description"
+                android:hint="Description*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bedsLayout">
@@ -365,7 +363,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/backgroundColor"
-                android:text="Upload Photos"
+                android:text="Upload Photos*"
                 android:textColor="@android:color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/descriptionLayout" />
@@ -423,6 +421,7 @@
                 android:id="@+id/amenitiesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Select Amenities"
                 android:textColor="@color/black"
@@ -437,7 +436,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Amenity 1"
+                android:hint="Amenity 1*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/amenitiesTitle">
@@ -454,7 +453,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Amenity 2"
+                android:hint="Amenity 2*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvamenity1">
@@ -471,7 +470,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Amenity 3"
+                android:hint="Amenity 3*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvamenity2">
@@ -539,8 +538,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="For Sale"
+                app:thumbTint="@color/backgroundColor"
+                app:layout_constraintEnd_toEndOf="@+id/textView14"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvamenity6" />
+                app:layout_constraintTop_toBottomOf="@id/textView14" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/rentSwitch"
@@ -548,8 +549,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="For Rent"
+                app:thumbTint="@color/backgroundColor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvamenity6" />
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toBottomOf="@id/textView14" />
 
             <!-- Submit Button -->
             <com.google.android.material.button.MaterialButton
@@ -625,6 +628,17 @@
                 app:layout_constraintStart_toEndOf="@+id/uploadPhotoButton5"
                 app:layout_constraintTop_toTopOf="@+id/uploadPhotoButton5"
                 tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="15sp"
+                android:text="You're Looking For?* "
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvamenity6"
+                app:layout_constraintTop_toBottomOf="@+id/tvamenity6" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
