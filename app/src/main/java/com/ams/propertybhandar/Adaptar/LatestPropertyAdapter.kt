@@ -13,7 +13,6 @@ import com.ams.propertybhandar.Activity.PropertyDetailsActivity
 import com.ams.propertybhandar.R
 import com.bumptech.glide.Glide
 import org.json.JSONArray
-import org.json.JSONObject
 
 class LatestPropertyAdapter(
     private val context: Context,
@@ -41,7 +40,17 @@ class LatestPropertyAdapter(
         holder.address.text = property.optString("address", "No Address")
         holder.area.text = property.optString("area", "No Area")
         holder.direction.text = property.optString("property_facing", "No Direction")
-        holder.price.text = "₹${property.optString("price", "No Price")}"
+
+        val propertyType = property.optString("property_type", "")
+        val priceValue = property.optString("price", "No Price")
+        val areaValue = property.optString("area", "No Area")
+
+        // Display price based on property_type
+        holder.price.text = when (propertyType.lowercase()) {
+            "plot" -> "₹$areaValue Sq.ft"
+            "flat", "shop", "house", "apartment" -> "₹$priceValue"
+            else -> "₹$priceValue" // Default to ₹ + price if type is unknown
+        }
 
         // Load image using Glide
         Glide.with(context)

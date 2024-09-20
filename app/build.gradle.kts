@@ -11,8 +11,8 @@ android {
         applicationId = "com.ams.propertybhandar"
         minSdk = 21
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 4
+        versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,6 +55,7 @@ dependencies {
     annotationProcessor(libs.compiler)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.picasso)
+    implementation(libs.picasso.v28)
 
 
 }

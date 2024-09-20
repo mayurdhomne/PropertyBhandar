@@ -251,20 +251,24 @@ class NetworkClient(private val context: Context) {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                if (response.code == 401) {
-                    handleTokenRefresh { success ->
+                when (response.code) {
+                    200 -> callback.onResponse(call, response) // Successful response
+                    401 -> handleTokenRefresh { success ->
                         if (success) {
+                            // Retry the original request after token refresh
                             makeAuthenticatedRequest(url, request, callback)
                         } else {
                             callback.onFailure(call, IOException("Token refresh failed"))
                         }
                     }
-                } else {
-                    callback.onResponse(call, response)
+                    else -> {
+                        callback.onFailure(call, IOException("Unexpected response code: ${response.code}"))
+                    }
                 }
             }
         })
     }
+
     // Search Properties
     fun searchProperties(keywords: String, callback: Callback) {
         // Construct the URL with the base URL and the "keywords" query parameter

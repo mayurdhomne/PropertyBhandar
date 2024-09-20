@@ -3,6 +3,7 @@
     <style name="Base.Theme.PropertyBhandar" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
         <!-- Customize your light theme here. -->
         <!-- Remove or override the colorPrimary if it's not needed -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->

@@ -14,11 +14,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.ams.propertybhandar.Domin.NetworkClient
 import com.ams.propertybhandar.R
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Request
-import okhttp3.Response
-import java.io.IOException
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -54,7 +49,7 @@ class SplashActivity : AppCompatActivity() {
             override fun onAnimationEnd(animation: Animation) {
                 // Delay to keep the splash screen visible for a while
                 Handler(Looper.getMainLooper()).postDelayed({
-                    checkTokenAndNavigate()
+                    navigateToHomeActivity() // Always navigate to HomeActivity
                 }, 1000) // 1 second delay
             }
 
@@ -62,69 +57,9 @@ class SplashActivity : AppCompatActivity() {
         })
     }
 
-    private fun checkTokenAndNavigate() {
-        val accessToken = networkClient.getAccessToken()
-        if (accessToken != null) {
-            // Token exists, check if it is expired
-            networkClient.makeAuthenticatedRequest(
-                url = "https://propertybhandar.com/api/profiles/profile/",
-                request = Request.Builder().url("https://propertybhandar.com/api/profiles/profile/").build(),
-                callback = object : Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-                        // Token might be expired or request failed, attempt to refresh token
-                        handleTokenRefresh()
-                    }
-
-                    override fun onResponse(call: Call, response: Response) {
-                        if (response.isSuccessful) {
-                            // Token is valid, navigate to HomeActivity
-                            navigateToHomeActivity()
-                        } else if (response.code == 401) {
-                            // Token expired, attempt to refresh token
-                            handleTokenRefresh()
-                        } else {
-                            // Handle other response codes if needed
-                            navigateToLoginActivity()
-                        }
-                    }
-                }
-            )
-        } else {
-            // No access token, navigate to LoginActivity
-            navigateToLoginActivity()
-        }
-    }
-
-    private fun handleTokenRefresh() {
-        val refreshToken = networkClient.getRefreshToken()
-        if (refreshToken != null) {
-            networkClient.refreshToken(refreshToken, object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    navigateToLoginActivity() // Refresh failed, navigate to login
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    if (response.isSuccessful) {
-                        // Token refreshed successfully, retry accessing profile
-                        checkTokenAndNavigate()
-                    } else {
-                        navigateToLoginActivity() // Refresh failed, navigate to login
-                    }
-                }
-            })
-        } else {
-            // No refresh token, navigate to LoginActivity
-            navigateToLoginActivity()
-        }
-    }
-
     private fun navigateToHomeActivity() {
         startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
         finish()
     }
-
-    private fun navigateToLoginActivity() {
-        startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
-        finish()
-    }
 }
+

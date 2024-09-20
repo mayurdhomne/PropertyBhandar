@@ -3,6 +3,7 @@ package com.ams.propertybhandar.Activity
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -21,7 +22,6 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -118,6 +118,7 @@ class AddPropertyFormActivity : AppCompatActivity() {
             finish()
         }
 
+
         submitButton.setOnClickListener {
             // Collect input values
             val propertyTypeSpinner: Spinner = findViewById(R.id.propertyTypeSpinner)
@@ -171,7 +172,6 @@ class AddPropertyFormActivity : AppCompatActivity() {
                     "is_for_sale" to isForSale.toString(),
                     "is_for_rent" to isForRent.toString(),
                     "list_date" to "2024-08-23T14:15:22Z",
-                    "agent" to "1"
                 )
 
                 // Show loading dialog
@@ -180,11 +180,12 @@ class AddPropertyFormActivity : AppCompatActivity() {
                 // Use Kotlin coroutines to handle background tasks
                 lifecycleScope.launch {
                     try {
-                        val photoMainFile = withContext(Dispatchers.IO) { photoMainUri?.let { uriToFile(it) } }
-                        val photo1File = withContext(Dispatchers.IO) { photo1Uri?.let { uriToFile(it) } }
-                        val photo2File = withContext(Dispatchers.IO) { photo2Uri?.let { uriToFile(it) } }
-                        val photo3File = withContext(Dispatchers.IO) { photo3Uri?.let { uriToFile(it) } }
-                        val photo4File = withContext(Dispatchers.IO) { photo4Uri?.let { uriToFile(it) } }
+                        val photoMainFile = photoMainUri?.let { compressAndResizeImage(it) }
+                        val photo1File = photo1Uri?.let { compressAndResizeImage(it) }
+                        val photo2File = photo2Uri?.let { compressAndResizeImage(it) }
+                        val photo3File = photo3Uri?.let { compressAndResizeImage(it) }
+                        val photo4File = photo4Uri?.let { compressAndResizeImage(it) }
+
 
                         networkClient.submitPropertyWithPhotos(
                             propertyData,
@@ -203,19 +204,38 @@ class AddPropertyFormActivity : AppCompatActivity() {
                                 }
 
                                 override fun onResponse(call: Call, response: Response) {
-                                    runOnUiThread {
+                                    lifecycleScope.launch(Dispatchers.IO) { // Use Dispatchers.IO for network operations
                                         if (response.isSuccessful) {
-                                            Toast.makeText(this@AddPropertyFormActivity, "Property submitted successfully!", Toast.LENGTH_LONG).show()
-                                            finish()
+                                            val responseBody = response.body?.string() ?: "" // Read the response body on a background thread
+                                            // ... process the responseBody ...
+                                            runOnUiThread {
+                                                // Update the UI with the processed data
+                                                Toast.makeText(this@AddPropertyFormActivity, "Property submitted successfully!", Toast.LENGTH_LONG).show()
+
+                                                // Navigate to HomeActivity after successful property submission
+                                                val intent = Intent(this@AddPropertyFormActivity, HomeActivity::class.java)
+                                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                                                startActivity(intent)
+
+                                                // Close the current activity
+                                                finish()
+                                            }
                                         } else {
-                                            Log.e("AddPropertyActivity", "Error response: ${response.message}")
-                                            Toast.makeText(this@AddPropertyFormActivity, "Error: ${response.message}", Toast.LENGTH_LONG).show()
+                                            val errorBody = response.body?.string() ?: "" // Read the error body on a background thread
+                                            Log.e("AddPropertyActivity", "Error response: ${response.code} - $errorBody")
+                                            runOnUiThread {
+                                                Toast.makeText(this@AddPropertyFormActivity, "Error: ${response.message}", Toast.LENGTH_LONG).show()
+                                            }
                                         }
-                                        hideLoadingDialog()
+                                        runOnUiThread {
+                                            hideLoadingDialog()
+                                        }
                                     }
                                 }
+
                             }
                         )
+                        hideLoadingDialog()
                     } catch (e: Exception) {
                         runOnUiThread {
                             Log.e("AddPropertyActivity", "Error: ${e.message}")
@@ -348,6 +368,15 @@ class AddPropertyFormActivity : AppCompatActivity() {
     private fun hideLoadingDialog() {
         progressDialog?.takeIf { it.isShowing }?.dismiss()
     }
-
+    private fun compressAndResizeImage(uri: Uri): File {
+        val originalBitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+        // Resize the image if necessary (e.g., max width and height)
+        val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 800, 600, true) // Adjust as needed
+        val file = File(cacheDir, getFileName(uri))
+        FileOutputStream(file).use { out ->
+            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 80, out) // Compress with quality
+        }
+        return file
+    }
 
 }

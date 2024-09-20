@@ -87,11 +87,29 @@
             android:textColor="#757575"
             android:layout_marginTop="8dp" />
 
-        <!-- Sign Out Everywhere Section -->
+
+        <Button
+            android:id="@+id/Passwordresetbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset Your Password"
+            android:layout_marginTop="9dp"
+            android:textColor="#D32F2F"
+            android:background="@drawable/buttonbg"
+            android:layout_gravity="right" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Sign Out Section -->
+        <!-- Sign Out Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign out everywhere"
+            android:text="Logout from this device"
             android:textSize="18sp"
             android:textColor="#000000"
             android:layout_marginTop="24dp" />
@@ -99,12 +117,42 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lost a device or signed in from a public computer? Sign out on all devices to protect your account from unauthorized access."
+            android:text="Logout only from this device to maintain security on other signed-in devices."
             android:textSize="16sp"
             android:textColor="#757575"
             android:layout_marginTop="8dp" />
 
+        <Button
+            android:id="@+id/SignOutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_marginTop="9dp"
+            android:textColor="#D32F2F"
+            android:background="@drawable/buttonbg"
+            android:layout_gravity="right" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete Your Account"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:layout_marginTop="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deleting your account is permanent. All your data will be lost, and you will no longer be able to access your account."
+            android:textSize="16sp"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp" />
 
         <!-- Delete Account Section -->
         <Button
@@ -112,10 +160,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Delete account"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="9dp"
             android:textColor="#D32F2F"
-            android:backgroundTint="@android:color/transparent"
-            android:layout_gravity="center_horizontal" />
+            android:background="@drawable/buttonbg"
+            android:layout_gravity="right" />
+
 
     </LinearLayout>
 </ScrollView>

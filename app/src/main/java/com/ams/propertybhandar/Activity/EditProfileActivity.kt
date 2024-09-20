@@ -2,8 +2,10 @@ package com.ams.propertybhandar.Activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -175,19 +177,15 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun uploadProfileWithImage(userId: String, updatedData: JSONObject) {
         showLoadingDialog()
-        val contentResolver = contentResolver
-        val inputStream = contentResolver.openInputStream(selectedImageUri)
-        val file = File.createTempFile("temp", ".jpg")
-        val outputStream = FileOutputStream(file)
-        inputStream?.copyTo(outputStream)
-        inputStream?.close()
-        outputStream.close()
 
-        val imagePart = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        // Compress and resize the image
+        val compressedFile = selectedImageUri?.let { compressAndResizeImage(it) } ?: return
+
+        val imagePart = compressedFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart("user", updatedData.toString())
-            .addFormDataPart("user_image", file.name, imagePart)
+            .addFormDataPart("user_image", compressedFile.name, imagePart)
             .build()
 
         networkClient.uploadUserProfileWithImage(userId, requestBody, object : Callback {
@@ -214,6 +212,18 @@ class EditProfileActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun compressAndResizeImage(uri: Uri): File {
+        val originalBitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+        // Resize the image if necessary (e.g., max width and height)
+        val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 800, 600, true) // Adjust dimensions as needed
+        val file = File(cacheDir, "compressed_${System.currentTimeMillis()}.jpg")
+        FileOutputStream(file).use { out ->
+            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 80, out) // Compress with quality
+        }
+        return file
+    }
+
 
     private fun handleProfileUpdateResponse(response: Response) {
         val responseData = response.body?.string()

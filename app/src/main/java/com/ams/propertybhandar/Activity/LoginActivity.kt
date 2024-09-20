@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -47,7 +48,16 @@ class LoginActivity : AppCompatActivity() {
         forgotPasswordTextView.setOnClickListener {
             startActivity(Intent(this, ForgotActivity::class.java))
         }
+        findViewById<ImageView>(R.id.back_button).setOnClickListener {
+            val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()  // Close the current LoginActivity
+        }
+
+
     }
+
 
     private fun signIn() {
         val email = emailEditText.text.toString().trim()
@@ -136,4 +146,15 @@ class LoginActivity : AppCompatActivity() {
     private fun hideLoadingDialog() {
         customLoadingDialog?.dismiss()
     }
+
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()  // Close the current LoginActivity
+    }
+
+
 }

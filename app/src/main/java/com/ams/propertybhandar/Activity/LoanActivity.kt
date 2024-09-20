@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.ams.propertybhandar.R
 
@@ -21,12 +22,40 @@ class LoanActivity : AppCompatActivity() {
         val right_arrow3: ImageView = findViewById(R.id.right_arrow3)
 
         feedbackButton.setOnClickListener {
-            // Create an intent to start the ContactUsActivity
-            val intent = Intent(this, LoanApplicationActivity::class.java)
-            startActivity(intent)
+            // Check if the user is logged in
+            val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+            val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
-            // Initialize back_arrow ImageView and set click listener
+            if (isLoggedIn) {
+                // User is logged in, navigate to LoanApplicationActivity
+                val intent = Intent(this@LoanActivity, LoanApplicationActivity::class.java)
+                startActivity(intent)
+            } else {
+                // Show dialog to notify the user to log in first
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Attention Required")
+                builder.setMessage("You need to be logged in to apply for a loan. Please log in to continue.")
+                builder.setIcon(R.drawable.ic_warning) // Optional: Add a relevant icon if needed
 
+                builder.setPositiveButton("Log in Now") { dialog, _ ->
+                    // Navigate to LoginActivity
+                    val loginIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(loginIntent)
+                    dialog.dismiss()
+                }
+
+                builder.setNegativeButton("Maybe Later") { dialog, _ ->
+                    // Just dismiss the dialog
+                    dialog.dismiss()
+                }
+
+                val dialog = builder.create()
+
+                // Set the background of the dialog to the custom drawable with white background and rounded corners
+                dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+                dialog.show()
+            }
         }
         right_arrow.setOnClickListener {
             // Create an intent to start the ContactUsActivity

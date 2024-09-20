@@ -2,14 +2,17 @@ package com.ams.propertybhandar.Activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
@@ -97,8 +100,14 @@ class PropertyListActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_property -> true // Already on PropertyListActivity
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this@PropertyListActivity, ProfileActivity::class.java))
-                    finish()
+                    if (isLoggedIn()) {
+                        // User is logged in, navigate to ProfileActivity
+                        startActivity(Intent(this@PropertyListActivity, ProfileActivity::class.java))
+                        finish()
+                    } else {
+                        // Show a dialog instead of Toast to notify the user to log in
+                        showLoginDialog("You need to log in to view your profile.")
+                    }
                     true
                 }
                 R.id.navigation_home -> {
@@ -107,8 +116,14 @@ class PropertyListActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_addproperty -> {
-                    startActivity(Intent(this@PropertyListActivity, AddPropertyFormActivity::class.java))
-                    finish()
+                    if (isLoggedIn()) {
+                        // User is logged in, navigate to AddPropertyFormActivity
+                        startActivity(Intent(this@PropertyListActivity, AddPropertyFormActivity::class.java))
+                        finish()
+                    } else {
+                        // Show a dialog instead of Toast to notify the user to log in
+                        showLoginDialog("You need to log in to add a property.")
+                    }
                     true
                 }
                 else -> false
@@ -116,6 +131,37 @@ class PropertyListActivity : AppCompatActivity() {
         }
         // Set the correct item as selected in BottomNavigationView
         navView.menu.findItem(R.id.navigation_property).isChecked = true
+    }
+    private fun showLoginDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Login Required")
+        builder.setMessage(message)
+        builder.setIcon(R.drawable.ic_warning) // Optional: Add an icon to make it look professional
+
+        builder.setPositiveButton("Log in Now") { dialog, _ ->
+            // Navigate to LoginActivity
+            val loginIntent = Intent(this@PropertyListActivity, LoginActivity::class.java)
+            startActivity(loginIntent)
+            dialog.dismiss()
+            finish() // Optional: Close HomeActivity after navigating to LoginActivity
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            // Just dismiss the dialog
+            dialog.dismiss()
+        }
+
+        // Create and show the dialog
+        val dialog = builder.create()
+
+        // Set custom background if needed
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+        dialog.show()
+    }
+    private fun isLoggedIn(): Boolean {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        return sharedPreferences.getBoolean("isLoggedIn", false) // Adjust based on how login status is stored
     }
 
     private fun navigateToHome() {
@@ -296,11 +342,13 @@ class PropertyListActivity : AppCompatActivity() {
             if ((type == "All" || propertyType == type) && price in minBudget..maxBudget) {
                 filteredProperties.put(property)
             }
-            if (filteredProperties.length() == 0) {
-                Toast.makeText(this@PropertyListActivity, "No properties found", Toast.LENGTH_SHORT).show()
-            }
-
         }
+
+        // Check if any properties were found AFTER the loop
+        if (filteredProperties.length() == 0) {
+            Toast.makeText(this@PropertyListActivity, "No properties found", Toast.LENGTH_SHORT).show()
+        }
+
         // Update adapter with filtered properties
         propertyListAdapter.updateProperties(filteredProperties)
 
@@ -309,6 +357,19 @@ class PropertyListActivity : AppCompatActivity() {
     private fun showFilterMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
         popupMenu.menuInflater.inflate(R.menu.filter_menu, popupMenu.menu)
+        try {
+            val popup = PopupMenu::class.java.getDeclaredField("mPopup")
+            popup.isAccessible = true
+            val menuPopupHelper = popup.get(popupMenu)
+            val popupWindow = menuPopupHelper.javaClass.getDeclaredField("mPopup")
+            popupWindow.isAccessible = true
+            val listView = popupWindow.get(menuPopupHelper) as ListView
+
+            // Set the background color of the list view
+            listView.setBackgroundColor(Color.WHITE)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.sort_low_to_high -> {

@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -156,7 +157,9 @@ class HomeActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.END)  // Open the drawer from the end (right side)
         }
         // Fetch an display user's profile information
-        // Set up the BottomNavigationView
+
+
+// Set up the BottomNavigationView
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -165,27 +168,41 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this@HomeActivity, ProfileActivity::class.java))
-                    finish() // Close current activity to prevent back stack accumulation
+                    if (isLoggedIn()) {
+                        // User is logged in, navigate to ProfileActivity
+                        startActivity(Intent(this@HomeActivity, ProfileActivity::class.java))
+                        finish()
+                    } else {
+                        // Show a dialog instead of Toast to notify the user to log in
+                        showLoginDialog("You need to log in to view your profile.")
+                    }
                     true
                 }
                 R.id.navigation_property -> {
+                    // No login check for property list; assuming it's public
                     startActivity(Intent(this@HomeActivity, PropertyListActivity::class.java))
-                    finish() // Close current activity to prevent back stack accumulation
+                    finish()
                     true
                 }
                 R.id.navigation_addproperty -> {
-                    startActivity(Intent(this@HomeActivity, AddPropertyFormActivity::class.java))
-                    finish() // Close current activity to prevent back stack accumulation
+                    if (isLoggedIn()) {
+                        // User is logged in, navigate to AddPropertyFormActivity
+                        startActivity(Intent(this@HomeActivity, AddPropertyFormActivity::class.java))
+                        finish()
+                    } else {
+                        // Show a dialog instead of Toast to notify the user to log in
+                        showLoginDialog("You need to log in to add a property.")
+                    }
                     true
                 }
                 else -> false
             }
         }
-        // Set the correct item as selected in BottomNavigationView
+
+
+// Set the correct item as selected in BottomNavigationView
         val homeItem = navView.menu.findItem(R.id.navigation_home)
         homeItem.isChecked = true
-
         // Set up CardView click listeners
         findViewById<androidx.cardview.widget.CardView>(R.id.hbcalculator).setOnClickListener {
             val intent = Intent(this@HomeActivity, HomeBudgetCalculatorActivity::class.java)
@@ -332,10 +349,43 @@ class HomeActivity : AppCompatActivity() {
                     startActivity(Intent(this, PropertyListActivity::class.java))
                     true
                 }
+
                 R.id.nav_Loan -> {
-                    startActivity(Intent(this, LoanApplicationActivity::class.java))
+                    if (isLoggedIn()) {
+                        // User is logged in, navigate to LoanApplicationActivity
+                        startActivity(Intent(this@HomeActivity, LoanApplicationActivity::class.java))
+                        finish()
+                    } else {
+                        // Show an advanced dialog to the user, prompting them to log in
+                        val builder = AlertDialog.Builder(this)
+                        builder.setTitle("Login Required")
+                        builder.setMessage("You need to log in to apply for a loan. Please log in to access the loan application feature.")
+                        builder.setIcon(R.drawable.ic_warning) // Optional: Add an icon for better UX
+
+                        builder.setPositiveButton("Log in Now") { dialog, _ ->
+                            // Navigate to LoginActivity
+                            val loginIntent = Intent(this@HomeActivity, LoginActivity::class.java)
+                            startActivity(loginIntent)
+                            dialog.dismiss()
+                            finish() // Optional: If you want to close the HomeActivity after navigating to LoginActivity
+                        }
+
+                        builder.setNegativeButton("Cancel") { dialog, _ ->
+                            // Just dismiss the dialog
+                            dialog.dismiss()
+                        }
+
+                        // Create and show the dialog
+                        val dialog = builder.create()
+
+                        // Set custom background (if required for consistency with your app design)
+                        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+                        dialog.show()
+                    }
                     true
                 }
+
                 R.id.nav_contactus -> {
                     startActivity(Intent(this, ContactUsActivity::class.java))
                     true
@@ -364,15 +414,83 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         // Handle "Add Property" button click
-// Set up the AddPropertyButton click listener
+        // Set up the AddPropertyButton click listener
+        // Listener for addPropertyButton
         addPropertyButton.setOnClickListener {
-            val intent = Intent(this@HomeActivity, AddPropertyFormActivity::class.java)
-            startActivity(intent)
+            // Check if the user is logged in
+            val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+            val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+            if (isLoggedIn) {
+                // User is logged in, navigate to AddPropertyFormActivity
+                val intent = Intent(this@HomeActivity, AddPropertyFormActivity::class.java)
+                startActivity(intent)
+            } else {
+                // Show dialog to notify the user to log in first
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Attention Required")
+                builder.setMessage("You need to be logged in to add a property. Please log in to proceed.")
+                builder.setIcon(R.drawable.ic_warning) // Optional: Add a relevant icon if needed
+
+                builder.setPositiveButton("Log in Now") { dialog, _ ->
+                    // Navigate to LoginActivity
+                    val loginIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(loginIntent)
+                    dialog.dismiss()
+                }
+
+                builder.setNegativeButton("Maybe Later") { dialog, _ ->
+                    // Just dismiss the dialog
+                    dialog.dismiss()
+                }
+
+                val dialog = builder.create()
+
+                // Set the background of the dialog to the custom drawable with white background and rounded corners
+                dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+                dialog.show()
+            }
         }
+
+// Listener for addPropertyButton2
         addPropertyButton2.setOnClickListener {
-            val intent = Intent(this@HomeActivity, LoanApplicationActivity::class.java)
-            startActivity(intent)
+            // Check if the user is logged in
+            val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+            val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+            if (isLoggedIn) {
+                // User is logged in, navigate to LoanApplicationActivity
+                val intent = Intent(this@HomeActivity, LoanApplicationActivity::class.java)
+                startActivity(intent)
+            } else {
+                // Show dialog to notify the user to log in first
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Attention Required")
+                builder.setMessage("You need to be logged in to apply for a loan. Please log in to continue.")
+                builder.setIcon(R.drawable.ic_warning) // Optional: Add a relevant icon if needed
+
+                builder.setPositiveButton("Log in Now") { dialog, _ ->
+                    // Navigate to LoginActivity
+                    val loginIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(loginIntent)
+                    dialog.dismiss()
+                }
+
+                builder.setNegativeButton("Maybe Later") { dialog, _ ->
+                    // Just dismiss the dialog
+                    dialog.dismiss()
+                }
+
+                val dialog = builder.create()
+
+                // Set the background of the dialog to the custom drawable with white background and rounded corners
+                dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+                dialog.show()
+            }
         }
+
         searchEditText = findViewById(R.id.searchView)
         // Use this method in HomeActivity to handle search actions
         // Handle search actions
@@ -391,6 +509,41 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun showLoginDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Login Required")
+        builder.setMessage(message)
+        builder.setIcon(R.drawable.ic_warning) // Optional: Add an icon to make it look professional
+
+        builder.setPositiveButton("Log in Now") { dialog, _ ->
+            // Navigate to LoginActivity
+            val loginIntent = Intent(this@HomeActivity, LoginActivity::class.java)
+            startActivity(loginIntent)
+            dialog.dismiss()
+            finish() // Optional: Close HomeActivity after navigating to LoginActivity
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            // Just dismiss the dialog
+            dialog.dismiss()
+        }
+
+        // Create and show the dialog
+        val dialog = builder.create()
+
+        // Set custom background if needed
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+        dialog.show()
+    }
+
+
+    private fun isLoggedIn(): Boolean {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        return sharedPreferences.getBoolean("isLoggedIn", false) // Adjust based on how login status is stored
+    }
+
     @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
@@ -425,33 +578,33 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
     private fun fetchProperties() {
-        showLoadingDialog()
+         showLoadingDialog()
         networkClient.fetchProperties(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
                     Toast.makeText(this@HomeActivity, "Failed to fetch properties", Toast.LENGTH_SHORT).show()
-                    logoutAndRedirectToLogin()
                 }
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
-                    hideLoadingDialog()
+                     hideLoadingDialog()
                     response.body?.let { responseBody ->
                         try {
-                            val jsonArray = JSONArray(responseBody.string())
+                            val jsonArray = JSONArray(response.body?.string())
                             val limit = 6
 
                             // Limit the number of properties
                             val recommendedJsonArray = JSONArray()
                             val latestJsonArray = JSONArray()
 
-                            for (i in 0 until minOf(jsonArray.length(), limit)) {
-                                recommendedJsonArray.put(jsonArray.getJSONObject(i))
+                            for (i in 0 until jsonArray?.length()?.let { minOf(it, limit) }!!
+                            ) {
+                                recommendedJsonArray.put(jsonArray?.getJSONObject(i))
                             }
 
-                            for (i in jsonArray.length() - 1 downTo maxOf(jsonArray.length() - limit, 0)) {
-                                latestJsonArray.put(jsonArray.getJSONObject(i))
+                            for (i in jsonArray?.length()!! - 1 downTo maxOf(jsonArray?.length()!! - limit, 0)) {
+                                latestJsonArray.put(jsonArray?.getJSONObject(i))
                             }
 
                             runOnUiThread {
@@ -462,7 +615,6 @@ class HomeActivity : AppCompatActivity() {
                                 // Set up the adapter for latest properties (first to last)
                                 val latestAdapter = LatestPropertyAdapter(this@HomeActivity, latestJsonArray)
                                 latestRecyclerView.adapter = latestAdapter
-
                             }
                         } catch (e: Exception) {
                             runOnUiThread {
@@ -472,13 +624,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                 } else {
                     runOnUiThread {
-                        if (response.code == 401) {
-                            Toast.makeText(this@HomeActivity, "Session expired. Please log in again.", Toast.LENGTH_LONG).show()
-                            logoutAndRedirectToLogin()
-                        } else {
-                            val errorMessage = "Error: ${response.message}"
-                            Toast.makeText(this@HomeActivity, errorMessage, Toast.LENGTH_LONG).show()
-                        }
+                        Toast.makeText(this@HomeActivity, "Failed to fetch properties", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -487,17 +633,6 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    private fun logoutAndRedirectToLogin() {
-        // Clear user session data
-        val sharedPreferences: SharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
-
-        // Redirect to login or splash screen
-        startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
-        finish() // Close current activity to prevent back stack accumulation
-    }
     private fun logout() {
         // Clear user session data
         val sharedPreferences: SharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
@@ -516,7 +651,7 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
     private fun showLoadingDialog() {
-        if (customLoadingDialog == null) {
+       if (customLoadingDialog == null) {
             customLoadingDialog = CustomLoadingDialog(this)
         }
         customLoadingDialog?.show()

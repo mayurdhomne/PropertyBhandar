@@ -32,6 +32,16 @@ class PropertyListAdapter(
 
         holder.titleTextView.text = property.getString("title")
         holder.priceTextView.text = "₹${property.getString("price")}"
+        val propertyType = property.optString("property_type", "")
+        val priceValue = property.optString("price", "No Price")
+        val areaValue = property.optString("area", "No Area")
+
+        // Display price based on property_type
+        holder.priceTextView.text = when (propertyType.lowercase()) {
+            "plot" -> "₹$areaValue Sq.ft"
+            "flat", "shop", "house", "apartment" -> "₹$priceValue"
+            else -> "₹$priceValue" // Default to ₹ + price if type is unknown
+        }
 
         // Handle image loading dynamically based on whether the URL is complete or not
         val imageUrl = property.optString("photo_main", "")
