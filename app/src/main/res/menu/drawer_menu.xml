@@ -23,13 +23,13 @@
         <item
             android:id="@+id/nav_Affordability"
             android:icon="@drawable/home"
-            android:title="Affordability Calculators"
+            android:title="Affordability Calculator"
             android:iconTint="@color/black"/>
 
         <item
             android:id="@+id/nav_Eligibility"
             android:icon="@drawable/baseline_calculate"
-            android:title="Eligibility Calculators"
+            android:title="Eligibility Calculator"
             android:iconTint="@color/black"/>
 
         <item
@@ -54,7 +54,7 @@
         <item
             android:id="@+id/nav_Setting"
             android:icon="@drawable/settings_24"
-            android:title="Setting"
+            android:title="Settings"
             android:iconTint="@color/black"/>
 
         <item

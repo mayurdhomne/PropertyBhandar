@@ -1011,7 +1011,6 @@
             app:itemIconTint="@color/white"
             android:paddingBottom="10dp"
             android:fitsSystemWindows="true"
-
             style="@style/BottomNavigationViewTransparent"
             app:itemTextColor="@color/white"
             app:menu="@menu/bottom_bar_items"

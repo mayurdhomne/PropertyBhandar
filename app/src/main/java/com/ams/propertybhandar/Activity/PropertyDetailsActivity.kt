@@ -9,15 +9,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.ams.propertybhandar.Adaptar.PhotoPagerAdapter
+import com.ams.propertybhandar.Domin.NetworkClient
 import com.ams.propertybhandar.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.json.JSONObject
 
 class PropertyDetailsActivity : AppCompatActivity() {
+
+    private lateinit var networkClient: NetworkClient
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +31,7 @@ class PropertyDetailsActivity : AppCompatActivity() {
         // Retrieve the property data from the Intent
         val propertyData = intent.getStringExtra("property_data")
         val property = JSONObject(propertyData.toString())
+        networkClient = NetworkClient(this)
 
         // Bind the UI elements to variables
         val photoViewPager: ViewPager2 = findViewById(R.id.photo_view_pager)
@@ -116,46 +121,51 @@ class PropertyDetailsActivity : AppCompatActivity() {
 
         // Handle the buy property button click
         buyButton.setOnClickListener {
-            // Check if the user is logged in
-            val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-            val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false) // Assuming "isLoggedIn" flag is used to check login
-
-            if (isLoggedIn) {
-                // User is logged in, proceed to ContactUsActivity
+            if (networkClient.getAccessToken() == null) {
+                showLoginRequiredDialog() // Use the existing showLoginRequiredDialog function
+            } else {
                 val intent = Intent(this, ContactUsActivity::class.java)
                 // Optionally, pass property details to the next activity if needed
                 intent.putExtra("property_data", propertyData)
                 startActivity(intent)
-            } else {
-                // Show a dialog to notify the user to log in first
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Attention Required")
-                builder.setMessage("To access this feature, you need to be logged in. Please log in to continue.")
-                builder.setIcon(R.drawable.ic_warning) // Optional: Add a relevant icon if needed
-
-                builder.setPositiveButton("Log in Now") { dialog, _ ->
-                    // Navigate to LoginActivity
-                    val loginIntent = Intent(this, LoginActivity::class.java)
-                    startActivity(loginIntent)
-                    dialog.dismiss()
-                }
-
-                builder.setNegativeButton("Maybe Later") { dialog, _ ->
-                    // Just dismiss the dialog
-                    dialog.dismiss()
-                }
-
-                val dialog = builder.create()
-
-                // Set the background of the dialog to the custom drawable with white background and rounded corners
-                dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
-
-                dialog.show()
             }
         }
 
 
     }
+
+    private fun showLoginRequiredDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null) // Create a custom layout for the dialog
+        val builder = AlertDialog.Builder(this)
+        builder.setView(dialogView)
+
+        val dialog = builder.create()
+
+        // Customize the dialog UI elements (using findViewById)
+        val titleTextView: TextView = dialogView.findViewById(R.id.dialogTitle)
+        val messageTextView: TextView = dialogView.findViewById(R.id.dialogMessage)
+        val loginButton: CardView = dialogView.findViewById(R.id.btnLoginNow)
+        val cancelButton: CardView = dialogView.findViewById(R.id.btnMaybeLater)
+
+        titleTextView.text = "Login Required"
+        messageTextView.text = "You need to be logged in to access this feature."
+
+        loginButton.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish() // Optional: Finish the current activity if needed
+        }
+
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Customize the dialog appearance (optional)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background) // Set a custom background drawable
+
+        dialog.show()
+    }
+
     private fun setTextViewVisibility(textView: TextView, text: String?) {
         if (text.isNullOrEmpty()) {
             textView.visibility = View.GONE

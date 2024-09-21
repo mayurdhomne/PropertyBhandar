@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.ams.propertybhandar.Domin.NetworkClient
@@ -138,6 +139,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         // Navigate to HomeActivity when back button is pressed
@@ -182,24 +184,43 @@ class ProfileActivity : AppCompatActivity() {
         val noButton: CardView = bottomSheetView.findViewById(R.id.noButton)
 
         yesButton.setOnClickListener {
+            // Clear access token and refresh token using NetworkClient
+            NetworkClient(this).logout(this)
+
+            // Optional: Clear other user data in SharedPreferences if needed
             with(sharedPreferences.edit()) {
-                clear()
+                // Remove other user-specific data if required
                 apply()
             }
+
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
+
+            // Navigate to the Login screen
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+
+            // Dismiss the dialog
             bottomSheetDialog.dismiss()
         }
 
         noButton.setOnClickListener {
+            // Dismiss the dialog if user cancels logout
             bottomSheetDialog.dismiss()
         }
 
         bottomSheetDialog.show()
     }
 
+
     private fun fetchUserProfile() {
+
+        if (networkClient.getAccessToken() == null) {
+            runOnUiThread {
+                showLoginRequiredDialog()
+            }
+            return // Don't proceed with fetching the profile
+        }
+
         showLoadingDialog()
         networkClient.fetchUserProfile(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -207,6 +228,8 @@ class ProfileActivity : AppCompatActivity() {
                 e.printStackTrace()
                 runOnUiThread {
                     Toast.makeText(this@ProfileActivity, "Failed to fetch profile", Toast.LENGTH_SHORT).show()
+                    // Show login required dialog when the profile fetch fails
+                    showLoginRequiredDialog()
                 }
             }
 
@@ -224,6 +247,7 @@ class ProfileActivity : AppCompatActivity() {
                         val userImage = profileJson.optString("user_image", "")
                         val greetingMessage = getGreetingMessage(firstName)
 
+                        // Store the user data in SharedPreferences
                         with(sharedPreferences.edit()) {
                             putString("firstName", firstName)
                             putString("lastName", lastName)
@@ -236,26 +260,29 @@ class ProfileActivity : AppCompatActivity() {
                         runOnUiThread {
                             updateProfileData(email, contact, greetingMessage, userImage)
                         }
-                    } else if (response.code == 401) {
+                    } else if (response.code == 401) { // Unauthorized, likely due to expired or missing token
                         runOnUiThread {
                             Toast.makeText(this@ProfileActivity, "Unauthorized access. Please log in again.", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@ProfileActivity, LoginActivity::class.java))
-                            finish()
+                            showLoginRequiredDialog() // Show login required dialog
                         }
                     } else {
                         runOnUiThread {
                             Toast.makeText(this@ProfileActivity, "Failed to fetch profile: ${response.code}", Toast.LENGTH_SHORT).show()
+                            // Show login required dialog on failure
+                            showLoginRequiredDialog()
                         }
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
                     runOnUiThread {
                         Toast.makeText(this@ProfileActivity, "Error reading response", Toast.LENGTH_SHORT).show()
+                        showLoginRequiredDialog() // Show login required dialog
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     runOnUiThread {
                         Toast.makeText(this@ProfileActivity, "Error parsing JSON response", Toast.LENGTH_SHORT).show()
+                        showLoginRequiredDialog() // Show login required dialog
                     }
                 } finally {
                     response.body?.close()
@@ -263,6 +290,40 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
     }
+
+    // Function to show login required dialog
+    private fun showLoginRequiredDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null) // Create a custom layout for the dialog
+        val builder = AlertDialog.Builder(this)
+        builder.setView(dialogView)
+
+        val dialog = builder.create()
+
+        // Customize the dialog UI elements (using findViewById)
+        val titleTextView: TextView = dialogView.findViewById(R.id.dialogTitle)
+        val messageTextView: TextView = dialogView.findViewById(R.id.dialogMessage)
+        val loginButton: CardView = dialogView.findViewById(R.id.btnLoginNow)
+        val cancelButton: CardView = dialogView.findViewById(R.id.btnMaybeLater)
+
+        titleTextView.text = "Login Required"
+        messageTextView.text = "You need to be logged in to access this feature."
+
+        loginButton.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish() // Optional: Finish the current activity if needed
+        }
+
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Customize the dialog appearance (optional)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background) // Set a custom background drawable
+
+        dialog.show()
+    }
+
     private fun updateProfileData(email: String, contact: String, greetingMessage: String, userImage: String) {
         emailText.text = email
         phoneText.text = contact

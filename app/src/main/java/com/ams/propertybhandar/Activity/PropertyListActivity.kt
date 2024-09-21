@@ -39,6 +39,9 @@ class PropertyListActivity : AppCompatActivity() {
     private var customLoadingDialog: CustomLoadingDialog? = null
     private var minBudget: Double = 0.0
     private var maxBudget: Double = Double.MAX_VALUE
+
+    private lateinit var backbutton: ImageView
+
     private var selectedPropertyType: String = "All"
 
 
@@ -83,7 +86,7 @@ class PropertyListActivity : AppCompatActivity() {
 
         // Back icon click listener
         findViewById<ImageView>(R.id.backic).setOnClickListener {
-            navigateToHome()
+            onBackPressed()
         }
 
         // Set up filter icon click listener
@@ -93,6 +96,15 @@ class PropertyListActivity : AppCompatActivity() {
 
         // Set up card click listeners for filtering
         setupCardFilters()
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        // Navigate to HomeActivity when back button is pressed
+        val intent = Intent(this@PropertyListActivity, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish() // Close current activity
     }
     private fun setupBottomNavigation() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)

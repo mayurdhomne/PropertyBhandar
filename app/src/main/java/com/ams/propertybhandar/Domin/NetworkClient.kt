@@ -122,8 +122,21 @@ class NetworkClient(private val context: Context) {
     // Fetch Properties
     fun fetchProperties(callback: Callback) {
         val url = "$BASE_URL/api/listings/"
-        makeAuthenticatedRequest(url, Request.Builder().url(url).build(), callback)
+        makeRequestWithoutToken(url, callback)
     }
+
+    fun makeRequestWithoutToken(url: String, callback: Callback) {
+        val client = OkHttpClient()
+
+        // Build the request without adding any token in the headers
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        client.newCall(request).enqueue(callback)
+    }
+
+    //makeAuthenticatedRequest(url, Request.Builder().url(url).build(), callback)
     // Verify Password Reset OTP
     fun verifyPasswordResetOtp(email: String, otp: String, callback: Callback) {
         val url = "$BASE_URL/api/users/verify_password_reset_otp/"
@@ -287,6 +300,14 @@ class NetworkClient(private val context: Context) {
             client.newCall(request).enqueue(callback)
         } else {
             Log.e("PropertySearch", "Failed to build URL")
+        }
+    }
+    fun logout(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().apply {
+            remove(ACCESS_TOKEN_KEY)
+            remove(REFRESH_TOKEN_KEY)
+            apply()
         }
     }
     // Token management
