@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:src="@drawable/baseline_arrow_back_ios_new_24"
+                android:src="@drawable/beslineback"
                 android:contentDescription="Back Button" />
 
             <TextView
@@ -197,7 +197,7 @@
                 android:text="Reset"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/grey"
                 app:cornerRadius="8dp"
                 app:iconGravity="textStart"
                 android:elevation="4dp"
@@ -359,7 +359,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/backgroundColor"
                 android:text="Months"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:background="@drawable/table_border"
                 android:gravity="center" />
@@ -371,6 +373,8 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:text="Principal"
+                android:backgroundTint="@color/backgroundColor"
+                android:textColor="@color/white"
                 android:background="@drawable/table_border"
                 android:gravity="center" />
 
@@ -381,6 +385,8 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:text="Interest"
+                android:backgroundTint="@color/backgroundColor"
+                android:textColor="@color/white"
                 android:background="@drawable/table_border"
                 android:gravity="center" />
 
@@ -390,6 +396,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textStyle="bold"
+                android:backgroundTint="@color/backgroundColor"
+                android:textColor="@color/white"
                 android:text="Outstanding"
                 android:background="@drawable/table_border"
                 android:gravity="center"/>

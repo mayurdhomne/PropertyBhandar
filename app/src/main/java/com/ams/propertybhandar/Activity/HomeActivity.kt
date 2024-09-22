@@ -202,45 +202,45 @@ class HomeActivity : AppCompatActivity() {
         val homeItem = navView.menu.findItem(R.id.navigation_home)
         homeItem.isChecked = true
         // Set up CardView click listeners
-        findViewById<androidx.cardview.widget.CardView>(R.id.hbcalculator).setOnClickListener {
+        findViewById<CardView>(R.id.hbcalculator).setOnClickListener {
             val intent = Intent(this@HomeActivity, HomeBudgetCalculatorActivity::class.java)
             startActivity(intent)
         }
-        findViewById<androidx.cardview.widget.CardView>(R.id.servicesbtn).setOnClickListener {
+        findViewById<CardView>(R.id.servicesbtn).setOnClickListener {
             val intent = Intent(this@HomeActivity, ServicesActivity::class.java)
             startActivity(intent)
         }
-        findViewById<androidx.cardview.widget.CardView>(R.id.buybtn).setOnClickListener {
+        findViewById<CardView>(R.id.buybtn).setOnClickListener {
             val intent = Intent(this@HomeActivity, BuyActivity::class.java)
             startActivity(intent)
         }
-        findViewById<androidx.cardview.widget.CardView>(R.id.loanbtn).setOnClickListener {
+        findViewById<CardView>(R.id.loanbtn).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoanActivity::class.java)
             startActivity(intent)
         }
         // Set up the CardView click listeners
-        findViewById<androidx.cardview.widget.CardView>(R.id.hbcalculator).setOnClickListener {
+        findViewById<CardView>(R.id.hbcalculator).setOnClickListener {
             val intent = Intent(this@HomeActivity, HomeBudgetCalculatorActivity::class.java)
             startActivity(intent)
         }
-        findViewById<androidx.cardview.widget.CardView>(R.id.lecalculator).setOnClickListener {
+        findViewById<CardView>(R.id.lecalculator).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoanEligibilityActivity::class.java)
             startActivity(intent)
         }
-        findViewById<androidx.cardview.widget.CardView>(R.id.emiCalculator).setOnClickListener {
+        findViewById<CardView>(R.id.emiCalculator).setOnClickListener {
             val intent = Intent(this@HomeActivity, EMICalculatorActivity::class.java)
             startActivity(intent)
         }
         // Newly added intents for additional calculators
-        findViewById<androidx.cardview.widget.CardView>(R.id.emiCalculatorcard).setOnClickListener {
+        findViewById<CardView>(R.id.emiCalculatorcard).setOnClickListener {
             val intent = Intent(this@HomeActivity, EMICalculatorActivity::class.java)
             startActivity(intent)
         }
-        findViewById<androidx.cardview.widget.CardView>(R.id.affordabilityCalculatorcard).setOnClickListener {
+        findViewById<CardView>(R.id.affordabilityCalculatorcard).setOnClickListener {
             val intent = Intent(this@HomeActivity, HomeBudgetCalculatorActivity::class.java)
             startActivity(intent)
         }
-        findViewById<androidx.cardview.widget.CardView>(R.id.hbcCalculatorcard).setOnClickListener {
+        findViewById<CardView>(R.id.hbcCalculatorcard).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoanEligibilityActivity::class.java)
             startActivity(intent)
         }
@@ -453,7 +453,7 @@ class HomeActivity : AppCompatActivity() {
         cancelButton.setOnClickListener {
             dialog.dismiss()
         }
-
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
         dialog.show()
     }
 

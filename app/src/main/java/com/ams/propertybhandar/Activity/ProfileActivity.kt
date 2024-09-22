@@ -45,6 +45,8 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+
+
         // Initialize views
         emailText = findViewById(R.id.email_text)
         phoneText = findViewById(R.id.phone_text)
@@ -254,35 +256,59 @@ class ProfileActivity : AppCompatActivity() {
                             putString("email", email)
                             putString("contact", contact)
                             putString("user_image", userImage) // Save user image URL
+                            putBoolean("isProfileFetched", true) // Store profile fetch status (Success)
                             apply()
                         }
 
                         runOnUiThread {
                             updateProfileData(email, contact, greetingMessage, userImage)
                         }
-                    } else if (response.code == 401) { // Unauthorized, likely due to expired or missing token
+                    } else if (response.code == 401) { // Unauthorized
                         runOnUiThread {
                             Toast.makeText(this@ProfileActivity, "Unauthorized access. Please log in again.", Toast.LENGTH_SHORT).show()
-                            showLoginRequiredDialog() // Show login required dialog
+                            // Show login required dialog
+                            showLoginRequiredDialog()
+                            // Store profile fetch status in SharedPreferences (Failure)
+                            with(sharedPreferences.edit()) {
+                                putBoolean("isProfileFetched", false)
+                                apply()
+                            }
                         }
                     } else {
                         runOnUiThread {
                             Toast.makeText(this@ProfileActivity, "Failed to fetch profile: ${response.code}", Toast.LENGTH_SHORT).show()
-                            // Show login required dialog on failure
+                            // Show login required dialog
                             showLoginRequiredDialog()
+                            // Store profile fetch status in SharedPreferences (Failure)
+                            with(sharedPreferences.edit()) {
+                                putBoolean("isProfileFetched", false)
+                                apply()
+                            }
                         }
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
                     runOnUiThread {
                         Toast.makeText(this@ProfileActivity, "Error reading response", Toast.LENGTH_SHORT).show()
-                        showLoginRequiredDialog() // Show login required dialog
+                        // Show login required dialog
+                        showLoginRequiredDialog()
+                        // Store profile fetch status in SharedPreferences (Failure)
+                        with(sharedPreferences.edit()) {
+                            putBoolean("isProfileFetched", false)
+                            apply()
+                        }
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     runOnUiThread {
                         Toast.makeText(this@ProfileActivity, "Error parsing JSON response", Toast.LENGTH_SHORT).show()
-                        showLoginRequiredDialog() // Show login required dialog
+                        // Show login required dialog
+                        showLoginRequiredDialog()
+                        // Store profile fetch status in SharedPreferences (Failure)
+                        with(sharedPreferences.edit()) {
+                            putBoolean("isProfileFetched", false)
+                            apply()
+                        }
                     }
                 } finally {
                     response.body?.close()

@@ -71,235 +71,242 @@ class AddPropertyFormActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_property_form)
 
-        val isLoggedIn = intent.getBooleanExtra("isLoggedIn", false)
 
-        if (!isLoggedIn) {
-            showLoginRequiredDialog()
-        }
+            // Profile is fetched, proceed with normal activity setup
+            // ... your code for logged-in users with profile fetched (initialize views, set listeners, etc.)
 
 
-        val titleEditText: EditText = findViewById<TextInputLayout>(R.id.titleLayout).editText!!
-        val addressEditText: EditText = findViewById<TextInputLayout>(R.id.addressLayout).editText!!
-        val cityEditText: EditText = findViewById<TextInputLayout>(R.id.cityLayout).editText!!
-        val stateSpinner: Spinner = findViewById(R.id.state)
-        val zipcodeEditText: EditText = findViewById<TextInputLayout>(R.id.zipcodeLayout).editText!!
-        val descriptionEditText: EditText = findViewById<TextInputLayout>(R.id.descriptionLayout).editText!!
-        val priceEditText: EditText = findViewById<TextInputLayout>(R.id.priceLayout).editText!!
-        val areaEditText: EditText = findViewById<TextInputLayout>(R.id.areaLayout).editText!!
-        val bedsEditText: EditText = findViewById<TextInputLayout>(R.id.bedsLayout).editText!!
-        val bathsEditText: EditText = findViewById<TextInputLayout>(R.id.bathsLayout).editText!!
-        val amenities1EditText: EditText = findViewById<TextInputLayout>(R.id.tvamenity1).editText!!
-        val amenities2EditText: EditText = findViewById<TextInputLayout>(R.id.tvamenity2).editText!!
-        val amenities3EditText: EditText = findViewById<TextInputLayout>(R.id.tvamenity3).editText!!
-        val amenities4EditText: EditText = findViewById<TextInputLayout>(R.id.tvamenity4).editText!!
-        val amenities5EditText: EditText = findViewById<TextInputLayout>(R.id.tvamenity5).editText!!
-        val amenities6EditText: EditText = findViewById<TextInputLayout>(R.id.tvamenity6).editText!!
-        val submitButton: Button = findViewById(R.id.submit)
-        val backButton: ImageView = findViewById(R.id.backic)
+            val titleEditText: EditText = findViewById<TextInputLayout>(R.id.titleLayout).editText!!
+            val addressEditText: EditText =
+                findViewById<TextInputLayout>(R.id.addressLayout).editText!!
+            val cityEditText: EditText = findViewById<TextInputLayout>(R.id.cityLayout).editText!!
+            val stateSpinner: Spinner = findViewById(R.id.state)
+            val zipcodeEditText: EditText =
+                findViewById<TextInputLayout>(R.id.zipcodeLayout).editText!!
+            val descriptionEditText: EditText =
+                findViewById<TextInputLayout>(R.id.descriptionLayout).editText!!
+            val priceEditText: EditText = findViewById<TextInputLayout>(R.id.priceLayout).editText!!
+            val areaEditText: EditText = findViewById<TextInputLayout>(R.id.areaLayout).editText!!
+            val bedsEditText: EditText = findViewById<TextInputLayout>(R.id.bedsLayout).editText!!
+            val bathsEditText: EditText = findViewById<TextInputLayout>(R.id.bathsLayout).editText!!
+            val amenities1EditText: EditText =
+                findViewById<TextInputLayout>(R.id.tvamenity1).editText!!
+            val amenities2EditText: EditText =
+                findViewById<TextInputLayout>(R.id.tvamenity2).editText!!
+            val amenities3EditText: EditText =
+                findViewById<TextInputLayout>(R.id.tvamenity3).editText!!
+            val amenities4EditText: EditText =
+                findViewById<TextInputLayout>(R.id.tvamenity4).editText!!
+            val amenities5EditText: EditText =
+                findViewById<TextInputLayout>(R.id.tvamenity5).editText!!
+            val amenities6EditText: EditText =
+                findViewById<TextInputLayout>(R.id.tvamenity6).editText!!
+            val submitButton: Button = findViewById(R.id.submit)
+            val backButton: ImageView = findViewById(R.id.backic)
 
 
-        photoMainButton = findViewById(R.id.uploadPhotoButton)
-        photo1Button = findViewById(R.id.uploadPhotoButton2)
-        photo2Button = findViewById(R.id.uploadPhotoButton3)
-        photo3Button = findViewById(R.id.uploadPhotoButton4)
-        photo4Button = findViewById(R.id.uploadPhotoButton5)
+            photoMainButton = findViewById(R.id.uploadPhotoButton)
+            photo1Button = findViewById(R.id.uploadPhotoButton2)
+            photo2Button = findViewById(R.id.uploadPhotoButton3)
+            photo3Button = findViewById(R.id.uploadPhotoButton4)
+            photo4Button = findViewById(R.id.uploadPhotoButton5)
 
 
-        photoMainButton.setOnClickListener { openImagePicker(PHOTO_MAIN_REQUEST) }
-        photo1Button.setOnClickListener { openImagePicker(PHOTO_1_REQUEST) }
-        photo2Button.setOnClickListener { openImagePicker(PHOTO_2_REQUEST) }
-        photo3Button.setOnClickListener { openImagePicker(PHOTO_3_REQUEST) }
-        photo4Button.setOnClickListener { openImagePicker(PHOTO_4_REQUEST) }
+            photoMainButton.setOnClickListener { openImagePicker(PHOTO_MAIN_REQUEST) }
+            photo1Button.setOnClickListener { openImagePicker(PHOTO_1_REQUEST) }
+            photo2Button.setOnClickListener { openImagePicker(PHOTO_2_REQUEST) }
+            photo3Button.setOnClickListener { openImagePicker(PHOTO_3_REQUEST) }
+            photo4Button.setOnClickListener { openImagePicker(PHOTO_4_REQUEST) }
 
-        filenameTextView = findViewById(R.id.filename)
-        filenameTextView1 = findViewById(R.id.filename1)
-        filenameTextView2 = findViewById(R.id.filename2)
-        filenameTextView3 = findViewById(R.id.filename3)
-        filenameTextView4 = findViewById(R.id.filename4)
-
-
-        backButton.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
-        }
+            filenameTextView = findViewById(R.id.filename)
+            filenameTextView1 = findViewById(R.id.filename1)
+            filenameTextView2 = findViewById(R.id.filename2)
+            filenameTextView3 = findViewById(R.id.filename3)
+            filenameTextView4 = findViewById(R.id.filename4)
 
 
-        submitButton.setOnClickListener {
-            if (networkClient.getAccessToken() == null) {
-                showLoginRequiredDialog()
-            } else {
-                // Collect input values
-                val propertyTypeSpinner: Spinner = findViewById(R.id.propertyTypeSpinner)
-                val selectedPropertyType = propertyTypeSpinner.selectedItem.toString()
-                val propertyFacingSpinner: Spinner = findViewById(R.id.propertyFacingSpinner)
-                val selectedPropertyFacing = propertyFacingSpinner.selectedItem.toString()
-                val title = titleEditText.text.toString().trim()
-                val address = addressEditText.text.toString().trim()
-                val city = cityEditText.text.toString().trim()
-                val selectedState = stateSpinner.selectedItem.toString()
-                val zipcode = zipcodeEditText.text.toString().trim()
-                val description = descriptionEditText.text.toString().trim()
-                val price = priceEditText.text.toString().trim()
-                val area = areaEditText.text.toString().trim()
-                val beds = bedsEditText.text.toString().trim()
-                val baths = bathsEditText.text.toString().trim()
-                val amenities1 = amenities1EditText.text.toString().trim()
-                val amenities2 = amenities2EditText.text.toString().trim()
-                val amenities3 = amenities3EditText.text.toString().trim()
-                val amenities4 = amenities4EditText.text.toString().trim()
-                val amenities5 = amenities5EditText.text.toString().trim()
-                val amenities6 = amenities6EditText.text.toString().trim()
-                val isForSale = findViewById<SwitchMaterial>(R.id.saleSwitch).isChecked
-                val isForRent = findViewById<SwitchMaterial>(R.id.rentSwitch).isChecked
-
-                if (!isForSale && !isForRent) {
-                    Toast.makeText(
-                        this,
-                        "Please select either For Sale or For Rent",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-                // Validate inputs
-                if (validateFields(
-                        title,
-                        address,
-                        city,
-                        selectedState,
-                        zipcode,
-                        description,
-                        price,
-                        area,
-                        amenities1,
-                        amenities2,
-                        amenities3
-                    ) && photoMainUri != null
-                ) {
-                    val propertyData = mapOf(
-                        "property_type" to selectedPropertyType,
-                        "property_facing" to selectedPropertyFacing,
-                        "title" to title,
-                        "address" to address,
-                        "city" to city,
-                        "state" to selectedState,
-                        "zipcode" to zipcode,
-                        "description" to description,
-                        "price" to price,
-                        "area" to area,
-                        "beds" to beds,
-                        "baths" to baths,
-                        "amenities1" to amenities1,
-                        "amenities2" to amenities2,
-                        "amenities3" to amenities3,
-                        "amenities4" to amenities4,
-                        "amenities5" to amenities5,
-                        "amenities6" to amenities6,
-                        "is_for_sale" to isForSale.toString(),
-                        "is_for_rent" to isForRent.toString(),
-                        "list_date" to "2024-08-23T14:15:22Z",
-                    )
-
-                    // Show loading dialog
-                    showLoadingDialog()
-
-                    // Use Kotlin coroutines to handle background tasks
-                    lifecycleScope.launch {
-                        try {
-                            val photoMainFile = photoMainUri?.let { compressAndResizeImage(it) }
-                            val photo1File = photo1Uri?.let { compressAndResizeImage(it) }
-                            val photo2File = photo2Uri?.let { compressAndResizeImage(it) }
-                            val photo3File = photo3Uri?.let { compressAndResizeImage(it) }
-                            val photo4File = photo4Uri?.let { compressAndResizeImage(it) }
+            backButton.setOnClickListener {
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            }
 
 
-                            networkClient.submitPropertyWithPhotos(
-                                propertyData,
-                                photoMainFile,
-                                photo1File,
-                                photo2File,
-                                photo3File,
-                                photo4File,
-                                object : Callback {
-                                    override fun onFailure(call: Call, e: IOException) {
-                                        runOnUiThread {
-                                            Log.e(
-                                                "AddPropertyActivity",
-                                                "Request failed: ${e.message}"
-                                            )
-                                            Toast.makeText(
-                                                this@AddPropertyFormActivity,
-                                                "Failed to submit property: ${e.message}",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-                                            hideLoadingDialog()
-                                        }
-                                    }
+            submitButton.setOnClickListener {
+                if (networkClient.getAccessToken() == null) {
+                    showLoginRequiredDialog()
+                } else {
+                    // Collect input values
+                    val propertyTypeSpinner: Spinner = findViewById(R.id.propertyTypeSpinner)
+                    val selectedPropertyType = propertyTypeSpinner.selectedItem.toString()
+                    val propertyFacingSpinner: Spinner = findViewById(R.id.propertyFacingSpinner)
+                    val selectedPropertyFacing = propertyFacingSpinner.selectedItem.toString()
+                    val title = titleEditText.text.toString().trim()
+                    val address = addressEditText.text.toString().trim()
+                    val city = cityEditText.text.toString().trim()
+                    val selectedState = stateSpinner.selectedItem.toString()
+                    val zipcode = zipcodeEditText.text.toString().trim()
+                    val description = descriptionEditText.text.toString().trim()
+                    val price = priceEditText.text.toString().trim()
+                    val area = areaEditText.text.toString().trim()
+                    val beds = bedsEditText.text.toString().trim()
+                    val baths = bathsEditText.text.toString().trim()
+                    val amenities1 = amenities1EditText.text.toString().trim()
+                    val amenities2 = amenities2EditText.text.toString().trim()
+                    val amenities3 = amenities3EditText.text.toString().trim()
+                    val amenities4 = amenities4EditText.text.toString().trim()
+                    val amenities5 = amenities5EditText.text.toString().trim()
+                    val amenities6 = amenities6EditText.text.toString().trim()
+                    val isForSale = findViewById<SwitchMaterial>(R.id.saleSwitch).isChecked
+                    val isForRent = findViewById<SwitchMaterial>(R.id.rentSwitch).isChecked
 
-                                    override fun onResponse(call: Call, response: Response) {
-                                        lifecycleScope.launch(Dispatchers.IO) { // Use Dispatchers.IO for network operations
-                                            if (response.isSuccessful) {
-                                                val responseBody = response.body?.string()
-                                                    ?: "" // Read the response body on a background thread
-                                                // ... process the responseBody ...
-                                                runOnUiThread {
-                                                    // Update the UI with the processed data
-                                                    Toast.makeText(
-                                                        this@AddPropertyFormActivity,
-                                                        "Property submitted successfully!",
-                                                        Toast.LENGTH_LONG
-                                                    ).show()
+                    if (!isForSale && !isForRent) {
+                        Toast.makeText(
+                            this,
+                            "Please select either For Sale or For Rent",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return@setOnClickListener
+                    }
+                    // Validate inputs
+                    if (validateFields(
+                            title,
+                            address,
+                            city,
+                            selectedState,
+                            zipcode,
+                            description,
+                            price,
+                            area,
+                            amenities1,
+                            amenities2,
+                            amenities3
+                        ) && photoMainUri != null
+                    ) {
+                        val propertyData = mapOf(
+                            "property_type" to selectedPropertyType,
+                            "property_facing" to selectedPropertyFacing,
+                            "title" to title,
+                            "address" to address,
+                            "city" to city,
+                            "state" to selectedState,
+                            "zipcode" to zipcode,
+                            "description" to description,
+                            "price" to price,
+                            "area" to area,
+                            "beds" to beds,
+                            "baths" to baths,
+                            "amenities1" to amenities1,
+                            "amenities2" to amenities2,
+                            "amenities3" to amenities3,
+                            "amenities4" to amenities4,
+                            "amenities5" to amenities5,
+                            "amenities6" to amenities6,
+                            "is_for_sale" to isForSale.toString(),
+                            "is_for_rent" to isForRent.toString(),
+                            "list_date" to "2024-08-23T14:15:22Z",
+                        )
 
-                                                    // Navigate to HomeActivity after successful property submission
-                                                    val intent = Intent(
-                                                        this@AddPropertyFormActivity,
-                                                        HomeActivity::class.java
-                                                    )
-                                                    intent.flags =
-                                                        Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                                                    startActivity(intent)
+                        // Show loading dialog
+                        showLoadingDialog()
 
-                                                    // Close the current activity
-                                                    finish()
-                                                }
-                                            } else {
-                                                val errorBody = response.body?.string()
-                                                    ?: "" // Read the error body on a background thread
+                        // Use Kotlin coroutines to handle background tasks
+                        lifecycleScope.launch {
+                            try {
+                                val photoMainFile = photoMainUri?.let { compressAndResizeImage(it) }
+                                val photo1File = photo1Uri?.let { compressAndResizeImage(it) }
+                                val photo2File = photo2Uri?.let { compressAndResizeImage(it) }
+                                val photo3File = photo3Uri?.let { compressAndResizeImage(it) }
+                                val photo4File = photo4Uri?.let { compressAndResizeImage(it) }
+
+
+                                networkClient.submitPropertyWithPhotos(
+                                    propertyData,
+                                    photoMainFile,
+                                    photo1File,
+                                    photo2File,
+                                    photo3File,
+                                    photo4File,
+                                    object : Callback {
+                                        override fun onFailure(call: Call, e: IOException) {
+                                            runOnUiThread {
                                                 Log.e(
                                                     "AddPropertyActivity",
-                                                    "Error response: ${response.code} - $errorBody"
+                                                    "Request failed: ${e.message}"
                                                 )
-                                                runOnUiThread {
-                                                    Toast.makeText(
-                                                        this@AddPropertyFormActivity,
-                                                        "Error: ${response.message}",
-                                                        Toast.LENGTH_LONG
-                                                    ).show()
-                                                }
-                                            }
-                                            runOnUiThread {
+                                                Toast.makeText(
+                                                    this@AddPropertyFormActivity,
+                                                    "Failed to submit property: ${e.message}",
+                                                    Toast.LENGTH_LONG
+                                                ).show()
                                                 hideLoadingDialog()
                                             }
                                         }
-                                    }
 
-                                }
-                            )
-                            hideLoadingDialog()
-                        } catch (e: Exception) {
-                            runOnUiThread {
-                                Log.e("AddPropertyActivity", "Error: ${e.message}")
-                                Toast.makeText(
-                                    this@AddPropertyFormActivity,
-                                    "An error occurred: ${e.message}",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                        override fun onResponse(call: Call, response: Response) {
+                                            lifecycleScope.launch(Dispatchers.IO) { // Use Dispatchers.IO for network operations
+                                                if (response.isSuccessful) {
+                                                    val responseBody = response.body?.string()
+                                                        ?: "" // Read the response body on a background thread
+                                                    // ... process the responseBody ...
+                                                    runOnUiThread {
+                                                        // Update the UI with the processed data
+                                                        Toast.makeText(
+                                                            this@AddPropertyFormActivity,
+                                                            "Property submitted successfully!",
+                                                            Toast.LENGTH_LONG
+                                                        ).show()
+
+                                                        // Navigate to HomeActivity after successful property submission
+                                                        val intent = Intent(
+                                                            this@AddPropertyFormActivity,
+                                                            HomeActivity::class.java
+                                                        )
+                                                        intent.flags =
+                                                            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                                                        startActivity(intent)
+
+                                                        // Close the current activity
+                                                        finish()
+                                                    }
+                                                } else {
+                                                    val errorBody = response.body?.string()
+                                                        ?: "" // Read the error body on a background thread
+                                                    Log.e(
+                                                        "AddPropertyActivity",
+                                                        "Error response: ${response.code} - $errorBody"
+                                                    )
+                                                    runOnUiThread {
+                                                        Toast.makeText(
+                                                            this@AddPropertyFormActivity,
+                                                            "Error: ${response.message}",
+                                                            Toast.LENGTH_LONG
+                                                        ).show()
+                                                    }
+                                                }
+                                                runOnUiThread {
+                                                    hideLoadingDialog()
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                )
                                 hideLoadingDialog()
+                            } catch (e: Exception) {
+                                runOnUiThread {
+                                    Log.e("AddPropertyActivity", "Error: ${e.message}")
+                                    Toast.makeText(
+                                        this@AddPropertyFormActivity,
+                                        "An error occurred: ${e.message}",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    hideLoadingDialog()
+                                }
                             }
                         }
                     }
-                }
             }
         }
     }
