@@ -9,7 +9,6 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -402,8 +401,6 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
-// Listener for addPropertyButton2
         addPropertyButton2.setOnClickListener {
             if (networkClient.getAccessToken() == null) {
                 showLoginRequiredDialog()
@@ -432,7 +429,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showLoginRequiredDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null) // Create a custom layout for the dialog
+        val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null) // Assuming you have a dialog_login_required.xml layout
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
 
@@ -456,9 +453,6 @@ class HomeActivity : AppCompatActivity() {
         cancelButton.setOnClickListener {
             dialog.dismiss()
         }
-
-        // Customize the dialog appearance (optional)
-        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background) // Set a custom background drawable
 
         dialog.show()
     }

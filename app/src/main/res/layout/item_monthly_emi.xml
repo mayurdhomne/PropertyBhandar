@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_corner_bg"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/monthTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:background="@drawable/table_border"
+        android:gravity="center"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/principalTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:background="@drawable/table_border"
+        android:gravity="center"
+        android:text="₹1000.00" />
+
+    <TextView
+        android:id="@+id/interestTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="₹50.00"
+        android:padding="5dp"
+        android:background="@drawable/table_border"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/outstandingTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="₹9000.00"
+        android:padding="5dp"
+        android:background="@drawable/table_border"
+        android:gravity="center" />
+
+</LinearLayout>

@@ -12,8 +12,11 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.ams.propertybhandar.R
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -41,6 +44,12 @@ class ContactUsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_us)
+
+        val isLoggedIn = intent.getBooleanExtra("isLoggedIn", false)
+
+        if (!isLoggedIn) {
+            showLoginRequiredDialog()
+        }
 
         // Initialize views
         editTextName = findViewById(R.id.name)
@@ -198,6 +207,40 @@ class ContactUsActivity : AppCompatActivity() {
             data = Uri.parse("mailto:$emailAddress")
         }
         startActivity(intent)
+    }
+    private fun showLoginRequiredDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null)
+        val builder = AlertDialog.Builder(this)
+        builder.setView(dialogView)
+
+        val dialog = builder.create()
+
+        // Customize the dialog UI elements
+        val titleTextView: TextView = dialogView.findViewById(R.id.dialogTitle)
+        val messageTextView: TextView = dialogView.findViewById(R.id.dialogMessage)
+        val loginButton: CardView = dialogView.findViewById(R.id.btnLoginNow)
+        val cancelButton: CardView = dialogView.findViewById(R.id.btnMaybeLater)
+
+        titleTextView.text = "Login Required"
+        messageTextView.text = "You need to be logged in to add a property."
+
+        loginButton.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Customize the dialog appearance (optional)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+        // Make the dialog non-cancelable (no cancel button or back press)
+
+        dialog.setCanceledOnTouchOutside(false)
+
+        dialog.show()
     }
 }
 

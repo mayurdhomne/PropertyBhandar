@@ -56,6 +56,10 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.picasso)
     implementation(libs.picasso.v28)
+    implementation(libs.mpandroidchart)
+    implementation(libs.androidx.multidex)
+
+
 
 
 }
