@@ -59,7 +59,7 @@
         <item name="tabRippleColor">@android:color/transparent</item>
 
         <!-- Set the dot indicator color selector -->
-        <item name="tabIndicator">@drawable/custom_tab_indicator</item>
+        <item name="tabIndicator">@color/backgroundColor</item>
         <!-- Optional: Adjust tab gravity and mode -->
         <item name="tabGravity">center</item>
         <item name="tabMode">fixed</item>

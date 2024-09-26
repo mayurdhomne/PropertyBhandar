@@ -2,9 +2,11 @@ package com.ams.propertybhandar.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -15,6 +17,7 @@ import okhttp3.Callback
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class PasswordRestOtpActivity : AppCompatActivity() {
 
@@ -22,6 +25,9 @@ class PasswordRestOtpActivity : AppCompatActivity() {
     private lateinit var verifyButton: AppCompatButton
     private lateinit var networkClient: NetworkClient
     private lateinit var email: String
+    private lateinit var resendOtpButton: TextView // Add resend OTP button
+    private lateinit var timerTextView: TextView // Add the timer TextView
+    private var countDownTimer: CountDownTimer? = null // Timer variable
     private var customLoadingDialog: CustomLoadingDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +44,14 @@ class PasswordRestOtpActivity : AppCompatActivity() {
         )
         verifyButton = findViewById(R.id.signInButton)
         networkClient = NetworkClient(this)
+
+        resendOtpButton = findViewById(R.id.resendOtppassTextView) // Get the resend button
+        resendOtpButton.setOnClickListener {
+            resendOtp() // Call the resend function
+        }
+
+        timerTextView = findViewById(R.id.timerpassTextView) // Get the timer TextView
+        timerTextView.text = "00:45" // Initial timer value
 
         email = intent.getStringExtra("email") ?: ""
 
@@ -114,6 +128,51 @@ class PasswordRestOtpActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this@PasswordRestOtpActivity, "Please enter a valid 6-digit OTP", Toast.LENGTH_SHORT).show()
         }
+    }
+    private fun resendOtp() {
+        val email = getSharedPreferences("UserPrefs", MODE_PRIVATE).getString("email", "")
+
+        email?.let {
+            showLoadingDialog()
+            networkClient.resendpassOtp(it, object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    runOnUiThread {
+                        hideLoadingDialog()
+                        Toast.makeText(this@PasswordRestOtpActivity, "Resend OTP failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    runOnUiThread {
+                        hideLoadingDialog()
+                        if (response.isSuccessful) {
+                            Toast.makeText(this@PasswordRestOtpActivity, "OTP resent successfully", Toast.LENGTH_SHORT).show()
+                            startTimer()
+                        } else {
+                            Toast.makeText(this@PasswordRestOtpActivity, "Resend OTP failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            })
+        } ?: run {
+            Toast.makeText(this, "Email not found", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun startTimer() {
+        countDownTimer = object : CountDownTimer(45000, 1000) { // 45 seconds in milliseconds
+            override fun onTick(millisUntilFinished: Long) {
+                val minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+                val seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                        TimeUnit.MINUTES.toSeconds(minutes)
+                timerTextView.text = String.format("%02d:%02d", minutes, seconds)
+            }
+
+            override fun onFinish() {
+                timerTextView.text = "00:00"
+                resendOtpButton.isEnabled = true // Enable resend button after timer finishes
+            }
+        }.start()
+        resendOtpButton.isEnabled = false // Disable resend button while timer is running
     }
 
     private fun showLoadingDialog() {

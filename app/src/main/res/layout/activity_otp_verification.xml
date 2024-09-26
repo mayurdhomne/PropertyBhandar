@@ -238,6 +238,33 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="00:00"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/otpLinearLayout"
+        app:layout_constraintStart_toStartOf="@+id/otpLinearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/otpLinearLayout"
+        tools:ignore="Autofill,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/resendOtpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="Resend OTP"
+        android:textColor="@color/blue_5"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/otpLinearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/timerTextView"
+        tools:ignore="Autofill,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
 
 
     <!-- Login Button -->
@@ -245,7 +272,7 @@
         android:id="@+id/signInButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/otpLinearLayout"
+        app:layout_constraintTop_toBottomOf="@id/resendOtpTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp"

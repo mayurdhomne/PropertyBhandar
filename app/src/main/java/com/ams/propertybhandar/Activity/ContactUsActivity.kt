@@ -17,14 +17,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.ams.propertybhandar.Domin.NetworkClient
 import com.ams.propertybhandar.R
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import okio.IOException
 import org.json.JSONException
 import org.json.JSONObject
 
+@Suppress("SameParameterValue")
 class ContactUsActivity : AppCompatActivity() {
 
     companion object {
@@ -39,15 +41,20 @@ class ContactUsActivity : AppCompatActivity() {
     private lateinit var editTextMessage: EditText
     private lateinit var webView: WebView
     private var customLoadingDialog: CustomLoadingDialog? = null
+    private lateinit var networkClient: NetworkClient
+    private var propertyId: String? = null
 
     @SuppressLint("MissingInflatedId", "SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_us)
+        networkClient = NetworkClient(this)
 
-        val isLoggedIn = intent.getBooleanExtra("isLoggedIn", false)
+        // Get property ID from the intent
+        propertyId = intent.getStringExtra("property_id")
 
-        if (!isLoggedIn) {
+        // Check if user is logged in
+        if (networkClient.getAccessToken() == null) {
             showLoginRequiredDialog()
         }
 
@@ -62,6 +69,7 @@ class ContactUsActivity : AppCompatActivity() {
         // Setup WebView
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = object : WebViewClient() {
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 if (url != null && url.startsWith("intent://")) {
                     try {
@@ -116,47 +124,76 @@ class ContactUsActivity : AppCompatActivity() {
         // Show loading dialog before sending the message
         showLoadingDialog()
 
-        val jsonBody = JSONObject().apply {
+        // Use the `propertyId` if available to make the subject more specific
+        val finalSubject = if (propertyId != null) {
+            "/nUser inquiry for property ID: $propertyId - $subject"
+        } else {
+            subject
+        }
+
+        JSONObject().apply {
             put("name", name)
             put("email", email)
             put("contact_number", phone)
-            put("subject", subject)
+            put("subject", finalSubject)
             put("message", message)
         }
 
-        val queue: RequestQueue = Volley.newRequestQueue(this)
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.POST, URL, jsonBody,
-            { response ->
-                try {
-                    val responseMessage = response.getString("message")
-                    Toast.makeText(this, responseMessage, Toast.LENGTH_SHORT).show()
-                    clearFields()
-                } catch (e: JSONException) {
-                    Log.e(TAG, "JSON Parsing error: ${e.message}")
-                    Toast.makeText(this, "Parsing error", Toast.LENGTH_SHORT).show()
-                } finally {
-                    // Hide loading dialog after response is handled
+        networkClient.submitContactForm(name, email, message, finalSubject, phone, object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                // Switch to main thread to show the error Toast
+                runOnUiThread {
+                    Toast.makeText(this@ContactUsActivity, "Network Error: ${e.message}", Toast.LENGTH_SHORT).show()
                     hideLoadingDialog()
                 }
-            },
-            { error ->
-                Log.e(TAG, "Error submitting form: ${error.message}")
-                error.networkResponse?.let {
-                    Log.e(TAG, "Status code: ${it.statusCode}")
-                    Log.e(TAG, "Response data: ${String(it.data)}")
-                    Toast.makeText(this, "Server Error: ${it.statusCode}", Toast.LENGTH_SHORT).show()
-                } ?: run {
-                    Toast.makeText(this, "Network error occurred", Toast.LENGTH_SHORT).show()
-                }
-                // Hide loading dialog in case of error
-                hideLoadingDialog()
             }
-        )
 
-        queue.add(jsonObjectRequest)
+            override fun onResponse(call: Call, response: Response) {
+                // Ensure response is successful before attempting to parse
+                if (!response.isSuccessful) {
+                    runOnUiThread {
+                        val errorMessage = "Error: ${response.code} - ${response.message}"
+                        Toast.makeText(this@ContactUsActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                        hideLoadingDialog()
+                    }
+                    return
+                }
+
+                // Try to parse the response as JSON
+                try {
+                    val jsonResponse = response.body?.string() ?: throw JSONException("Empty Response")
+
+                    // Check if the response contains valid JSON data
+                    if (jsonResponse.startsWith("{")) {
+                        val jsonObject = JSONObject(jsonResponse)
+                        val responseMessage = jsonObject.getString("message")
+
+                        // Update UI on the main thread
+                        runOnUiThread {
+                            Toast.makeText(this@ContactUsActivity, responseMessage, Toast.LENGTH_SHORT).show()
+                            clearFields() // Clear input fields after submission
+                            hideLoadingDialog()
+                        }
+                    } else {
+                        // Handle cases where the response is not JSON
+                        runOnUiThread {
+                            Log.e(TAG, "Unexpected response format: $jsonResponse")
+                            Toast.makeText(this@ContactUsActivity, "Unexpected server response", Toast.LENGTH_SHORT).show()
+                            hideLoadingDialog()
+                        }
+                    }
+                } catch (e: JSONException) {
+                    // Handle JSON parsing errors
+                    runOnUiThread {
+                        Log.e(TAG, "JSON Parsing error: ${e.message}")
+                        Toast.makeText(this@ContactUsActivity, "Parsing error", Toast.LENGTH_SHORT).show()
+                        hideLoadingDialog()
+                    }
+                }
+            }
+
+        })
     }
-
 
     @SuppressLint("SetTextI18n")
     private fun clearFields() {
@@ -208,6 +245,8 @@ class ContactUsActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
+
+    @SuppressLint("SetTextI18n")
     private fun showLoginRequiredDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null)
         val builder = AlertDialog.Builder(this)
@@ -242,8 +281,4 @@ class ContactUsActivity : AppCompatActivity() {
 
         dialog.show()
     }
-}
-
-private infix fun Unit.finally(function: () -> Unit) {
-    TODO("Not yet implemented")
 }

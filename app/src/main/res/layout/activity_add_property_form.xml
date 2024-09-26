@@ -19,6 +19,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:background="@color/white">
 
 
@@ -52,21 +54,38 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/propertyTypeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Select Property Type "
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/top_bar"
+                app:layout_constraintStart_toStartOf="parent"
+            />
+
+
             <!-- Property Type Dropdown -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/propertyTypeLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="Property Type"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/top_bar">
+                app:layout_constraintTop_toBottomOf="@+id/propertyTypeTitle">
 
                 <!-- FrameLayout to hold Spinner and dropdown arrow -->
                 <FrameLayout
                     android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_height="wrap_content">
 
                     <!-- Spinner for Property Type -->
@@ -76,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:entries="@array/property_types"
                         android:textSize="18sp"
-                        android:padding="16dp"
+                        android:padding="14dp"
                         android:importantForAccessibility="yes"
                         android:background="@drawable/text_input_border"
                         android:contentDescription="Select Property Type"
@@ -94,6 +113,21 @@
                 </FrameLayout>
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <TextView
+                android:id="@+id/propertyFacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Select Property Facing "
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/propertyTypeLayout"
+                app:layout_constraintStart_toStartOf="parent"
+            />
+
             <!-- Property Facing Dropdown -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/propertyFacingLayout"
@@ -101,10 +135,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:hint="Property Facing"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/propertyTypeLayout">
+                app:layout_constraintTop_toBottomOf="@id/propertyFacing">
 
                 <!-- FrameLayout to hold Spinner and dropdown arrow -->
                 <FrameLayout
@@ -118,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:entries="@array/property_facing_options"
                         android:textSize="18sp"
-                        android:padding="16dp"
+                        android:padding="14dp"
                         android:importantForAccessibility="yes"
                         android:background="@drawable/text_input_border"
                         android:contentDescription="Select Property Facing"
@@ -136,6 +172,21 @@
                 </FrameLayout>
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <TextView
+                android:id="@+id/titleview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Property Title"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/propertyFacingLayout"
+                app:layout_constraintStart_toStartOf="parent"
+            />
+
             <!-- Title Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/titleLayout"
@@ -143,17 +194,35 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Title*"
+                android:layout_marginStart="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
+                android:layout_marginEnd="5dp"
+                android:hint="Title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/propertyFacingLayout">
+                app:layout_constraintTop_toBottomOf="@id/titleview">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/addressviewtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Property Address"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/titleLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <!-- Address Input -->
             <com.google.android.material.textfield.TextInputLayout
@@ -162,10 +231,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Address*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleLayout">
+                app:layout_constraintTop_toBottomOf="@id/addressviewtext">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/address"
@@ -174,6 +246,19 @@
                     android:inputType="textPostalAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <TextView
+                android:id="@+id/cityviewtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="City"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/addressLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
             <!-- City and State -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/cityLayout"
@@ -181,11 +266,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="City*"
                 app:layout_constraintEnd_toStartOf="@id/stateLayout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addressLayout">
+                app:layout_constraintTop_toBottomOf="@id/cityviewtext">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/city"
@@ -194,17 +281,33 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/stateviewtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressLayout" />
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/stateLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="8dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="State*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cityLayout"
-                app:layout_constraintTop_toBottomOf="@id/addressLayout">
+                app:layout_constraintTop_toBottomOf="@id/stateviewtext">
 
                 <!-- FrameLayout to stack Spinner and dropdown arrow together -->
                 <FrameLayout
@@ -221,7 +324,7 @@
                         android:contentDescription="Select State type"
                         android:entries="@array/indian_states"
                         android:importantForAccessibility="yes"
-                        android:padding="16dp"
+                        android:padding="14dp"
                         android:popupTheme="@style/Widget.AppCompat.Spinner.Underlined"/>
 
                     <!-- ImageView for dropdown arrow -->
@@ -237,6 +340,18 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/zipcodeviewtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Postal Code (Zipcode)"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/stateLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <!-- Zipcode Input -->
             <com.google.android.material.textfield.TextInputLayout
@@ -245,10 +360,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Zipcode*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cityLayout">
+                app:layout_constraintTop_toBottomOf="@id/zipcodeviewtext">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/zipcode"
@@ -257,6 +375,19 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/priceviewtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Property Price and Property Area (sq ft)"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/zipcodeLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <!-- Price and Area -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/priceLayout"
@@ -264,18 +395,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:layout_marginEnd="8dp"
                 android:hint="Price*"
                 app:layout_constraintEnd_toStartOf="@id/areaLayout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/zipcodeLayout">
+                app:layout_constraintTop_toBottomOf="@id/priceviewtext">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/areaLayout"
@@ -283,18 +418,34 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="8dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Area(Per Sq.Ft.)*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/priceLayout"
-                app:layout_constraintTop_toBottomOf="@id/zipcodeLayout">
+                app:layout_constraintTop_toBottomOf="@id/priceviewtext">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/bedsviewtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Number of Bedrooms &amp; Bathrooms;"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/areaLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <!-- Beds and Baths -->
             <com.google.android.material.textfield.TextInputLayout
@@ -303,11 +454,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:layout_marginEnd="8dp"
                 android:hint="Beds"
                 app:layout_constraintEnd_toStartOf="@id/bathsLayout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/priceLayout">
+                app:layout_constraintTop_toBottomOf="@id/bedsviewtext">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/beds"
@@ -323,10 +476,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Baths"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/bedsLayout"
-                app:layout_constraintTop_toBottomOf="@id/areaLayout">
+                app:layout_constraintTop_toBottomOf="@id/bedsviewtext">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/baths"
@@ -335,6 +490,19 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/descriptionviewtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Property Description"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/bathsLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <!-- Description Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/descriptionLayout"
@@ -342,10 +510,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Description*"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
+                android:hint="Enter a brief description of the property*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bedsLayout">
+                app:layout_constraintTop_toBottomOf="@id/descriptionviewtext">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/description"
@@ -355,18 +526,33 @@
                     android:minLines="3" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/photosviewtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Upload Property Photos"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <!-- Photo Upload Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/uploadPhotoButton"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:backgroundTint="@color/backgroundColor"
                 android:text="Upload Photos*"
                 android:textColor="@android:color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/descriptionLayout" />
+                app:layout_constraintTop_toBottomOf="@id/photosviewtext" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/uploadPhotoButton2"
@@ -374,6 +560,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:backgroundTint="@color/backgroundColor"
                 android:text="Upload Photos"
                 android:textColor="@android:color/white"
@@ -386,6 +574,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:backgroundTint="@color/backgroundColor"
                 android:text="Upload Photos"
                 android:textColor="@android:color/white"
@@ -398,6 +588,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:backgroundTint="@color/backgroundColor"
                 android:text="Upload Photos"
                 android:textColor="@android:color/white"
@@ -410,6 +602,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:backgroundTint="@color/backgroundColor"
                 android:text="Upload Photos"
                 android:textColor="@android:color/white"
@@ -423,12 +617,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="Select Amenities"
+                android:textSize="16sp"
+                android:text="Amenities Offered"
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/uploadPhotoButton5" />
 
+            <TextView
+                android:id="@+id/amenitiesDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="5dp"
+                android:text="Please enter any three different amenities offered by the property."
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/amenitiesTitle" />
+
+            <TextView
+                android:id="@+id/amenityTitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Amenities 1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/amenitiesDescription" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvamenity1"
@@ -436,16 +654,32 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Amenity 1*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/amenitiesTitle">
+                app:layout_constraintTop_toBottomOf="@id/amenityTitle1">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amenity1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/amenityTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Amenities 2"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvamenity1" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvamenity2"
@@ -453,16 +687,32 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Amenity 2*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvamenity1">
+                app:layout_constraintTop_toBottomOf="@id/amenityTitle2">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amenity2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/amenityTitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Amenities 3"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvamenity2" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvamenity3"
@@ -470,10 +720,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Amenity 3*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvamenity2">
+                app:layout_constraintTop_toBottomOf="@id/amenityTitle3">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amenity3"
@@ -481,16 +734,32 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/amenityTitle4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Amenities 4"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvamenity3" />
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvamenity4"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Amenity 4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvamenity3">
+                app:layout_constraintTop_toBottomOf="@id/amenityTitle4">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amenity4"
@@ -498,16 +767,31 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/amenityTitle5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Amenities 5"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvamenity4" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvamenity5"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Amenity 5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvamenity4">
+                app:layout_constraintTop_toBottomOf="@id/amenityTitle5">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amenity5"
@@ -515,16 +799,31 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/amenityTitle6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Amenities 6"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvamenity5" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvamenity6"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:boxStrokeColor="@color/backgroundColor"
                 android:hint="Amenity 6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvamenity5">
+                app:layout_constraintTop_toBottomOf="@id/amenityTitle6">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amenity6"
@@ -537,22 +836,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="For Sale"
-                app:thumbTint="@color/backgroundColor"
-                app:layout_constraintEnd_toEndOf="@+id/textView14"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView14" />
+                app:layout_constraintTop_toBottomOf="@id/textView14"
+                app:thumbTint="@color/backgroundColor" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/rentSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="For Rent"
-                app:thumbTint="@color/backgroundColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@id/textView14" />
+                app:layout_constraintStart_toEndOf="@+id/saleSwitch"
+                app:layout_constraintTop_toBottomOf="@id/textView14"
+                app:thumbTint="@color/backgroundColor" />
 
             <!-- Submit Button -->
             <com.google.android.material.button.MaterialButton
@@ -560,6 +863,8 @@
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/backgroundColor"
                 android:text="Add Property"
@@ -634,9 +939,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textSize="15sp"
                 android:text="You're Looking For?* "
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@+id/tvamenity6"
                 app:layout_constraintTop_toBottomOf="@+id/tvamenity6" />
         </androidx.constraintlayout.widget.ConstraintLayout>

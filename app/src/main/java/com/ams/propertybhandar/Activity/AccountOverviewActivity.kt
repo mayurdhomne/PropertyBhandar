@@ -189,8 +189,12 @@ class AccountOverviewActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {
                     if (response.isSuccessful) {
-                        // Account successfully deleted, handle UI updates here
-                        showSuccessDialog("Your account has been successfully deleted.")
+                        // Account successfully deleted, navigate to LoginActivity
+                        showSuccessDialog("Your account has been successfully deleted.") {
+                            // Navigate to LoginActivity after the success dialog is dismissed
+                            startActivity(Intent(this@AccountOverviewActivity, LoginActivity::class.java))
+                            finish() // Finish the current activity
+                        }
                     } else {
                         // Handle the failure case
                         showErrorDialog("Failed to delete the account. Please try again later.")
@@ -209,17 +213,19 @@ class AccountOverviewActivity : AppCompatActivity() {
         }
         val errorDialog = errorDialogBuilder.create()
         errorDialog.show()
+        errorDialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
     }
 
-    private fun showSuccessDialog(message: String) {
-        val successDialogBuilder = AlertDialog.Builder(this)
-        successDialogBuilder.setTitle("Success")
-        successDialogBuilder.setMessage(message)
-        successDialogBuilder.setPositiveButton("OK") { dialog, which ->
-            dialog.dismiss()
-            finish() // Close the activity after account deletion
-        }
-        val successDialog = successDialogBuilder.create()
-        successDialog.show()
+    private fun showSuccessDialog(message: String, onDismiss: () -> Unit) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Success")
+        builder.setMessage(message)
+        builder.setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                onDismiss() // Execute the lambda when the dialog is dismissed
+            }
+        val dialog = builder.create()
+        builder.create().show()
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
     }
 }

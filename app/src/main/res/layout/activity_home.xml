@@ -951,7 +951,7 @@
                     <!-- Highlighted Text -->
                     <TextView
                         android:id="@+id/highlightedTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="loan application for FREE"
@@ -1063,7 +1063,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="16dp"
                                     android:layout_weight="1"
-                                    android:text="Best-in-class products and services"
+                                    android:text="Best-in-class Products and Services"
                                     android:textColor="#000000"
                                     android:textSize="16sp" />
                             </LinearLayout>
@@ -1107,7 +1107,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="16dp"
                                     android:layout_weight="1"
-                                    android:text="Hassle free experience and great customer support"
+                                    android:text="Hassle free Experience and great Customer Support"
                                     android:textColor="#000000"
                                     android:textSize="16sp" />
                             </LinearLayout>

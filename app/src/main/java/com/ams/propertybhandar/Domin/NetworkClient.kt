@@ -105,6 +105,20 @@ class NetworkClient(private val context: Context) {
 
         client.newCall(request).enqueue(callback)
     }
+
+    fun resendOtp(email: String, callback: Callback) {
+        val request = Request.Builder()
+            .url("https://www.propertybhandar.com/api/users/resend_signup_otp/")
+            .post(
+                FormBody.Builder()
+                    .add("email", email)
+                    .build()
+            )
+            .build()
+
+        client.newCall(request).enqueue(callback)
+    }
+
     // Forgot Password
     fun forgotPassword(email: String, callback: Callback) {
         val url = "$BASE_URL/api/users/password_reset_request/"
@@ -123,6 +137,24 @@ class NetworkClient(private val context: Context) {
     fun fetchProperties(callback: Callback) {
         val url = "$BASE_URL/api/listings/"
         makeRequestWithoutToken(url, callback)
+    }
+
+    fun submitContactForm(name: String, email: String, subject: String, message: String, phone: String, callback: Callback) {
+        val url = "https://www.propertybhandar.com/api/contact/"
+        val json = JsonObject().apply {
+            addProperty("name", name)
+            addProperty("email", email)
+            addProperty("contact_number", phone)
+            addProperty("subject", subject)
+            addProperty("message", message)
+        }.toString()
+        val body = json.toRequestBody(JSON)
+        val request = Request.Builder()
+            .url(url)
+            .post(body)
+            .build()
+        client.newCall(request).enqueue(callback)
+
     }
 
     fun makeRequestWithoutToken(url: String, callback: Callback) {
@@ -148,6 +180,19 @@ class NetworkClient(private val context: Context) {
         val request = Request.Builder()
             .url(url)
             .post(body)
+            .build()
+
+        client.newCall(request).enqueue(callback)
+    }
+
+    fun resendpassOtp(email: String, callback: Callback) {
+        val request = Request.Builder()
+            .url("https://www.propertybhandar.com/api/users/resend_password_reset_otp/")
+            .post(
+                FormBody.Builder()
+                    .add("email", email)
+                    .build()
+            )
             .build()
 
         client.newCall(request).enqueue(callback)
@@ -302,6 +347,7 @@ class NetworkClient(private val context: Context) {
             Log.e("PropertySearch", "Failed to build URL")
         }
     }
+
     fun logout(context: Context) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().apply {

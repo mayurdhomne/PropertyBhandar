@@ -38,6 +38,7 @@ import okhttp3.Response
 import org.json.JSONArray
 import java.io.IOException
 
+@Suppress("ControlFlowWithEmptyBody", "DEPRECATION")
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var editProfileLauncher: ActivityResultLauncher<Intent>
@@ -147,7 +148,7 @@ class HomeActivity : AppCompatActivity() {
         val headerView = navigationView.getHeaderView(0)
         nameTextView = headerView.findViewById(R.id.nameTextView)
         emailTextView = headerView.findViewById(R.id.emailTextView)
-        // Initalize "View All" TextViews
+        // Initialize "View All" TextViews
         viewAllTextView1 = findViewById(R.id.viewAllTextView1)
         viewAllTextView2 = findViewById(R.id.viewAllTextView2)
         // Initialize the AddPropertyButton
@@ -428,6 +429,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showLoginRequiredDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null) // Assuming you have a dialog_login_required.xml layout
         val builder = AlertDialog.Builder(this)
@@ -465,7 +467,7 @@ class HomeActivity : AppCompatActivity() {
         showExitConfirmationDialog()
     }
     private fun showExitConfirmationDialog() {
-        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this)
         // Inflate the custom dialog layout
         val inflater = layoutInflater
         val dialogLayout = inflater.inflate(R.layout.dialog_exit_confirmation, null)
@@ -504,7 +506,7 @@ class HomeActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                      hideLoadingDialog()
-                    response.body?.let { responseBody ->
+                    response.body?.let {
                         try {
                             val jsonArray = JSONArray(response.body?.string())
                             val limit = 6
@@ -513,13 +515,12 @@ class HomeActivity : AppCompatActivity() {
                             val recommendedJsonArray = JSONArray()
                             val latestJsonArray = JSONArray()
 
-                            for (i in 0 until jsonArray?.length()?.let { minOf(it, limit) }!!
-                            ) {
-                                recommendedJsonArray.put(jsonArray?.getJSONObject(i))
+                            for (i in 0 until minOf(jsonArray.length(), limit)) {
+                                latestJsonArray.put(jsonArray.getJSONObject(i))
                             }
 
-                            for (i in jsonArray?.length()!! - 1 downTo maxOf(jsonArray?.length()!! - limit, 0)) {
-                                latestJsonArray.put(jsonArray?.getJSONObject(i))
+                            for (i in jsonArray.length() - 1 downTo maxOf(jsonArray.length() - limit, 0)) {
+                                recommendedJsonArray.put(jsonArray.getJSONObject(i))
                             }
 
                             runOnUiThread {

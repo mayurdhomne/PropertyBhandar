@@ -1,7 +1,6 @@
 package com.ams.propertybhandar.Activity
 
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +10,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import org.json.JSONObject
 
@@ -21,7 +21,7 @@ class CoustomerServiceActivity : AppCompatActivity() {
     private lateinit var emailInputLayout: TextInputLayout
     private lateinit var subjectInputLayout: TextInputLayout
     private lateinit var descriptionInputLayout: TextInputLayout
-    private lateinit var submitButton: Button
+    private lateinit var submitButton: MaterialButton
     private lateinit var backButton: ImageView
 
     private val apiUrl = "https://www.propertybhandar.com/api/contact/"

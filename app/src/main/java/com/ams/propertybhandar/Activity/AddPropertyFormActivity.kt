@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ams.propertybhandar.Activity
 
 import android.annotation.SuppressLint
@@ -30,9 +32,9 @@ import okhttp3.Response
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
 import java.util.regex.Pattern
 
+@Suppress("DEPRECATION")
 class AddPropertyFormActivity : AppCompatActivity() {
 
     private lateinit var networkClient: NetworkClient
@@ -70,7 +72,11 @@ class AddPropertyFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_property_form)
+        networkClient = NetworkClient(this)
 
+        if (networkClient.getAccessToken() == null) {
+            showLoginRequiredDialog()
+        }
 
             // Profile is fetched, proceed with normal activity setup
             // ... your code for logged-in users with profile fetched (initialize views, set listeners, etc.)
@@ -247,7 +253,7 @@ class AddPropertyFormActivity : AppCompatActivity() {
                                         override fun onResponse(call: Call, response: Response) {
                                             lifecycleScope.launch(Dispatchers.IO) { // Use Dispatchers.IO for network operations
                                                 if (response.isSuccessful) {
-                                                    val responseBody = response.body?.string()
+                                                    response.body?.string()
                                                         ?: "" // Read the response body on a background thread
                                                     // ... process the responseBody ...
                                                     runOnUiThread {
@@ -290,7 +296,6 @@ class AddPropertyFormActivity : AppCompatActivity() {
                                                 }
                                             }
                                         }
-
                                     }
                                 )
                                 hideLoadingDialog()
@@ -343,9 +348,9 @@ class AddPropertyFormActivity : AppCompatActivity() {
         if (description.isEmpty()) isValid.append("Description is required.\n")
         if (price.isEmpty() || !Pattern.matches("\\d+", price)) isValid.append("Valid Price is required.\n")
         if (area.isEmpty() || !Pattern.matches("\\d+", area)) isValid.append("Valid Area is required.\n")
-        if (amenities1.isEmpty()) isValid.append("At least one amenity is required.\n")
-        if (amenities2.isEmpty()) isValid.append("At least one amenity is required.\n")
-        if (amenities3.isEmpty()) isValid.append("At least one amenity is required.\n")
+        if (amenities1.isEmpty()) isValid.append("At least Three amenity is required.\n")
+        if (amenities2.isEmpty()) isValid.append("At least Three amenity is required.\n")
+        if (amenities3.isEmpty()) isValid.append("At least Three amenity is required.\n")
 
 
         if (isValid.isNotEmpty()) {
@@ -360,6 +365,7 @@ class AddPropertyFormActivity : AppCompatActivity() {
         startActivityForResult(intent, requestCode)
     }
 
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && data != null) {
@@ -404,18 +410,6 @@ class AddPropertyFormActivity : AppCompatActivity() {
         return fileName ?: "Unknown file"
     }
 
-    private fun uriToFile(uri: Uri): File {
-        val inputStream: InputStream? = contentResolver.openInputStream(uri)
-        val file = File(cacheDir, getFileName(uri))
-        val outputStream = FileOutputStream(file)
-        inputStream?.copyTo(outputStream)
-        inputStream?.close()
-        outputStream.close()
-        return file
-    }
-
-
-
     private fun showLoadingDialog() {
         if (progressDialog == null) {
             progressDialog = ProgressDialog(this).apply {
@@ -442,6 +436,7 @@ class AddPropertyFormActivity : AppCompatActivity() {
         return file
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showLoginRequiredDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null)
         val builder = AlertDialog.Builder(this)

@@ -72,9 +72,7 @@ class LoanApplicationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_loan_application)
 
         networkClient = NetworkClient(this)
-        val isLoggedIn = intent.getBooleanExtra("isLoggedIn", false)
-
-        if (!isLoggedIn) {
+        if (networkClient.getAccessToken() == null) {
             showLoginRequiredDialog()
         }
 
@@ -397,7 +395,7 @@ class LoanApplicationActivity : AppCompatActivity() {
         val cancelButton: CardView = dialogView.findViewById(R.id.btnMaybeLater)
 
         titleTextView.text = "Login Required"
-        messageTextView.text = "You need to be logged in to add a property."
+        messageTextView.text = "You need to be logged in to access this feature."
 
         loginButton.setOnClickListener {
             dialog.dismiss()
@@ -412,7 +410,7 @@ class LoanApplicationActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
 
         // Make the dialog non-cancelable (no cancel button or back press)
-
+        dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
 
         dialog.show()
