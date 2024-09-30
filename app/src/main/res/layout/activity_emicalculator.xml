@@ -309,7 +309,6 @@
                 android:background="@drawable/table_border"
                 android:gravity="center" />
 
-
             <TextView
                 android:id="@+id/principalTextView"
                 android:layout_width="0dp"
@@ -333,6 +332,8 @@
                 android:textColor="@color/white"
                 android:background="@drawable/table_border"
                 android:gravity="center" />
+
+
 
             <TextView
                 android:id="@+id/outstandingTextView"
