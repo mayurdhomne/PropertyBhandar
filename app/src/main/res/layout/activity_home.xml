@@ -681,28 +681,30 @@
                     <!-- Subtext -->
                     <TextView
                         android:id="@+id/subtextTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Option to get assistance &amp; \nfree verification"
+                        android:text="You have the option to get assistance and free verification services."
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/postPropertyTextView"
                         tools:ignore="HardcodedText" />
 
+                    <!-- Add Property Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/AddPropertyButton"
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/backgroundColor"
                         android:text="Add Property"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/propertyImageView"
+                        app:layout_constraintTop_toBottomOf="@id/subtextTextView"
                         tools:ignore="HardcodedText" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

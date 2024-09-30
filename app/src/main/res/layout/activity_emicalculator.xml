@@ -135,35 +135,7 @@
                 android:textColor="@android:color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/processingFeeLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Processing Fee (%)"
-            android:textSize="16sp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="20dp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/processingFeeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            app:boxStrokeColor="@color/backgroundColor">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/processingFeeEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:hint="Enter processing fee (%)"
-                android:maxLength="5"
-                android:textColor="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Buttons (add these below processingFeeLayout) -->
         <LinearLayout
@@ -203,18 +175,6 @@
                 android:elevation="4dp"
                 android:layout_marginEnd="8dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/detailsButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Detail"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:backgroundTint="@color/backgroundColor"
-                app:cornerRadius="8dp"
-                app:iconGravity="textStart"
-                android:elevation="4dp" />
         </LinearLayout>
 
         <TextView
@@ -245,6 +205,7 @@
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:background="@android:color/white"
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"/>
@@ -308,24 +269,6 @@
                     android:background="@drawable/table_border"/>
             </TableRow>
 
-            <TableRow>
-                <TextView
-                    android:text="Processing Fees"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:background="@drawable/table_border"/>
-                <TextView
-                    android:id="@+id/processingFees"
-                    android:text="₹0.00"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:gravity="center"
-                    android:background="@drawable/table_border" />
-            </TableRow>
 
             <TableRow>
                 <TextView
@@ -365,6 +308,7 @@
                 android:textStyle="bold"
                 android:background="@drawable/table_border"
                 android:gravity="center" />
+
 
             <TextView
                 android:id="@+id/principalTextView"

@@ -421,7 +421,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginTop="8dp"
                 app:boxStrokeColor="@color/backgroundColor"
-                android:hint="Area(Per Sq.Ft.)*"
+                android:hint="Area(In Sq.Ft.)*"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/priceLayout"
                 app:layout_constraintTop_toBottomOf="@id/priceviewtext">
@@ -828,7 +828,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amenity6"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.switchmaterial.SwitchMaterial

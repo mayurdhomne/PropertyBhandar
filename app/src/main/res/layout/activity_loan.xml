@@ -88,40 +88,43 @@
 
                     <!-- Land/Plot Loan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
-                        android:orientation="vertical"
+                        android:id="@+id/LandPlotLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
-                        android:padding="8dp">
+                        android:background="@drawable/loandailoge"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        tools:ignore="InvalidId">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/landplot"
-                            android:contentDescription="Land/Plot Loan Image"/>
+                            android:contentDescription="Land/Plot Loan Image"
+                            android:src="@drawable/landplot" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="8dp"
-                            android:text="Land/Plot Loan"
+                            android:contentDescription="Land/Plot Loan Card"
                             android:gravity="center"
-                            android:textStyle="bold"
+                            android:text="Land/Plot Loan"
                             android:textColor="@color/black"
                             android:textSize="12sp"
-                            android:contentDescription="Land/Plot Loan Card"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <!-- Home Loan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
+                        android:id="@+id/HomeLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
+                        android:background="@drawable/loandailoge"
                         android:padding="8dp">
 
                         <ImageView
@@ -146,11 +149,12 @@
 
                     <!-- Construction Loan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
+                        android:id="@+id/ConstructionLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
+                        android:background="@drawable/loandailoge"
                         android:padding="8dp">
 
                         <ImageView
@@ -175,11 +179,12 @@
 
                     <!-- Improvement Loan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
+                        android:id="@+id/ImprovementLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
+                        android:background="@drawable/loandailoge"
                         android:padding="8dp">
 
                         <ImageView
@@ -202,42 +207,14 @@
                             android:contentDescription="Improvement Loan Card"/>
                     </LinearLayout>
 
-                    <!-- Extension Loan Card -->
-                    <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
-                        android:orientation="vertical"
-                        android:layout_margin="8dp"
-                        android:background="@color/white"
-                        android:padding="8dp">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/extension"
-                            android:contentDescription="Extension Loan Image"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="8dp"
-                            android:text="Extension Loan"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"
-                            android:textSize="11.6sp"
-                            android:contentDescription="Extension Loan Card"/>
-                    </LinearLayout>
-
                     <!-- Top-upLoan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
+                        android:id="@+id/TopUpLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
+                        android:background="@drawable/loandailoge"
                         android:padding="8dp">
 
                         <ImageView
@@ -262,11 +239,12 @@
 
                     <!-- Pre-approved Loan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
+                        android:id="@+id/PreApprovedLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
+                        android:background="@drawable/loandailoge"
                         android:padding="8dp">
 
                         <ImageView
@@ -291,11 +269,12 @@
 
                     <!-- PMAY Loan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
+                        android:id="@+id/PmayLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
+                        android:background="@drawable/loandailoge"
                         android:padding="8dp"
                         android:contentDescription="PMAY Loan Card">
 
@@ -321,11 +300,12 @@
 
                     <!-- Balance Transfer home Loan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
+                        android:id="@+id/BalanceTransferLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
+                        android:background="@drawable/loandailoge"
                         android:padding="8dp"
                         android:contentDescription="Balance Transfer Home Loan Card">
 
@@ -351,11 +331,12 @@
 
                     <!-- NRI home Loan Card -->
                     <LinearLayout
-                        android:layout_width="85dp"
-                        android:layout_height="110dp"
+                        android:id="@+id/NriHomeLoan"
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
                         android:orientation="vertical"
                         android:layout_margin="8dp"
-                        android:background="@color/white"
+                        android:background="@drawable/loandailoge"
                         android:padding="8dp"
                         android:contentDescription="NRI Home Loan Card">
 
@@ -381,7 +362,6 @@
 
                 </LinearLayout>
             </HorizontalScrollView>
-
 
             <!-- Nested RelativeLayout section -->
             <RelativeLayout
@@ -417,17 +397,20 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
                         <!-- EMI Calculator Card -->
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/emi_calculator_card"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
                             android:background="@color/white"
                             android:layout_gravity="center"
                             app:cardCornerRadius="16dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
                             app:cardElevation="4dp"
                             android:contentDescription="EMI Calculator Card">
 
@@ -435,13 +418,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:layout_marginLeft="20dp"
                                 android:padding="16dp"
                                 android:contentDescription="EMI Calculator Content">
 
                                 <ImageView
                                     android:layout_width="80dp"
                                     android:layout_height="80dp"
+                                    android:layout_gravity="center"
                                     android:src="@drawable/ic_emi_calculator"
                                     android:contentDescription="EMI Calculator Image"/>
 
@@ -450,6 +433,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
                                     android:text="EMI Calculator"
+                                    android:layout_gravity="center"
                                     android:textColor="#8B4513"
                                     android:textSize="16sp"
                                     android:textStyle="bold"
@@ -459,6 +443,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Calculate your EMI"
+                                    android:layout_gravity="center"
                                     android:textColor="#8B4513"
                                     android:textSize="14sp"
                                     android:layout_marginTop="4dp"
@@ -478,12 +463,15 @@
 
                         <!-- Eligibility Calculator Card -->
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/primer_calculator_card"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
                             android:background="@color/white"
                             android:layout_gravity="center"
                             app:cardCornerRadius="16dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
                             app:cardElevation="4dp"
                             android:contentDescription="Eligibility Calculator Card">
 
@@ -497,6 +485,7 @@
                                 <ImageView
                                     android:layout_width="80dp"
                                     android:layout_height="80dp"
+                                    android:layout_gravity="center"
                                     android:src="@drawable/ic_eligibility_calculator"
                                     android:contentDescription="Eligibility Calculator Image"/>
 
@@ -505,6 +494,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
                                     android:text="Eligibility Calculator"
+                                    android:layout_gravity="center"
                                     android:textColor="#8B4513"
                                     android:textSize="16sp"
                                     android:textStyle="bold"
@@ -515,6 +505,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Check your Eligibility"
                                     android:textColor="#8B4513"
+                                    android:layout_gravity="center"
                                     android:textSize="14sp"
                                     android:layout_marginTop="4dp"
                                     android:contentDescription="Eligibility Calculator Subtitle"/>
@@ -531,12 +522,15 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>                       <!-- Eligibility Calculator Card -->
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/affordability_calculator_card"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="25dp"
                             android:background="@color/white"
                             android:layout_gravity="center"
                             app:cardCornerRadius="16dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
                             app:cardElevation="4dp"
                             android:contentDescription="Affordable Calculator Card">
 
@@ -550,6 +544,7 @@
                                 <ImageView
                                     android:layout_width="80dp"
                                     android:layout_height="80dp"
+                                    android:layout_gravity="center"
                                     android:src="@drawable/ic_affordable_calculator"
                                     android:contentDescription="Affordable Calculator Image"/>
 
@@ -559,6 +554,7 @@
                                     android:layout_marginTop="8dp"
                                     android:text="Affordable Calculator"
                                     android:textColor="#8B4513"
+                                    android:layout_gravity="center"
                                     android:textSize="16sp"
                                     android:textStyle="bold"
                                     android:contentDescription="Affordable Calculator Text"/>
@@ -568,6 +564,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Check your Affordability"
                                     android:textColor="#8B4513"
+                                    android:layout_gravity="center"
                                     android:textSize="14sp"
                                     android:layout_marginTop="4dp"
                                     android:contentDescription="Affordable Calculator Subtitle"/>

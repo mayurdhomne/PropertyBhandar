@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ams.propertybhandar.R
+import java.text.NumberFormat
+import java.util.Locale
 
-class MonthlyEMIAdaper(private val monthlyEMIList: List<MonthlyEMI>) :
+class MonthlyEMIAdaper(private var monthlyEMIList: List<MonthlyEMI>) :
     RecyclerView.Adapter<MonthlyEMIAdaper.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,13 +28,22 @@ class MonthlyEMIAdaper(private val monthlyEMIList: List<MonthlyEMI>) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val monthlyEMI = monthlyEMIList[position]
+
+        // Create a NumberFormat instance for the Indian locale or default locale
+        val numberFormat = NumberFormat.getNumberInstance(Locale("en", "IN"))
+
+        // Set text for each TextView with proper formatting
         holder.monthTextView.text = "${monthlyEMI.month}"
-        holder.principalTextView.text = "₹${String.format("%.2f", monthlyEMI.principalComponent)}"
-        holder.interestTextView.text = "₹${String.format("%.2f", monthlyEMI.interestComponent)}"
-        holder.outstandingTextView.text = "₹${String.format("%.2f", monthlyEMI.outstandingBalance)}"
+        holder.principalTextView.text = "₹${numberFormat.format(monthlyEMI.principalComponent.toInt())}"
+        holder.interestTextView.text = "₹${numberFormat.format(monthlyEMI.interestComponent.toInt())}"
+        holder.outstandingTextView.text = "₹${numberFormat.format(monthlyEMI.outstandingBalance.toInt())}"
     }
 
     override fun getItemCount(): Int {
         return monthlyEMIList.size
+    }
+
+    fun updateMonthlyEMIList(newMonthlyEMIList: List<MonthlyEMI>) {
+        monthlyEMIList = newMonthlyEMIList
     }
 }

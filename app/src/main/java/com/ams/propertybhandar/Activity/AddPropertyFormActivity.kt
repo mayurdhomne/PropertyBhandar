@@ -143,6 +143,7 @@ class AddPropertyFormActivity : AppCompatActivity() {
                 if (networkClient.getAccessToken() == null) {
                     showLoginRequiredDialog()
                 } else {
+
                     // Collect input values
                     val propertyTypeSpinner: Spinner = findViewById(R.id.propertyTypeSpinner)
                     val selectedPropertyType = propertyTypeSpinner.selectedItem.toString()
@@ -264,6 +265,8 @@ class AddPropertyFormActivity : AppCompatActivity() {
                                                             Toast.LENGTH_LONG
                                                         ).show()
 
+                                                        hideLoadingDialog()
+
                                                         // Navigate to HomeActivity after successful property submission
                                                         val intent = Intent(
                                                             this@AddPropertyFormActivity,
@@ -284,21 +287,26 @@ class AddPropertyFormActivity : AppCompatActivity() {
                                                         "Error response: ${response.code} - $errorBody"
                                                     )
                                                     runOnUiThread {
-                                                        Toast.makeText(
-                                                            this@AddPropertyFormActivity,
-                                                            "Error: ${response.message}",
-                                                            Toast.LENGTH_LONG
-                                                        ).show()
+                                                        // Handle unauthorized error (401)
+                                                        if (response.code == 401) {
+                                                            showLoginRequiredDialog()
+                                                        } else {
+                                                            // Handle other errors
+                                                            Toast.makeText(
+                                                                this@AddPropertyFormActivity,
+                                                                "Error: ${response.message}",
+                                                                Toast.LENGTH_LONG
+                                                            ).show()
+                                                        }
                                                     }
-                                                }
-                                                runOnUiThread {
-                                                    hideLoadingDialog()
+                                                    runOnUiThread {
+                                                        hideLoadingDialog()
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 )
-                                hideLoadingDialog()
                             } catch (e: Exception) {
                                 runOnUiThread {
                                     Log.e("AddPropertyActivity", "Error: ${e.message}")
@@ -312,7 +320,7 @@ class AddPropertyFormActivity : AppCompatActivity() {
                             }
                         }
                     }
-            }
+                }
         }
     }
 
@@ -411,20 +419,17 @@ class AddPropertyFormActivity : AppCompatActivity() {
     }
 
     private fun showLoadingDialog() {
-        if (progressDialog == null) {
-            progressDialog = ProgressDialog(this).apply {
-                setMessage("Loading...")
-                setCancelable(false)
-            }
+        if (customLoadingDialog == null) {
+            customLoadingDialog = CustomLoadingDialog(this) // Initialize if null
         }
-        if (!isFinishing) {
-            progressDialog?.show()
-        }
+        customLoadingDialog?.show() // Show the dialog after initialization
     }
 
+
     private fun hideLoadingDialog() {
-        progressDialog?.takeIf { it.isShowing }?.dismiss()
+        customLoadingDialog?.dismiss()
     }
+
     private fun compressAndResizeImage(uri: Uri): File {
         val originalBitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
         // Resize the image if necessary (e.g., max width and height)

@@ -254,15 +254,27 @@ class PropertyDetailsActivity : AppCompatActivity() {
         val propertyId = property.optString("id")
         val link = "https://propertybhandar.com/property/$propertyId" // Deep link or website URL
 
-        val shareText = "Check out this property:\n\n" +
-                "Title: $title\n" +
-                "Address: $address\n" +
-                "Area: $area Sq.Ft\n" +
-                "Price: ₹$price\n" +
-                "Property Type: $propertyType\n" +
-                "Description: $shortDescription\n" +
-                "See more details here: $link\n"+
-                "Download the app: https://play.google.com/store/apps/details?id=com.ams.propertybhandar"
+        val shareText = """
+            🏡 Explore this stunning property on PropertyBhandar:
+        
+            🔹 *Title*: $title
+            📍 *Location*: $address
+            📏 *Area*: $area Sq.Ft
+            💰 *Price*: ₹$price
+            🏠 *Type*: $propertyType
+            
+            📝 *Description*: 
+            $shortDescription...
+        
+            For complete details and more high-quality images, visit the property listing:
+            🌐 $link
+        
+            📲 Looking for more properties? Download the PropertyBhandar app for easy access to a wide range of listings: 
+            https://play.google.com/store/apps/details?id=com.ams.propertybhandar
+            
+            Don't miss out on this opportunity! Start your journey to finding the perfect property today.
+        """.trimIndent()
+
 
         // Check if image URL is available
 

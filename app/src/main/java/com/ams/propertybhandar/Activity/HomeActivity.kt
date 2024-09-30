@@ -64,6 +64,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var viewAllTextView2: TextView
     private var customLoadingDialog: CustomLoadingDialog? = null
 
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

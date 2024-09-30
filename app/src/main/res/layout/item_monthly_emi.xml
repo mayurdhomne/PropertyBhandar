@@ -1,48 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/white_corner_bg"
-    android:orientation="horizontal">
+    android:background="@drawable/table_border">
 
+    <!-- First TextView -->
     <TextView
         android:id="@+id/monthTextView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:background="@drawable/table_border"
+        android:padding="8dp"
         android:gravity="center"
-        android:text="1" />
+        android:text="1"
+        android:textSize="14sp"
+        android:minWidth="80dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- First Vertical Border -->
+    <View
+        android:id="@+id/verticalDivider1"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/monthTextView"
+        app:layout_constraintWidth_percent="0.01" />
+
+    <!-- Second TextView -->
     <TextView
         android:id="@+id/principalTextView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:background="@drawable/table_border"
+        android:padding="8dp"
         android:gravity="center"
-        android:text="₹1000.00" />
+        android:text="₹1000.00"
+        android:textSize="14sp"
+        android:minWidth="80dp"
+        app:layout_constraintWidth_percent="0.24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/verticalDivider1" />
 
+    <!-- Second Vertical Border -->
+    <View
+        android:id="@+id/verticalDivider2"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/principalTextView"
+        app:layout_constraintWidth_percent="0.01" />
+
+    <!-- Third TextView -->
     <TextView
         android:id="@+id/interestTextView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:padding="8dp"
+        android:gravity="center"
         android:text="₹50.00"
-        android:padding="5dp"
-        android:background="@drawable/table_border"
-        android:gravity="center" />
+        android:textSize="14sp"
+        android:minWidth="80dp"
+        app:layout_constraintWidth_percent="0.24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/verticalDivider2" />
 
+    <!-- Third Vertical Border -->
+    <View
+        android:id="@+id/verticalDivider3"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/interestTextView"
+        app:layout_constraintWidth_percent="0.01" />
+
+    <!-- Fourth TextView -->
     <TextView
         android:id="@+id/outstandingTextView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:gravity="center"
+        android:minWidth="80dp"
+        android:padding="8dp"
         android:text="₹9000.00"
-        android:padding="5dp"
-        android:background="@drawable/table_border"
-        android:gravity="center" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/interestTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.24" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

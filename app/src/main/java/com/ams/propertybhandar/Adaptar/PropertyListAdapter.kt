@@ -52,8 +52,8 @@ class PropertyListAdapter(
                     .load(imageUrl)
                     .apply(
                         RequestOptions()
-                            .placeholder(R.drawable.placeholder) // Placeholder image while loading
-                            .error(R.drawable.error) // Error image if the load fails
+                            .placeholder(R.drawable.errorbg) // Placeholder image while loading
+                            .error(R.drawable.errorbg) // Error image if the load fails
                     )
                     .into(holder.propertyImageView)
             } else {
@@ -64,13 +64,13 @@ class PropertyListAdapter(
                     .load(fullImageUrl)
                     .apply(
                         RequestOptions()
-                            .placeholder(R.drawable.placeholder) // Placeholder image while loading
-                            .error(R.drawable.error) // Error image if the load fails
+                            .placeholder(R.drawable.errorbg) // Placeholder image while loading
+                            .error(R.drawable.errorbg) // Error image if the load fails
                     )
                     .into(holder.propertyImageView)
             }
         } else {
-            holder.propertyImageView.setImageResource(R.drawable.placeholder) // Use placeholder if URL is empty
+            holder.propertyImageView.setImageResource(R.drawable.errorbg) // Use placeholder if URL is empty
         }
 
         holder.addressTextView.text = property.optString("address", "N/A")

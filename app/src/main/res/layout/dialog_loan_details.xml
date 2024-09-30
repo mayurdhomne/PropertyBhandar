@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="20dp">
+
+    <!-- Loan Image -->
+    <ImageView
+        android:id="@+id/loanImageView"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/homeloan" /> <!-- Placeholder image -->
+
+    <!-- Loan Title -->
+    <TextView
+        android:id="@+id/loan_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Loan Title"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <!-- Loan Details -->
+    <TextView
+        android:id="@+id/loan_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="Loan Details" />
+</LinearLayout>

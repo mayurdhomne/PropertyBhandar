@@ -75,8 +75,8 @@ class RecommandedProppertyAdapter(
         // Load the image using Glide
         Glide.with(context)
             .load(property.optString("photo_main", ""))
-            .placeholder(R.drawable.person) // Placeholder image if the URL is empty
-            .error(R.drawable.error) // Error image if loading fails
+            .placeholder(R.drawable.errorbg) // Placeholder image if the URL is empty
+            .error(R.drawable.errorbg) // Error image if loading fails
             .into(holder.imageView)
 
         // Set click listener on the itemView

@@ -28,6 +28,8 @@ import com.google.android.material.textfield.TextInputEditText
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+import java.text.NumberFormat
+import java.util.Locale
 import kotlin.math.pow
 
 class EMICalculatorActivity : AppCompatActivity() {
@@ -35,22 +37,19 @@ class EMICalculatorActivity : AppCompatActivity() {
     private lateinit var loanAmountEditText: TextInputEditText
     private lateinit var interestRateEditText: TextInputEditText
     private lateinit var loanTenureEditText: TextInputEditText
-    private lateinit var processingFeeEditText: TextInputEditText
     private lateinit var emiAmountTextView: TextView // For Estimated EMI
     private lateinit var monthlyEMITextView: TextView // For Monthly EMI in summary
     private lateinit var totalInterestTextView: TextView
-    private lateinit var processingFeesTextView: TextView
     private lateinit var totalPaymentTextView: TextView
     private lateinit var calculateButton: MaterialButton
     private lateinit var resetButton: MaterialButton
-    private lateinit var detailsButton: MaterialButton
     private lateinit var backButton: ImageView
     private lateinit var monthlyEMIRecylerView: RecyclerView
     private lateinit var pieChart: PieChart
     private lateinit var shareDetailsButton: MaterialButton
     private lateinit var pieChartHint: TextView
-
     private lateinit var monthlyBreakdown: List<MonthlyEMI>
+    private lateinit var monthlyEMIAdaper: MonthlyEMIAdaper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,15 +58,12 @@ class EMICalculatorActivity : AppCompatActivity() {
         loanAmountEditText = findViewById(R.id.loanAmountEditText)
         interestRateEditText = findViewById(R.id.interestRateEditText)
         loanTenureEditText = findViewById(R.id.loanTenureEditText)
-        processingFeeEditText = findViewById(R.id.processingFeeEditText)
         emiAmountTextView = findViewById(R.id.emiAmount) // Estimated EMI TextView
         monthlyEMITextView = findViewById(R.id.monthlyEMI)
         totalInterestTextView = findViewById(R.id.totalInterest)
-        processingFeesTextView = findViewById(R.id.processingFees)
         totalPaymentTextView = findViewById(R.id.totalPayment)
         calculateButton = findViewById(R.id.calculateButton)
         resetButton = findViewById(R.id.resetButton)
-        detailsButton = findViewById(R.id.detailsButton)
         backButton = findViewById(R.id.backButton)
         monthlyEMIRecylerView = findViewById(R.id.monthlyEMIRecylerView)
         pieChart = findViewById(R.id.pieChart)
@@ -75,16 +71,17 @@ class EMICalculatorActivity : AppCompatActivity() {
         pieChartHint = findViewById(R.id.pieChartHint)
         monthlyBreakdown = emptyList() // Initialize as an empty list
 
+        monthlyEMIAdaper = MonthlyEMIAdaper(monthlyBreakdown) // Initialize adapter
+
+        monthlyEMIRecylerView.layoutManager = LinearLayoutManager(this)
+        monthlyEMIRecylerView.adapter = monthlyEMIAdaper
+
         calculateButton.setOnClickListener {
             calculateEMI()
         }
 
         resetButton.setOnClickListener {
             resetFields()
-        }
-
-        detailsButton.setOnClickListener {
-            showMonthlyDetails()
         }
 
         backButton.setOnClickListener {
@@ -96,17 +93,15 @@ class EMICalculatorActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("DefaultLocale", "SetTextI18n")
+    @SuppressLint("DefaultLocale", "SetTextI18n", "NotifyDataSetChanged")
     private fun calculateEMI() {
         val principal = loanAmountEditText.text.toString().toDoubleOrNull()
         val annualInterestRate = interestRateEditText.text.toString().toDoubleOrNull()
         val tenureInYears = loanTenureEditText.text.toString().toIntOrNull()
-        val processingFeePercentage = processingFeeEditText.text.toString().toDoubleOrNull()
 
-        if (principal != null && annualInterestRate != null && tenureInYears != null && processingFeePercentage != null) {
+        if (principal != null && annualInterestRate != null && tenureInYears != null) {
             val monthlyInterestRate = (annualInterestRate / 12) / 100
             val numberOfMonths = tenureInYears * 12
-            val processingFee = (principal * processingFeePercentage) / 100
 
             val emi = if (monthlyInterestRate != 0.0) {
                 (principal * monthlyInterestRate * (1 + monthlyInterestRate).pow(numberOfMonths)) /
@@ -116,17 +111,25 @@ class EMICalculatorActivity : AppCompatActivity() {
             }
 
             val totalInterest = (emi * numberOfMonths) - principal
-            val totalPayment = totalInterest + principal + processingFee
+            val totalPayment = totalInterest + principal
 
-            // Update UI elements
-            emiAmountTextView.text = String.format("₹%.2f", emi) // Estimated EMI
-            monthlyEMITextView.text = String.format("₹%.2f", emi)
-            totalInterestTextView.text = String.format("₹%.2f", totalInterest)
-            processingFeesTextView.text = String.format("₹%.2f", processingFee)
-            totalPaymentTextView.text = String.format("₹%.2f", totalPayment)
+            // Update UI elements - WITHOUT decimal points
+            val numberFormat = NumberFormat.getNumberInstance(Locale("en", "IN"))
+
+// Format and set the text with proper commas
+            emiAmountTextView.text = "₹" + numberFormat.format(emi.toInt()) // Estimated EMI
+            monthlyEMITextView.text = "₹" + numberFormat.format(emi.toInt())
+            totalInterestTextView.text = "₹" + numberFormat.format(totalInterest.toInt())
+            totalPaymentTextView.text = "₹" + numberFormat.format(totalPayment.toInt())
 
             // Generate monthly breakdown
             monthlyBreakdown = generateMonthlyBreakdown(principal, monthlyInterestRate, numberOfMonths, emi)
+
+            // Update the adapter with the new monthly breakdown
+            monthlyEMIAdaper.updateMonthlyEMIList(monthlyBreakdown)
+            monthlyEMIAdaper.notifyDataSetChanged() // Notify the adapter of data change
+            monthlyEMIRecylerView.visibility = View.VISIBLE // Show the RecyclerView
+
             setupPieChart(principal, totalInterest)
             pieChartHint.visibility = View.GONE
         } else {
@@ -157,13 +160,11 @@ class EMICalculatorActivity : AppCompatActivity() {
         loanAmountEditText.text?.clear()
         interestRateEditText.text?.clear()
         loanTenureEditText.text?.clear()
-        processingFeeEditText.text?.clear()
 
-        emiAmountTextView.text = "₹0.00" // Estimated EMI
-        monthlyEMITextView.text = "₹0.00"
-        totalInterestTextView.text = "₹0.00"
-        processingFeesTextView.text = "₹0.00"
-        totalPaymentTextView.text = "₹0.00"
+        emiAmountTextView.text = "₹0" // Estimated EMI
+        monthlyEMITextView.text = "₹0"
+        totalInterestTextView.text = "₹0"
+        totalPaymentTextView.text = "₹0"
 
         // Clear the monthly breakdown and RecyclerView
         monthlyBreakdown = emptyList()
@@ -171,14 +172,6 @@ class EMICalculatorActivity : AppCompatActivity() {
         monthlyEMIRecylerView.visibility = View.GONE
     }
 
-    private fun showMonthlyDetails() {
-        if (monthlyBreakdown.isNotEmpty()) {
-            val adapter = MonthlyEMIAdaper(monthlyBreakdown)
-            monthlyEMIRecylerView.adapter = adapter
-            monthlyEMIRecylerView.layoutManager = LinearLayoutManager(this)
-            monthlyEMIRecylerView.visibility = View.VISIBLE
-        }
-    }
 
     private fun generateMonthlyBreakdown(principal: Double, monthlyInterestRate: Double, numberOfMonths: Int, emi: Double): List<MonthlyEMI> {
         val breakdown = mutableListOf<MonthlyEMI>()
@@ -196,17 +189,19 @@ class EMICalculatorActivity : AppCompatActivity() {
 
     private fun generateShareableContent(): String {
         val content = StringBuilder()
-        content.append("EMI Calculation Results:\n")
+        content.append("EMI Calculation Summary\n\n")
         content.append("Loan Amount: ₹${loanAmountEditText.text.toString()}\n")
         content.append("Interest Rate: ${interestRateEditText.text.toString()}%\n")
         content.append("Loan Tenure: ${loanTenureEditText.text.toString()} years\n")
-        content.append("Processing Fee: ${processingFeeEditText.text.toString()}%\n")
-        content.append("\nMonthly EMI: ₹${monthlyEMITextView.text}\n")
-        content.append("Total Interest: ₹${totalInterestTextView.text}\n")
-        content.append("Processing Fees: ₹${processingFeesTextView.text}\n")
-        content.append("Total Payment: ₹${totalPaymentTextView.text}\n")
+        content.append("\n") // Adding a line break for clarity
+        content.append("Monthly EMI: ₹${monthlyEMITextView.text}\n")
+        content.append("Total Interest Payable: ₹${totalInterestTextView.text}\n")
+        content.append("Total Amount Payable (Principal + Interest): ₹${totalPaymentTextView.text}\n")
+        content.append("\nThis summary was generated using the PropertyBhandar EMI Calculator.\n")
+        content.append("For further assistance, please contact us.\n")
         return content.toString()
     }
+
 
     private fun shareEMIdetails() {
         val shareText = generateShareableContent()
@@ -214,18 +209,24 @@ class EMICalculatorActivity : AppCompatActivity() {
         val bitmap = getBitmapFromView(pieChart)
 
         if (bitmap != null) {
-            val imageUri = saveImageToCache(bitmap, "image.jpg") // Save as JPG
+            val imageUri = saveImageToCache(bitmap, "emi_chart.jpg") // Save as JPG
 
             if (imageUri != null) {
                 val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "image/jpeg" // Set MIME type to JPEG
+
+                // Draw a white background behind the pie chart for better visibility
                 val whiteBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config)
                 val canvas = Canvas(whiteBitmap)
-                canvas.drawColor(Color.WHITE) // Draw white background
-                canvas.drawBitmap(bitmap, 0f, 0f, null) // Draw the PieChart on top
-                shareIntent.type = "image/jpeg" // Set MIME type to JPEG
+                canvas.drawColor(Color.WHITE) // White background for a cleaner look
+                canvas.drawBitmap(bitmap, 0f, 0f, null)
+
+                // Attach both the image and text
                 shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareText)
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+                // Start share intent
                 startActivity(Intent.createChooser(shareIntent, "Share EMI Details"))
             } else {
                 Toast.makeText(this, "Failed to save chart image", Toast.LENGTH_SHORT).show()
@@ -252,7 +253,7 @@ class EMICalculatorActivity : AppCompatActivity() {
             val cachePath = File(cacheDir, "images")
             cachePath.mkdirs()
             val stream: OutputStream = FileOutputStream("$cachePath/$fileName")
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream) // Compress as JPEG
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream) // Compress as JPEG for quality
             stream.close()
             val imagePath = File(cachePath, fileName)
             return FileProvider.getUriForFile(
@@ -265,5 +266,5 @@ class EMICalculatorActivity : AppCompatActivity() {
             return null
         }
     }
-}
 
+}

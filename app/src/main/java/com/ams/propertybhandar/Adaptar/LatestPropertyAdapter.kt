@@ -55,6 +55,8 @@ class LatestPropertyAdapter(
         // Load image using Glide
         Glide.with(context)
             .load(property.optString("photo_main", ""))
+            .placeholder(R.drawable.errorbg)
+            .error(R.drawable.errorbg)
             .into(holder.imageView)
 
         holder.itemView.setOnClickListener {

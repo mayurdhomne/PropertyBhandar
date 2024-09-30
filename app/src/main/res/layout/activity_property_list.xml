@@ -260,9 +260,4 @@
         style="@style/BottomNavigationViewTransparent"
         app:menu="@menu/bottom_bar_items"
         tools:ignore="VisualLintBottomNav" />
-
-
-
-    <!-- Filter Icon -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
