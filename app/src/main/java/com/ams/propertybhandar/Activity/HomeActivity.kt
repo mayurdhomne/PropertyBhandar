@@ -28,6 +28,7 @@ import com.ams.propertybhandar.Adaptar.RecommandedProppertyAdapter
 import com.ams.propertybhandar.Domin.NetworkClient
 import com.ams.propertybhandar.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
@@ -62,6 +63,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var buyShopImageView: ImageView
     private lateinit var viewAllTextView1: TextView
     private lateinit var viewAllTextView2: TextView
+    private lateinit var wishlist: ImageView
+    private lateinit var sharedPreferences: SharedPreferences
     private var customLoadingDialog: CustomLoadingDialog? = null
 
 
@@ -69,6 +72,11 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+
+
+        // Initialize SharedPreferences and NetworkClient
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         propertyImageView = findViewById(R.id.propertyImageView)
         calculatorImageView = findViewById(R.id.calculator_image)
         calculatorImageView2 = findViewById(R.id.calculator_image2)
@@ -76,6 +84,7 @@ class HomeActivity : AppCompatActivity() {
         buyHomeImageView = findViewById(R.id.buyHomeImageView)
         buyPlotImageView = findViewById(R.id.rentHomeImageView)
         buyShopImageView = findViewById(R.id.pgCoLivingImageView)
+        wishlist = findViewById(R.id.wishlist)
         val imageUrl = "https://drive.google.com/uc?export=download&id=1BIoT5aBuLzqRnqaQyy6WIMUxIs8hGYO3"
         Picasso.get()
             .load(imageUrl)
@@ -162,6 +171,14 @@ class HomeActivity : AppCompatActivity() {
         // Fetch an display user's profile information
 
 
+        wishlist.setOnClickListener {
+            if (networkClient.getAccessToken() == null) {
+                showLoginRequiredDialog()
+            } else {
+                startActivity(Intent(this@HomeActivity, AllWishlistActivity::class.java))
+                finish()
+            }
+        }
 // Set up the BottomNavigationView
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener { item ->
@@ -326,7 +343,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Fetch and display properties
         fetchProperties()
-   // Handle NavigationView item clicks
+        // Handle NavigationView item clicks
         navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_profile1 -> {
@@ -431,7 +448,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun showLoginRequiredDialog() {
+    fun showLoginRequiredDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_login_required, null) // Assuming you have a dialog_login_required.xml layout
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
@@ -459,8 +476,6 @@ class HomeActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
         dialog.show()
     }
-
-
 
     @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     @SuppressLint("MissingSuperCall")
@@ -496,23 +511,22 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
     private fun fetchProperties() {
-         showLoadingDialog()
+        showLoadingDialog()
         networkClient.fetchProperties(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-                    Toast.makeText(this@HomeActivity, "Failed to fetch properties", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@HomeActivity, "Failed to fetch properties: ${e.message}", Toast.LENGTH_SHORT).show() //Improved error message
                 }
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
-                     hideLoadingDialog()
+                    hideLoadingDialog()
                     response.body?.let {
                         try {
-                            val jsonArray = JSONArray(response.body?.string())
+                            val jsonArray = JSONArray(it.string())
                             val limit = 6
 
-                            // Limit the number of properties
                             val recommendedJsonArray = JSONArray()
                             val latestJsonArray = JSONArray()
 
@@ -525,42 +539,65 @@ class HomeActivity : AppCompatActivity() {
                             }
 
                             runOnUiThread {
-                                // Set up the adapter for recommended properties (last to first)
-                                val recommendedAdapter = RecommandedProppertyAdapter(this@HomeActivity, recommendedJsonArray)
+                                val recommendedAdapter = RecommandedProppertyAdapter(this@HomeActivity, networkClient, recommendedJsonArray)
                                 recyclerView.adapter = recommendedAdapter
 
-                                // Set up the adapter for latest properties (first to last)
-                                val latestAdapter = LatestPropertyAdapter(this@HomeActivity, latestJsonArray)
+                                val latestAdapter = LatestPropertyAdapter(this@HomeActivity, networkClient, latestJsonArray) // Pass networkClient here
                                 latestRecyclerView.adapter = latestAdapter
                             }
                         } catch (e: Exception) {
                             runOnUiThread {
-                                Toast.makeText(this@HomeActivity, "Failed to parse properties", Toast.LENGTH_SHORT).show()
-                                e.printStackTrace() // Print the stack trace to debug
+                                Toast.makeText(this@HomeActivity, "Failed to parse properties: ${e.message}", Toast.LENGTH_SHORT).show() //Improved error message
+                                e.printStackTrace()
                             }
                         }
                     }
                 } else {
                     runOnUiThread {
-                        Toast.makeText(this@HomeActivity, "Failed to fetch properties", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@HomeActivity, "Failed to fetch properties: ${response.code}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
-
-
         })
     }
 
     private fun logout() {
-        // Clear user session data
-        val sharedPreferences: SharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
+        showLogoutDialog()
+    }
+    private fun showLogoutDialog() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetView = layoutInflater.inflate(R.layout.dialog_logout, null)
+        bottomSheetDialog.setContentView(bottomSheetView)
 
-        // Redirect to login or splash screen
-        startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
-        finish() // Close current activity to prevent back stack accumulation
+        val yesButton: CardView = bottomSheetView.findViewById(R.id.yesButton)
+        val noButton: CardView = bottomSheetView.findViewById(R.id.noButton)
+
+        yesButton.setOnClickListener {
+            // Clear access token and refresh token using NetworkClient
+            NetworkClient(this).logout(this)
+
+            // Optional: Clear other user data in SharedPreferences if needed
+            with(sharedPreferences.edit()) {
+                // Remove other user-specific data if required
+                apply()
+            }
+
+            Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
+
+            // Navigate to the Login screen
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+
+            // Dismiss the dialog
+            bottomSheetDialog.dismiss()
+        }
+
+        noButton.setOnClickListener {
+            // Dismiss the dialog if user cancels logout
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.show()
     }
     private fun navigateToPropertyList(propertyType: String) {
         val intent = Intent(this, PropertyListActivity::class.java).apply {
@@ -569,7 +606,7 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
     private fun showLoadingDialog() {
-       if (customLoadingDialog == null) {
+        if (customLoadingDialog == null) {
             customLoadingDialog = CustomLoadingDialog(this)
         }
         customLoadingDialog?.show()

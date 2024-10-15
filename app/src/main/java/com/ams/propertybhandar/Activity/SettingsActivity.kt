@@ -66,9 +66,29 @@ class SettingsActivity : AppCompatActivity() {
 
         // Terms & conditions click listener
         findViewById<LinearLayout>(R.id.llTermsConditions).setOnClickListener {
-            val intent = Intent(this, TermsActivity::class.java)
+            val url = "https://propertybhandar.com/privacy_policy/"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
             startActivity(intent)
         }
+
+        // Check for updates click listener
+        // Check for updates click listener
+        findViewById<LinearLayout>(R.id.llcheckforupdates).setOnClickListener {
+            val appPackageName = packageName // Get the current app package name
+            try {
+                // Try to open the Play Store app if it's available
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName"))
+                startActivity(intent)
+            } catch (e: android.content.ActivityNotFoundException) {
+                // If the Play Store app isn't available, open the browser instead
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName"))
+                startActivity(intent)
+            }
+        }
+
+
+
     }
 
     // Method to open email client when email is clicked

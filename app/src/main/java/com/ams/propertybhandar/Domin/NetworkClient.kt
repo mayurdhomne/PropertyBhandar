@@ -17,6 +17,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.json.JSONObject
 import java.io.File
 import java.io.IOException
@@ -346,6 +347,113 @@ class NetworkClient(private val context: Context) {
         } else {
             Log.e("PropertySearch", "Failed to build URL")
         }
+    }
+
+    fun toggleWishlist(listingId: Int, callback: Callback) {
+        val url = "$BASE_URL/api/wishlist/$listingId/toggle/"
+        val request = Request.Builder()
+            .url(url)
+            .post("".toRequestBody(JSON))
+            .addHeader("Authorization", "Bearer ${getAccessToken()}")
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("NetworkClient", "Wishlist toggle failed (onFailure): ${e.message}", e)
+                callback.onFailure(call, e)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    Log.d("NetworkClient", "Wishlist toggled successfully. Response code: ${response.code}")
+                    try {
+                        val responseBody = response.body?.string()
+                        Log.d("NetworkClient", "Response body: $responseBody")
+                        callback.onResponse(call, response)
+                    } catch (e: Exception) {
+                        Log.e("NetworkClient", "Error parsing response body: ${e.message}", e)
+                        callback.onFailure(call, IOException("Error parsing response body"))
+                    }
+                } else {
+                    Log.e("NetworkClient", "Wishlist toggle failed. Response code: ${response.code} - ${response.message}")
+                    try {
+                        val responseBody = response.body?.string() // Get the error response
+                        Log.e("NetworkClient", "Error response body: $responseBody") //Log the response body to check for server side errors
+                    } catch (e: Exception) {
+                        Log.e("NetworkClient", "Error parsing error response body", e)
+                    }
+                    when (response.code) {
+                        401 -> { //Handle 401 Unauthorized specifically
+                            handleTokenRefresh { success ->
+                                if (success) {
+                                    // Retry the request
+                                    toggleWishlist(listingId, callback)
+                                } else {
+                                    callback.onFailure(call, IOException("Token refresh failed"))
+                                }
+                            }
+                        }
+                        else -> {
+                            callback.onFailure(call, IOException("Wishlist toggle failed. Server responded with code ${response.code}"))
+                        }
+                    }
+                }
+                response.close()
+            }
+        })
+    }
+
+    fun checkWishlist(listingId: Int, callback: Callback) {
+        val url = "$BASE_URL/api/wishlist/$listingId/"
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .addHeader("Authorization", "Bearer ${getAccessToken()}")
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("NetworkClient", "Failed to check wishlist: ${e.message}", e)
+                callback.onFailure(call, e) // Pass the exception up
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    try {
+                        val responseBody = response.body?.string()
+                        val jsonObject = responseBody?.let { JSONObject(it) }
+                        val isInWishlist = jsonObject?.getBoolean("in_wishlist")
+                        if (responseBody != null) {
+                            callback.onResponse(call, Response.Builder().code(200).body(responseBody.toResponseBody(JSON)).message("Wishlist check successful").request(request).build())
+                        } //Pass modified response for further processing
+
+                    } catch (e: Exception) {
+                        Log.e("NetworkClient", "Error parsing wishlist check response: ${e.message}", e)
+                        callback.onFailure(call, IOException("Error parsing wishlist check response"))
+                    }
+                } else if (response.code == 401) {
+                    //Handle Unauthorized, potentially trigger token refresh or redirect to login
+                    callback.onFailure(call, IOException("Unauthorized. Please log in."))
+
+                } else {
+                    callback.onFailure(call, IOException("Wishlist check failed: ${response.code}"))
+                }
+                response.close()
+            }
+        })
+    }
+
+    // Fetch Wishlist
+    fun fetchWishlist(callback: Callback) {
+        val url = "$BASE_URL/api/wishlist/"
+        makeAuthenticatedRequest(url, Request.Builder().url(url).get().build(), callback)
+    }
+
+
+    // Fetch Property Details
+    fun fetchPropertyDetails(listingId: Int, callback: Callback) {
+        val url = "$BASE_URL/api/listings/$listingId/"
+        makeAuthenticatedRequest(url, Request.Builder().url(url).get().build(), callback)
     }
 
     fun logout(context: Context) {

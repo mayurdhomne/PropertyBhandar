@@ -57,7 +57,7 @@
                             android:layout_marginStart="8dp"
                             android:text="Welcome To"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toEndOf="@id/logo"
                             tools:ignore="HardcodedText,MissingConstraints"
@@ -69,13 +69,36 @@
                             android:layout_height="wrap_content"
                             android:text="Property Bhandar"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="@id/title1"
                             app:layout_constraintTop_toBottomOf="@id/title1"
                             tools:ignore="HardcodedText" />
 
+                        <TextView
+                            android:id="@+id/wishlist_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toStartOf="@+id/wishlist"
+                            tools:ignore="MissingConstraints" />
+                        <ImageView
+                            android:id="@+id/wishlist"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="right"
+                            android:labelFor="@id/wishlist_label"
+                            app:layout_constraintBottom_toBottomOf="@+id/actionmenudivider2"
+                            app:layout_constraintEnd_toStartOf="@+id/actionmenudivider2"
+                            app:layout_constraintTop_toTopOf="@+id/actionmenudivider2"
+                            app:srcCompat="@drawable/ic_favorite_outline"
+                            tools:ignore="ContentDescription" />
+
+
+
+
                         <FrameLayout
+                            android:id="@+id/actionmenudivider2"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:layout_marginEnd="16dp"

@@ -9,10 +9,10 @@ android {
 
     defaultConfig {
         applicationId = "com.ams.propertybhandar"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 34
-        versionCode = 7
-        versionName = "1.6"
+        versionCode = 8
+        versionName = "1.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,6 +32,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -59,4 +62,6 @@ dependencies {
     implementation(libs.mpandroidchart)
     implementation(libs.androidx.multidex)
     implementation(libs.lottie)
+    implementation(libs.poi)
+    implementation(libs.poi.ooxml)
 }

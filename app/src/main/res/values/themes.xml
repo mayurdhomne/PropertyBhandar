@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.PropertyBhandar" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Base.Theme.PropertyBhandar" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
@@ -20,9 +20,11 @@
         <!-- Remove any other conflicting attributes -->
     </style>
 
+
+    <style name="flotingbtn">
+        <item name="cornerSize">50%</item>
+    </style>
     <style name="Theme.PropertyBhandar" parent="Base.Theme.PropertyBhandar" />
-
-
 
     <style name="ShapeAppearanceOverlay.App.CircleImageView" parent="">
         <item name="cornerFamily">rounded</item>
@@ -64,6 +66,4 @@
         <item name="tabGravity">center</item>
         <item name="tabMode">fixed</item>
     </style>
-
-
 </resources>

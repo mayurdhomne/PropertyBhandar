@@ -3,7 +3,6 @@ package com.ams.propertybhandar.Activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,7 +10,6 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
@@ -34,6 +32,7 @@ class PropertyListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyListAdapter: PropertyListAdapter
+    private lateinit var networkClient: NetworkClient
     private var allProperties: JSONArray = JSONArray() // Initialize with an empty JSONArray
     private var searchPerformed: Boolean = false // Track if a search was performed
     private var customLoadingDialog: CustomLoadingDialog? = null
@@ -47,11 +46,13 @@ class PropertyListActivity : AppCompatActivity() {
 
 
 
-    @RequiresApi(Build.VERSION_CODES.M)
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_property_list)
+
+        networkClient = NetworkClient(this)
 
         val searchQuery = intent.getStringExtra("keywords") ?: ""
         minBudget = intent.getDoubleExtra("min_budget", 0.0)
@@ -69,7 +70,10 @@ class PropertyListActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }, { property, isChecked ->
-        })
+            //Handle wishlist toggle UI update
+            property.put("isInWishlist", isChecked)
+            propertyListAdapter.notifyDataSetChanged()
+        }, networkClient)
         recyclerView.adapter = propertyListAdapter
 
         // Automatically trigger the search or fetch all properties based on intent extras
@@ -98,6 +102,7 @@ class PropertyListActivity : AppCompatActivity() {
         setupCardFilters()
     }
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         // Navigate to HomeActivity when back button is pressed
@@ -127,6 +132,7 @@ class PropertyListActivity : AppCompatActivity() {
                     finish()
                     true
                 }
+
                 R.id.navigation_addproperty -> {
                     if (isLoggedIn()) {
                         // User is logged in, navigate to AddPropertyFormActivity
@@ -182,7 +188,6 @@ class PropertyListActivity : AppCompatActivity() {
         finish()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("NewApi")
     private fun setupCardFilters() {
         // Define the colors for default and selected states
@@ -319,6 +324,7 @@ class PropertyListActivity : AppCompatActivity() {
                             if (!responseBody.isNullOrEmpty()) {
                                 allProperties = JSONArray(responseBody)
                                 // Call filterProperties with budget range
+
                                 filterProperties("All", minBudget, maxBudget)
                             } else {
                                 Log.d("PropertySearch", "No properties found")

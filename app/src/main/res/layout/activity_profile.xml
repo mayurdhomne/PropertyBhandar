@@ -135,13 +135,13 @@
             android:id="@+id/helpful_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/star_rate_24"
-            android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
             android:drawablePadding="8dp"
             android:padding="16dp"
             android:text="Are you finding us Helpful?"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/baseline_arrow_forward_ios_24"
+            app:drawableStartCompat="@drawable/star_rate_24" />
 
         <View
             android:layout_width="match_parent"
@@ -152,12 +152,12 @@
             android:id="@+id/contactus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/message_24"
             android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
             android:drawablePadding="8dp"
             android:padding="16dp"
             android:text="Contact Us"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/message_24" />
 
         <View
             android:layout_width="match_parent"
@@ -168,12 +168,12 @@
             android:id="@+id/logout_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/logout_24"
-            android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
             android:drawablePadding="8dp"
             android:padding="16dp"
             android:text="Logout"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/baseline_arrow_forward_ios_24"
+            app:drawableStartCompat="@drawable/logout_24" />
 
 
     </LinearLayout>
